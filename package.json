@@ -1,0 +1,16 @@
+{
+  "name": "dress-cod",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cookie-parser": "^1.4.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Elegant Evening Gown",
+    "description": "A stunning black evening gown perfect for formal occasions",
+    "price": 299.99,
+    "category": "Evening Wear",
+    "size": ["XS", "S", "M", "L", "XL"],
+    "color": "Black",
+    "material": "Silk",
+    "image": "https://via.placeholder.com/300x400/000000/FFFFFF?text=Evening+Gown",
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Summer Floral Dress",
+    "description": "A beautiful floral print dress perfect for summer days",
+    "price": 89.99,
+    "category": "Casual Wear",
+    "size": ["XS", "S", "M", "L"],
+    "color": "Blue Floral",
+    "material": "Cotton",
+    "image": "https://via.placeholder.com/300x400/87CEEB/FFFFFF?text=Floral+Dress",
+    "inStock": true
+  }
+]
