@@ -49,3 +49,32 @@ function displayProducts(products) {
 
 // Load products when page loads
 document.addEventListener('DOMContentLoaded', fetchProducts);
+
+// חיפוש: שלחי לנתיב /products?q=...
+const form = document.getElementById('searchForm');
+const q = document.getElementById('q');
+form?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const query = (q.value || '').trim();
+  // נווטי לעמוד תוצאות, או קראי ל-API ואז הציגי:
+  window.location.href = `/index.html?q=${encodeURIComponent(query)}`;
+});
+
+// קישורים ל־SHOP BY:
+document.getElementById('byItem')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  // לדוגמה: פתיחת עמוד קטגוריות פריטים
+  window.location.href = '/index.html?mode=item';
+});
+document.getElementById('byDesigner')?.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = '/index.html?mode=designer';
+});
+
+// אופציונלי: אם יש ?q=... בכתובת, להציג תוצאות במקום ה-Hero
+const params = new URLSearchParams(location.search);
+if (params.has('q')) {
+  document.getElementById('products-container')?.classList.remove('hidden');
+  // כאן תוכלי לקרוא ל-GET /products?q=<prefix> ולהציג תוצאות
+  // fetch(`/products?q=${encodeURIComponent(params.get('q'))}`)...
+}

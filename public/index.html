@@ -1,23 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dress Code - Fashion Collection</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
 <body>
-    <div class="container">
-        <header>
-            <h1>👗 Dress Code</h1>
-            <p class="subtitle">Discover our stunning collection of dresses</p>
-        </header>
-
-        <div id="products-container">
-            <div class="loading">Loading products...</div>
+    <header class="site-header">
+      <div class="logo">DRESS code</div>
+      <nav class="site-nav">
+        <button class="nav-btn">Menu ▾</button>
+        <a>shopping bag</a>
+        <a>my account</a>
+        <div class="search-container">
+            <input type="text" placeholder="SEARCH">
         </div>
-    </div>
-
+        <button class="heart">♡</button>
+      </nav>
+    </header>
+  
+    <main class="hero">
+      <form class="search" id="searchForm">
+        <input id="q" type="text" placeholder='1700+ Evening looks await. Try "Blue dress"' />
+        <button aria-label="Search">🔍</button>
+      </form>
+  
+      <h2 class="section-title">START YOUR SEARCH FOR THE PERFECT EVENT LOOK</h2>
+  
+      <section class="tiles">
+        <a class="tile" id="byItem">
+          <img src="https://images.unsplash.com/photo-1520975817394-6929c5c8d0b9?q=80&w=1400&auto=format&fit=crop" alt="">
+          <span class="tile-label">SHOP BY ITEM</span>
+        </a>
+        <a class="tile" id="byDesigner">
+          <img src="https://images.unsplash.com/photo-1519744346364-43e32ae7d2f2?q=80&w=1400&auto=format&fit=crop" alt="">
+          <span class="tile-label">SHOP BY DESIGNER</span>
+        </a>
+      </section>
+  
+      <div id="products-container" class="hidden">
+        <div class="loading">Loading products...</div>
+      </div>
+    </main>
+  
     <script src="script.js"></script>
-</body>
-</html>
+  </body>  
