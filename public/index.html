@@ -1,40 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dress Code</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
 <body>
-    <header class="site-header">
-      <div class="logo">DRESS code</div>
-      <nav class="site-nav">
-        <button class="nav-btn">Menu ▾</button>
-        <a>shopping bag</a>
-        <a>my account</a>
-        <div class="search-container">
-            <input type="text" placeholder="SEARCH">
+  <div class="page">
+    <header class="hc">
+      <div class="hc__left">
+        <form id="searchForm" class="searchline" role="search">
+          <input id="q" type="text" placeholder="Search dresses…" aria-label="Search dresses" />
+          <button class="icon" type="submit" aria-label="Search"><i class="ri-search-line"></i></button>
+        </form>
+      </div>
+  
+      <h1 class="page-title">DRESS <span>code</span></h1>
+  
+      <div class="hc__right">
+        <button class="icon" aria-label="Liked"><i class="ri-heart-line"></i></button>
+        <button class="icon" aria-label="Personal area"><i class="ri-user-line"></i></button>
+        <button class="icon" aria-label="Shopping cart"><i class="ri-shopping-bag-line"></i><span class="badge" id="bagCount">0</span></button>
+        <div class="menu-wrapper">
+          <button class="icon menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="Main menu">
+            <i class="ri-menu-line" aria-hidden="true"></i>
+          </button>
+          <nav class="dropdown-menu" role="menu" aria-hidden="true">
+            <div class="dropdown-section">
+              <div class="dropdown-item" role="menuitem">NEW IN</div>
+              <div class="dropdown-item sale-item" role="menuitem">SALE</div>
+              <div class="dropdown-item" role="menuitem">ALL ITEMS</div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-section">
+              <div class="dropdown-heading">Categories:</div>
+              <div class="dropdown-item" role="menuitem">Vacation</div>
+              <div class="dropdown-item" role="menuitem">Evening</div>
+              <div class="dropdown-item" role="menuitem">Summer</div>
+              <div class="dropdown-item" role="menuitem">Everyday</div>
+            </div>
+          </nav>
         </div>
-        <button class="heart">♡</button>
-      </nav>
+      </div>
     </header>
   
-    <main class="hero">
-      <form class="search" id="searchForm">
-        <input id="q" type="text" placeholder='1700+ Evening looks await. Try "Blue dress"' />
-        <button aria-label="Search">🔍</button>
-      </form>
-  
-      <h2 class="section-title">START YOUR SEARCH FOR THE PERFECT EVENT LOOK</h2>
-  
-      <section class="tiles">
-        <a class="tile" id="byItem">
-          <img src="https://images.unsplash.com/photo-1520975817394-6929c5c8d0b9?q=80&w=1400&auto=format&fit=crop" alt="">
-          <span class="tile-label">SHOP BY ITEM</span>
-        </a>
-        <a class="tile" id="byDesigner">
-          <img src="https://images.unsplash.com/photo-1519744346364-43e32ae7d2f2?q=80&w=1400&auto=format&fit=crop" alt="">
-          <span class="tile-label">SHOP BY DESIGNER</span>
-        </a>
-      </section>
-  
-      <div id="products-container" class="hidden">
-        <div class="loading">Loading products...</div>
+    <main class="main-content">
+      <div class="hero-section">
+        <div class="hero-left">
+          <div id="products-container">
+            <!-- Products content will go here -->
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="video-container evening-video">
+            <video autoplay muted loop playsinline>
+              <source src="20250812_1934_Glamorous Evening Elegance_simple_compose_01k2fj3ydceqa9mpa4v4wcswr4.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+              <div class="overlay-text">Evening collection</div>
+            </div>
+          </div>
+          
+          <div class="video-container">
+            <video autoplay muted loop playsinline>
+              <source src="20250812_1919_Serene Beach Elegance_simple_compose_01k2fh7w50e6vt4rp15c4ds6nr (1).mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+              <div class="overlay-text">Summer collection</div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
+  </div>
   
-    <script src="script.js"></script>
-  </body>  
+  <script src="script.js"></script>
+</body>
+</html>
+  
