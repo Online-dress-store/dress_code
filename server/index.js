@@ -14,6 +14,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // products API (reads from data/products.json via persist module)
 app.use('/products', require('./routes/products'));
 
+// auth API
+app.use('/api/auth', require('./routes/auth'));
+
 // healthcheck
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
