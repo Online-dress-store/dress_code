@@ -195,12 +195,12 @@
 
 .overlay-text {
   color: white;
+  font-family: 'Playfair Display', serif;
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  direction: rtl;
-  font-family: 'Arial', sans-serif;
+  letter-spacing: -0.5px;
 }
 
 /* Responsive design */

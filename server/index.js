@@ -17,6 +17,38 @@ app.use('/products', require('./routes/products'));
 // healthcheck
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
+// Route for home page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
+
+// Route for login page (both with and without trailing slash)
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login', 'login.html'));
+});
+
+app.get('/login/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'login', 'login.html'));
+});
+
+// Route for register page
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'register', 'register.html'));
+});
+
+app.get('/register/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'register', 'register.html'));
+});
+
+// Route for cart page
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'shop-cart.html'));
+});
+
+app.get('/cart/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'shop-cart.html'));
+});
+
 // 404 fallback for APIs
 app.use((req, res) => res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }));
 
