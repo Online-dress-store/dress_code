@@ -42,11 +42,11 @@ app.get('/register/', (req, res) => {
 
 // Route for cart page
 app.get('/cart', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'shop-cart.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'cart', 'cart.html'));
 });
 
 app.get('/cart/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'shop-cart.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'cart', 'cart.html'));
 });
 
 // 404 fallback for APIs
