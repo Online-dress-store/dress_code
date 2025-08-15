@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Likes - Dress Code</title>
+  <link rel="stylesheet" href="wishlist.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+    
+    <div class="wishlist-container">
+      <div class="wishlist-header">
+        <h1>My Likes</h1>
+        <p class="subtitle">Your favorite items</p>
+      </div>
+      
+      <!-- Empty state (shown by default) -->
+      <div class="empty-wishlist" id="emptyWishlist">
+        <div class="empty-wishlist-icon">
+          <i class="ri-heart-line"></i>
+        </div>
+        <h2>You haven't liked anything yet.</h2>
+        <p>Start exploring our collections and save your favorites!</p>
+        <button class="continue-shopping-btn" onclick="window.location.href='/'">
+          <i class="ri-arrow-left-line"></i>
+          Continue Shopping
+        </button>
+      </div>
+      
+      <!-- Wishlist grid (hidden by default, shown when items exist) -->
+      <div class="wishlist-grid" id="wishlistGrid" style="display: none;">
+        <!-- Wishlist items will be dynamically populated here -->
+      </div>
+    </div>
+  </div>
+  
+  <script src="wishlist.js"></script>
+</body>
+</html>

@@ -49,6 +49,15 @@ app.get('/cart/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'cart', 'cart.html'));
 });
 
+// Route for wishlist page
+app.get('/wishlist', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'wishlist', 'index.html'));
+});
+
+app.get('/wishlist/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'wishlist', 'index.html'));
+});
+
 // 404 fallback for APIs
 app.use((req, res) => res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }));
 
