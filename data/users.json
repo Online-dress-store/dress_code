@@ -1,0 +1,561 @@
+[
+  {
+    "id": "u_admin_001",
+    "username": "admin",
+    "email": "admin@dressstore.com",
+    "password": "G7!pRz2@wQ9#xL8$",
+    "firstName": "Admin",
+    "lastName": "User",
+    "role": "admin",
+    "cart": [
+      {
+        "productId": "p_drs_001",
+        "quantity": 8,
+        "size": "M",
+        "addedAt": "2025-08-13T00:04:13.696Z"
+      },
+      {
+        "productId": "p_drs_002",
+        "quantity": 1,
+        "size": "M",
+        "addedAt": "2025-08-13T01:34:14.866Z"
+      }
+    ],
+    "purchases": [],
+    "prefs": {
+      "theme": "light",
+      "language": "en",
+      "notifications": true
+    },
+    "activity": [
+      {
+        "type": "login",
+        "timestamp": "2025-01-01T10:00:00.000Z",
+        "ip": "192.168.1.1"
+      },
+      {
+        "type": "logout",
+        "timestamp": "2025-01-01T12:00:00.000Z",
+        "ip": "192.168.1.1"
+      },
+      {
+        "at": "2025-08-13T00:04:13.696Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T00:04:38.778Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T00:18:52.925Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T00:20:03.621Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T00:31:27.194Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T00:50:51.858Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T01:05:00.507Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-13T01:34:14.866Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_002"
+      }
+    ],
+    "address": {
+      "street": "123 Admin Street",
+      "city": "Admin City",
+      "state": "Admin State",
+      "zipCode": "12345",
+      "country": "Admin Country"
+    },
+    "phone": "+1-555-ADMIN-01",
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T12:00:00.000Z"
+  },
+  {
+    "id": "u_customer_001",
+    "username": "sarah",
+    "email": "sarah@example.com",
+    "password": "sarah123",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "role": "customer",
+    "cart": [
+      {
+        "productId": "p_drs_001",
+        "size": "M",
+        "quantity": 1,
+        "addedAt": "2025-01-01T11:00:00.000Z"
+      },
+      {
+        "productId": "p_drs_003",
+        "size": "S",
+        "quantity": 2,
+        "addedAt": "2025-01-01T11:30:00.000Z"
+      }
+    ],
+    "purchases": [
+      {
+        "orderId": "o_001",
+        "items": [
+          {
+            "productId": "p_drs_002",
+            "title": "Blue Satin Evening Dress",
+            "size": "M",
+            "quantity": 1,
+            "price": 349.99
+          }
+        ],
+        "total": 349.99,
+        "status": "delivered",
+        "orderDate": "2024-12-15T00:00:00.000Z",
+        "deliveryDate": "2024-12-20T00:00:00.000Z"
+      }
+    ],
+    "prefs": {
+      "theme": "dark",
+      "language": "en",
+      "notifications": true
+    },
+    "activity": [
+      {
+        "type": "login",
+        "timestamp": "2025-01-01T09:00:00.000Z",
+        "ip": "192.168.1.100"
+      },
+      {
+        "type": "add-to-cart",
+        "timestamp": "2025-01-01T11:00:00.000Z",
+        "productId": "p_drs_001"
+      },
+      {
+        "type": "add-to-cart",
+        "timestamp": "2025-01-01T11:30:00.000Z",
+        "productId": "p_drs_003"
+      }
+    ],
+    "address": {
+      "street": "456 Customer Avenue",
+      "city": "Customer City",
+      "state": "Customer State",
+      "zipCode": "67890",
+      "country": "Customer Country"
+    },
+    "phone": "+1-555-CUST-01",
+    "createdAt": "2024-06-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T11:30:00.000Z"
+  },
+  {
+    "id": "u_customer_002",
+    "username": "mike",
+    "email": "mike@example.com",
+    "password": "mike123",
+    "firstName": "Mike",
+    "lastName": "Davis",
+    "role": "customer",
+    "cart": [
+      {
+        "productId": "p_drs_004",
+        "size": "L",
+        "quantity": 1,
+        "addedAt": "2025-01-01T10:00:00.000Z"
+      }
+    ],
+    "purchases": [
+      {
+        "orderId": "o_002",
+        "items": [
+          {
+            "productId": "p_drs_001",
+            "title": "Black Summer Dress",
+            "size": "L",
+            "quantity": 1,
+            "price": 179.99
+          }
+        ],
+        "total": 179.99,
+        "status": "shipped",
+        "orderDate": "2024-12-20T00:00:00.000Z",
+        "deliveryDate": null
+      }
+    ],
+    "prefs": {
+      "theme": "light",
+      "language": "en",
+      "notifications": false
+    },
+    "activity": [
+      {
+        "type": "login",
+        "timestamp": "2025-01-01T08:00:00.000Z",
+        "ip": "192.168.1.200"
+      },
+      {
+        "type": "add-to-cart",
+        "timestamp": "2025-01-01T10:00:00.000Z",
+        "productId": "p_drs_004"
+      }
+    ],
+    "address": {
+      "street": "789 User Boulevard",
+      "city": "User City",
+      "state": "User State",
+      "zipCode": "11111",
+      "country": "User Country"
+    },
+    "phone": "+1-555-USER-02",
+    "createdAt": "2024-08-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T10:00:00.000Z"
+  },
+  {
+    "id": "8bf26cb1-9d9d-4b8a-a16d-3c9245214b1e",
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-12T17:35:27.216Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-12T17:35:27.216Z"
+  },
+  {
+    "id": "400438ee-7427-4db4-9546-7cd2a0880749",
+    "username": "testuser2",
+    "email": "test2@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-12T23:46:51.037Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-12T23:46:51.037Z"
+  },
+  {
+    "id": "6ce113a8-9253-4ca5-ae2d-52f5989c9e11",
+    "username": "testuser_1755042430455",
+    "email": "test_1755042430455@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-12T23:47:10.456Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-12T23:47:10.456Z"
+  },
+  {
+    "id": "ab948405-ce17-47a2-8b76-2e1c0fd637e1",
+    "username": "testuser_1755042440996",
+    "email": "test_1755042440996@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-12T23:47:21.001Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-12T23:47:21.001Z"
+  },
+  {
+    "id": "59ced4ef-1267-4451-812d-2dc7f6891158",
+    "username": "testuser_1755043478772",
+    "email": "test_1755043478772@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T00:04:38.773Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T00:04:38.773Z"
+  },
+  {
+    "id": "723057af-c23f-4606-b0cd-e62cb28ef92b",
+    "username": "testuser_1755044332912",
+    "email": "test_1755044332912@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T00:18:52.917Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T00:18:52.917Z"
+  },
+  {
+    "id": "c0ec3d36-f2dd-46eb-aa53-c9082a55aa99",
+    "username": "testuser_1755044403616",
+    "email": "test_1755044403616@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T00:20:03.617Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T00:20:03.617Z"
+  },
+  {
+    "id": "418e07c1-b19e-4483-b609-61f16146d1c4",
+    "username": "testuser_1755045087181",
+    "email": "test_1755045087181@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T00:31:27.188Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T00:31:27.188Z"
+  },
+  {
+    "id": "836faa04-c122-479f-80d2-6e38d3ca9ee3",
+    "username": "testuser_1755046251846",
+    "email": "test_1755046251846@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T00:50:51.852Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T00:50:51.852Z"
+  },
+  {
+    "id": "7129a016-7453-4a9f-8791-64e21319ff42",
+    "username": "testuser_1755047100500",
+    "email": "test_1755047100500@example.com",
+    "password": "test123",
+    "role": "customer",
+    "cart": [
+      {
+        "productId": "p_drs_004",
+        "quantity": 1,
+        "size": "M",
+        "addedAt": "2025-08-13T01:47:07.721Z"
+      }
+    ],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T01:05:00.501Z",
+        "type": "register"
+      },
+      {
+        "at": "2025-08-13T01:47:07.721Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_004"
+      }
+    ],
+    "createdAt": "2025-08-13T01:05:00.501Z"
+  },
+  {
+    "id": "570aecbd-7e8a-4f31-99d2-a6a6363a38fa",
+    "username": "OphirShiran",
+    "email": "ophir.s@schemathics.com",
+    "password": "ophi123h",
+    "role": "customer",
+    "cart": [
+      {
+        "productId": "p_drs_001",
+        "quantity": 1,
+        "size": "M",
+        "addedAt": "2025-08-13T01:35:53.250Z"
+      }
+    ],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T01:07:20.709Z",
+        "type": "register"
+      },
+      {
+        "at": "2025-08-13T01:35:53.250Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      }
+    ],
+    "createdAt": "2025-08-13T01:07:20.709Z"
+  },
+  {
+    "id": "f36ebfcd-e852-4ad1-b856-c64dc0fda96f",
+    "username": "yuval",
+    "email": "yuval@gmail.com",
+    "password": "yuval123",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-13T01:37:23.653Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-13T01:37:23.653Z"
+  },
+  {
+    "id": "5ab5ec28-28ff-4566-b8e1-f50c23d4b9b4",
+    "username": "ophir1212",
+    "email": "ophir1212@example.com",
+    "password": "ophir1212",
+    "role": "customer",
+    "cart": [
+      {
+        "productId": "p_drs_001",
+        "quantity": 2,
+        "size": "M",
+        "addedAt": "2025-08-15T21:00:57.555Z"
+      },
+      {
+        "productId": "p_drs_002",
+        "quantity": 2,
+        "size": "M",
+        "addedAt": "2025-08-15T21:01:02.188Z"
+      },
+      {
+        "productId": "p_drs_004",
+        "quantity": 1,
+        "size": "M",
+        "addedAt": "2025-08-15T21:06:17.324Z"
+      }
+    ],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-15T20:50:46.587Z",
+        "type": "register"
+      },
+      {
+        "at": "2025-08-15T21:00:57.555Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-15T21:01:02.188Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_002"
+      },
+      {
+        "at": "2025-08-15T21:05:33.106Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_001"
+      },
+      {
+        "at": "2025-08-15T21:05:39.556Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_002"
+      },
+      {
+        "at": "2025-08-15T21:06:17.324Z",
+        "type": "add-to-cart",
+        "productId": "p_drs_004"
+      }
+    ],
+    "createdAt": "2025-08-15T20:50:46.587Z"
+  },
+  {
+    "id": "3a3d4b3b-1a7c-4e6b-9fd3-376bf8ad3113",
+    "username": "ophir3",
+    "password": "ophir3",
+    "role": "customer",
+    "cart": [],
+    "purchases": [],
+    "prefs": {
+      "theme": "light"
+    },
+    "activity": [
+      {
+        "at": "2025-08-15T22:50:44.115Z",
+        "type": "register"
+      }
+    ],
+    "createdAt": "2025-08-15T22:50:44.115Z"
+  }
+]

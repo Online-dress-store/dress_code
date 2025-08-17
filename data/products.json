@@ -1,26 +1,178 @@
 [
   {
-    "id": 1,
-    "name": "Elegant Evening Gown",
-    "description": "A stunning black evening gown perfect for formal occasions",
-    "price": 299.99,
-    "category": "Evening Wear",
-    "size": ["XS", "S", "M", "L", "XL"],
-    "color": "Black",
-    "material": "Silk",
-    "image": "https://via.placeholder.com/300x400/000000/FFFFFF?text=Evening+Gown",
-    "inStock": true
+    "id": "p_drs_001",
+    "title": "Black Summer Dress",
+    "description": "Lightweight knee-length summer dress with breathable fabric. Perfect for warm weather and casual occasions.",
+    "category": "Summer",
+    "tags": ["casual", "summer", "lightweight"],
+    "price": 89.99,
+    "fabricType": "cotton",
+    "variants": [
+      {
+        "size": "S",
+        "stock": 15,
+        "color": "black"
+      },
+      {
+        "size": "M",
+        "stock": 20,
+        "color": "black"
+      },
+      {
+        "size": "L",
+        "stock": 12,
+        "color": "black"
+      }
+    ],
+    "images": {
+      "main": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=600&fit=crop"
+      ]
+    },
+    "inStock": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
   },
   {
-    "id": 2,
-    "name": "Summer Floral Dress",
-    "description": "A beautiful floral print dress perfect for summer days",
-    "price": 89.99,
-    "category": "Casual Wear",
-    "size": ["XS", "S", "M", "L"],
-    "color": "Blue Floral",
-    "material": "Cotton",
-    "image": "https://via.placeholder.com/300x400/87CEEB/FFFFFF?text=Floral+Dress",
-    "inStock": true
+    "id": "p_drs_002",
+    "title": "Elegant Evening Gown",
+    "description": "Stunning floor-length evening gown perfect for formal events and special occasions.",
+    "category": "Evening",
+    "tags": ["formal", "elegant", "evening"],
+    "price": 299.99,
+    "fabricType": "silk",
+    "variants": [
+      {
+        "size": "S",
+        "stock": 8,
+        "color": "navy"
+      },
+      {
+        "size": "M",
+        "stock": 12,
+        "color": "navy"
+      },
+      {
+        "size": "L",
+        "stock": 6,
+        "color": "navy"
+      }
+    ],
+    "images": {
+      "main": "https://images.unsplash.com/photo-1520975817394-6929c5c8d0b9?w=400&h=600&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1520975817394-6929c5c8d0b9?w=400&h=600&fit=crop"
+      ]
+    },
+    "inStock": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "p_drs_003",
+    "title": "Floral Spring Dress",
+    "description": "Beautiful floral print dress perfect for spring and summer events.",
+    "category": "Spring",
+    "tags": ["floral", "spring", "casual"],
+    "price": 129.99,
+    "fabricType": "cotton",
+    "variants": [
+      {
+        "size": "S",
+        "stock": 20,
+        "color": "floral"
+      },
+      {
+        "size": "M",
+        "stock": 25,
+        "color": "floral"
+      },
+      {
+        "size": "L",
+        "stock": 18,
+        "color": "floral"
+      }
+    ],
+    "images": {
+      "main": "https://images.unsplash.com/photo-1519744346364-43e32ae7d2f2?w=400&h=600&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1519744346364-43e32ae7d2f2?w=400&h=600&fit=crop"
+      ]
+    },
+    "inStock": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "p_drs_004",
+    "title": "Cocktail Party Dress",
+    "description": "Perfect cocktail dress for parties and semi-formal events.",
+    "category": "Cocktail",
+    "tags": ["party", "cocktail", "semi-formal"],
+    "price": 159.99,
+    "fabricType": "polyester",
+    "variants": [
+      {
+        "size": "S",
+        "stock": 12,
+        "color": "red"
+      },
+      {
+        "size": "M",
+        "stock": 15,
+        "color": "red"
+      },
+      {
+        "size": "L",
+        "stock": 10,
+        "color": "red"
+      }
+    ],
+    "images": {
+      "main": "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=400&h=600&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=400&h=600&fit=crop"
+      ]
+    },
+    "inStock": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "p_drs_005",
+    "title": "Wedding Guest Dress",
+    "description": "Elegant dress perfect for wedding guests and special celebrations.",
+    "category": "Wedding Guest",
+    "tags": ["wedding", "elegant", "special"],
+    "price": 189.99,
+    "fabricType": "chiffon",
+    "variants": [
+      {
+        "size": "S",
+        "stock": 10,
+        "color": "sage"
+      },
+      {
+        "size": "M",
+        "stock": 14,
+        "color": "sage"
+      },
+      {
+        "size": "L",
+        "stock": 8,
+        "color": "sage"
+      }
+    ],
+    "images": {
+      "main": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=600&fit=crop",
+      "gallery": [
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=600&fit=crop"
+      ]
+    },
+    "inStock": true,
+    "createdAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2025-01-01T00:00:00.000Z"
   }
 ]
