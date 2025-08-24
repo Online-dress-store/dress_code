@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRESS code – Category</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+    
+    <main>
+      <h1 id="catTitle">Category</h1>
+      <p id="catSubtitle" class="sub">Explore our latest looks</p>
+      
+      <div class="toolbar">
+        <select class="sort-select">
+          <option value="newest">Newest First</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Name A-Z</option>
+        </select>
+        <div class="filter-placeholder">
+          <span>Size: All</span>
+        </div>
+        <div class="filter-placeholder">
+          <span>Color: All</span>
+        </div>
+      </div>
+      
+      <section id="grid" class="grid empty">
+        <div class="empty-state">
+          <div class="icon">🛍️</div>
+          <h2>No items yet</h2>
+          <p>Products will appear here soon.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script type="module" src="page.js"></script>
+</body>
+</html>
