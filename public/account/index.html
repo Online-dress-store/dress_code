@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account - Dress Code</title>
+  <link rel="stylesheet" href="account.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+    
+    <div class="account-container">
+      <div class="account-header">
+        <h1>My Account</h1>
+        <p class="subtitle">Manage your profile and view your orders</p>
+      </div>
+      
+      <div class="account-content">
+        <!-- Personal Details Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h2><i class="ri-user-line"></i> Personal Details</h2>
+            <button class="edit-btn" id="editProfileBtn">
+              <i class="ri-edit-line"></i>
+              Edit
+            </button>
+          </div>
+          
+          <div class="profile-info" id="profileInfo">
+            <div class="info-row">
+              <span class="info-label">Email:</span>
+              <span class="info-value" id="email">Loading...</span>
+            </div>
+          </div>
+          
+          <div class="profile-form" id="profileForm" style="display: none;">
+            <div class="form-group">
+              <label for="editEmail">Email</label>
+              <input type="email" id="editEmail" name="email" required>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="save-btn" id="saveProfileBtn">
+                <i class="ri-save-line"></i>
+                Save Changes
+              </button>
+              <button type="button" class="cancel-btn" id="cancelEditBtn">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Order History Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h2><i class="ri-shopping-bag-line"></i> Order History</h2>
+          </div>
+          
+          <div class="orders-container" id="ordersContainer">
+            <div class="empty-orders" id="emptyOrders">
+              <div class="empty-icon">
+                <i class="ri-shopping-bag-line"></i>
+              </div>
+              <h3>No Orders Yet</h3>
+              <p>You haven't placed any orders yet.</p>
+              <a href="/categories" class="shop-now-btn">
+                <i class="ri-store-line"></i>
+                Start Shopping
+              </a>
+            </div>
+            
+            <div class="orders-list" id="ordersList" style="display: none;">
+              <!-- Orders will be populated here -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Account Actions Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h2><i class="ri-settings-line"></i> Account Actions</h2>
+          </div>
+          
+          <div class="account-actions">
+            <button class="action-btn" onclick="window.location.href='/wishlist'">
+              <i class="ri-heart-line"></i>
+              My Wishlist
+            </button>
+            <button class="action-btn" onclick="window.location.href='/cart'">
+              <i class="ri-shopping-cart-line"></i>
+              Shopping Cart
+            </button>
+            <button class="action-btn" onclick="window.location.href='/sell'">
+              <i class="ri-add-line"></i>
+              Sell a Dress
+            </button>
+            <button class="action-btn logout-btn" onclick="logout()">
+              <i class="ri-logout-box-line"></i>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/auth-check.js"></script>
+  <script src="account.js"></script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f5f2eb 0%, #e8e4dd 50%, #f5f2eb 100%);
+  min-height: 100vh;
+  color: #2c2c2c;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+}
+
+/* Back button styling (reused from other pages) */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.back-link {
+  color: #8b7d6b;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 125, 107, 0.2);
+}
+
+.back-link:hover {
+  color: #6b5b47;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 125, 107, 0.15);
+}
+
+/* Sell container */
+.sell-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 48px 40px;
+  margin-top: 60px;
+  box-shadow: 
+    0 20px 40px rgba(139, 125, 107, 0.1),
+    0 8px 16px rgba(139, 125, 107, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+}
+
+.sell-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+}
+
+/* Header styling */
+.sell-header {
+  text-align: center;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #8b7d6b;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+/* Form styling */
+.sell-form {
+  position: relative;
+  z-index: 1;
+}
+
+.form-section {
+  margin-bottom: 40px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.form-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 16px;
+  letter-spacing: -0.3px;
+}
+
+.section-help {
+  font-size: 14px;
+  color: #8b7d6b;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b5b47;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e8e4dd;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
+  color: #2c2c2c;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #d4a574;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Variants styling */
+.variant-item {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e8e4dd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.variant-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px 40px;
+  gap: 16px;
+  align-items: end;
+}
+
+.remove-variant-btn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.remove-variant-btn:hover {
+  background: #ff5252;
+  transform: scale(1.05);
+}
+
+.add-variant-btn {
+  background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.add-variant-btn:hover {
+  background: linear-gradient(135deg, #c19a6b 0%, #b08a5a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+/* Form actions */
+.form-actions {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(139, 125, 107, 0.2);
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #c19a6b 0%, #b08a5a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .sell-container {
+    padding: 32px 24px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  .form-section {
+    padding: 24px;
+  }
+  
+  .variant-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .remove-variant-btn {
+    width: 100%;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sell-container {
+    padding: 24px 16px;
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+}

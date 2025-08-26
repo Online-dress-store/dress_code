@@ -1,35 +1,99 @@
+// Register page functionality
 document.addEventListener('DOMContentLoaded', function() {
   const registerForm = document.getElementById('registerForm');
   
-  registerForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    // Basic validation
+  // Handle form submission
+  registerForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(registerForm);
+    const username = formData.get('username');
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    // Client-side validation
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      showMessage('Passwords do not match', 'error');
       return;
     }
+    
     if (password.length < 6) {
-      alert('Password must be at least 6 characters long!');
+      showMessage('Password must be at least 6 characters', 'error');
       return;
     }
+    
     try {
-      const res = await fetch('/api/auth/register', {
+      // Show loading state
+      const submitBtn = registerForm.querySelector('.signup-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Creating Account...';
+      submitBtn.disabled = true;
+      
+      // Send registration request
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          confirmPassword
+        })
       });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        window.location.href = '/';
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        showMessage('Account created successfully! Redirecting...', 'success');
+        setTimeout(() => {
+          // Check for returnTo parameter
+          const urlParams = new URLSearchParams(window.location.search);
+          const returnTo = urlParams.get('returnTo');
+          
+          if (returnTo) {
+            window.location.href = decodeURIComponent(returnTo);
+          } else {
+            window.location.href = '/';
+          }
+        }, 1000);
       } else {
-        alert(data.error || 'Registration failed.');
+        showMessage(data.error || 'Registration failed', 'error');
       }
-    } catch (err) {
-      alert('An error occurred. Please try again.');
+      
+    } catch (error) {
+      console.error('Registration error:', error);
+      showMessage('Network error. Please try again.', 'error');
+    } finally {
+      // Reset button state
+      const submitBtn = registerForm.querySelector('.signup-btn');
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
     }
   });
 });
+
+// Show message function
+function showMessage(message, type = 'info') {
+  // Remove existing messages
+  const existingMessage = document.querySelector('.message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Create message element
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message message-${type}`;
+  messageDiv.textContent = message;
+  
+  // Insert before the form
+  const form = document.getElementById('registerForm');
+  form.parentNode.insertBefore(messageDiv, form);
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    if (messageDiv.parentNode) {
+      messageDiv.remove();
+    }
+  }, 5000);
+}

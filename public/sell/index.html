@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sell a Dress - Dress Code</title>
+  <link rel="stylesheet" href="sell.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+    
+    <div class="sell-container">
+      <div class="sell-header">
+        <h1>Sell Your Dress</h1>
+        <p class="subtitle">Share your beautiful dress with our community</p>
+      </div>
+      
+      <form id="sellForm" class="sell-form">
+        <!-- Basic Information -->
+        <div class="form-section">
+          <h2>Basic Information</h2>
+          
+          <div class="form-group">
+            <label for="title">Dress Title *</label>
+            <input type="text" id="title" name="title" required placeholder="e.g., Elegant Evening Gown">
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" name="description" required placeholder="Describe your dress, its style, condition, and any special features..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="category">Category *</label>
+            <select id="category" name="category" required>
+              <option value="">Select a category</option>
+              <option value="Evening">Evening</option>
+              <option value="Summer">Summer</option>
+              <option value="Casual">Casual</option>
+              <option value="Cocktail">Cocktail</option>
+              <option value="Wedding Guest">Wedding Guest</option>
+              <option value="Vacation">Vacation</option>
+              <option value="Everyday">Everyday</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" name="tags" placeholder="e.g., floral, elegant, vintage (separate with commas)">
+          </div>
+        </div>
+        
+        <!-- Pricing -->
+        <div class="form-section">
+          <h2>Pricing</h2>
+          
+          <div class="form-group">
+            <label for="price">Price (USD) *</label>
+            <input type="number" id="price" name="price" required min="0" step="0.01" placeholder="0.00">
+          </div>
+        </div>
+        
+        <!-- Product Details -->
+        <div class="form-section">
+          <h2>Product Details</h2>
+          
+          <div class="form-group">
+            <label for="fabricType">Fabric Type</label>
+            <input type="text" id="fabricType" name="fabricType" placeholder="e.g., silk, cotton, polyester">
+          </div>
+        </div>
+        
+        <!-- Variants -->
+        <div class="form-section">
+          <h2>Available Sizes & Colors</h2>
+          <p class="section-help">Add the sizes and colors you have available</p>
+          
+          <div id="variantsContainer">
+            <div class="variant-item">
+              <div class="variant-row">
+                <div class="form-group">
+                  <label>Size</label>
+                  <select class="variant-size" required>
+                    <option value="">Select size</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Color</label>
+                  <input type="text" class="variant-color" required placeholder="e.g., navy, red, floral">
+                </div>
+                
+                <div class="form-group">
+                  <label>Stock</label>
+                  <input type="number" class="variant-stock" required min="1" value="1">
+                </div>
+                
+                <button type="button" class="remove-variant-btn" onclick="removeVariant(this)">
+                  <i class="ri-delete-bin-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-variant-btn" onclick="addVariant()">
+            <i class="ri-add-line"></i>
+            Add Another Size/Color
+          </button>
+        </div>
+        
+        <!-- Images -->
+        <div class="form-section">
+          <h2>Images</h2>
+          <p class="section-help">Add image URLs for your dress</p>
+          
+          <div class="form-group">
+            <label for="mainImage">Main Image URL *</label>
+            <input type="url" id="mainImage" name="mainImage" required placeholder="https://example.com/image.jpg">
+          </div>
+          
+          <div class="form-group">
+            <label for="galleryImages">Gallery Images (one per line)</label>
+            <textarea id="galleryImages" name="galleryImages" placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"></textarea>
+          </div>
+        </div>
+        
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" class="submit-btn">
+            <i class="ri-upload-line"></i>
+            List My Dress
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script src="../js/auth-check.js"></script>
+  <script src="sell.js"></script>
+</body>
+</html>

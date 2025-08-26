@@ -1,23 +1,81 @@
 // Empty cart array by default - no preloaded products
 let cartItems = [];
 
-// DOM elements
-const cartItemsContainer = document.getElementById('cartItems');
-const emptyCartElement = document.getElementById('emptyCart');
-const cartContentElement = document.getElementById('cartContent');
-const subtotalElement = document.getElementById('subtotal');
-const shippingElement = document.getElementById('shipping');
-const totalElement = document.getElementById('total');
-const checkoutBtn = document.getElementById('checkoutBtn');
+// DOM elements (will be resolved after DOMContentLoaded)
+let cartItemsContainer;
+let emptyCartElement;
+let cartContentElement;
+let subtotalElement;
+let shippingElement;
+let totalElement;
+let checkoutBtn;
 
 // Initialize cart
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  // Resolve elements now that DOM is ready
+  cartItemsContainer = document.getElementById('cartItems');
+  emptyCartElement = document.getElementById('emptyCart');
+  cartContentElement = document.getElementById('cartContent');
+  subtotalElement = document.getElementById('subtotal');
+  shippingElement = document.getElementById('shipping');
+  totalElement = document.getElementById('total');
+  checkoutBtn = document.getElementById('checkoutBtn');
+  // Check authentication first
+  const authCheck = new AuthCheck();
+  const isAuthenticated = await authCheck.init();
+  
+  if (!isAuthenticated) {
+    return; // Stop execution if not authenticated
+  }
+  
+  // Get current user for cart data
+  const currentUser = authCheck.getCurrentUser();
+  
   // Load cart data from localStorage (if any exists)
   loadCartFromStorage();
   
   // Render the cart based on current state
   renderCart();
-  updateTotals();
+  // Only calculate totals if elements exist
+  if (subtotalElement && shippingElement && totalElement && checkoutBtn) {
+    updateTotals();
+  }
+
+  // Event delegation for remove buttons (handles icon clicks too)
+  cartItemsContainer.addEventListener('click', function(event) {
+    const removeBtn = event.target.closest('.remove-btn');
+    if (removeBtn) {
+      const row = removeBtn.closest('.cart-item');
+      const id = row && row.getAttribute('data-id');
+      const size = row && row.getAttribute('data-size');
+      if (id) {
+        removeItem(id, size);
+      }
+    }
+
+    // Quantity +/- buttons
+    const qtyBtn = event.target.closest('.quantity-btn');
+    if (qtyBtn) {
+      const row = qtyBtn.closest('.cart-item');
+      const id = row && row.getAttribute('data-id');
+      if (!id) return;
+      // Determine delta: prefer data attribute, fallback to icon class
+      const deltaAttr = qtyBtn.getAttribute('data-delta');
+      const change = deltaAttr ? parseInt(deltaAttr, 10) : (qtyBtn.querySelector('.ri-add-line') ? 1 : -1);
+      updateQuantity(id, change);
+    }
+  });
+
+  // Delegate for direct quantity input changes (live input)
+  cartItemsContainer.addEventListener('input', function(event) {
+    const input = event.target.closest('.quantity-input');
+    if (input) {
+      const row = input.closest('.cart-item');
+      const id = row && row.getAttribute('data-id');
+      if (!id) return;
+      setQuantity(id, input.value);
+    }
+  });
 });
 
 // Load cart data from localStorage
@@ -25,7 +83,26 @@ function loadCartFromStorage() {
   try {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
-      cartItems = JSON.parse(savedCart);
+      // Normalize stored items to a consistent shape used by the cart UI
+      const parsed = JSON.parse(savedCart);
+      cartItems = (Array.isArray(parsed) ? parsed : []).map((raw) => {
+        return {
+          // Preserve id (required)
+          id: raw.id,
+          // Prefer 'name'; fall back to 'title'
+          name: raw.name || raw.title || 'Untitled Item',
+          // Optional description
+          description: raw.description || '',
+          // Prefer flat image; fall back to nested images.main
+          image: raw.image || (raw.images && raw.images.main) || '',
+          // Price as number
+          price: typeof raw.price === 'number' ? raw.price : Number(raw.price) || 0,
+          // Quantity defaults to 1 and is clamped to [1,99]
+          quantity: Math.max(1, Math.min(99, parseInt(raw.quantity, 10) || 1)),
+          // Size information
+          size: raw.size || null,
+        };
+      });
     }
   } catch (error) {
     console.error('Error loading cart from storage:', error);
@@ -44,42 +121,54 @@ function saveCartToStorage() {
 
 // Render cart items
 function renderCart() {
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  
   if (cartItems.length === 0) {
     // Show empty cart state
     emptyCartElement.style.display = 'block';
     cartContentElement.style.display = 'none';
+    // Disable checkout button
+    if (checkoutBtn) {
+      checkoutBtn.disabled = true;
+    }
     return;
   }
 
   // Show cart content
   emptyCartElement.style.display = 'none';
   cartContentElement.style.display = 'block';
+  
+  // Enable checkout button
+  if (checkoutBtn) {
+    checkoutBtn.disabled = false;
+  }
 
   cartItemsContainer.innerHTML = cartItems.map(item => `
-    <div class="cart-item" data-id="${item.id}">
-      <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+    <div class="cart-item" data-id="${String(item.id)}" data-size="${item.size || ''}">
+      <img src="${item.image}" alt="${item.name || item.title || ''}" class="cart-item-image">
       
       <div class="cart-item-details">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
+        <h3>${item.name || item.title || 'Untitled Item'}</h3>
+        <p>${item.description || ''}</p>
+        ${item.size ? `<p class="cart-item-size">Size: ${item.size}</p>` : ''}
       </div>
       
       <div class="cart-item-price">$${item.price.toFixed(2)}</div>
       
       <div class="quantity-selector">
-        <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">
+        <button class="quantity-btn" data-delta="-1">
           <i class="ri-subtract-line"></i>
         </button>
         <input type="number" class="quantity-input" value="${item.quantity}" 
-               min="1" max="99" onchange="setQuantity(${item.id}, this.value)">
-        <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">
+               min="1" max="99" inputmode="numeric" pattern="[0-9]*">
+        <button class="quantity-btn" data-delta="1">
           <i class="ri-add-line"></i>
         </button>
       </div>
       
       <div class="cart-item-total">$${(item.price * item.quantity).toFixed(2)}</div>
       
-      <button class="remove-btn" onclick="removeItem(${item.id})" title="Remove item">
+      <button class="remove-btn" title="Remove item">
         <i class="ri-delete-bin-line"></i>
       </button>
     </div>
@@ -88,33 +177,59 @@ function renderCart() {
 
 // Update quantity by increment/decrement
 function updateQuantity(itemId, change) {
-  const item = cartItems.find(item => item.id === itemId);
+  const item = cartItems.find(item => String(item.id) === String(itemId));
   if (item) {
     const newQuantity = Math.max(1, Math.min(99, item.quantity + change));
     item.quantity = newQuantity;
     saveCartToStorage();
-    renderCart();
+    // Update only the affected item's DOM for better UX
+    const row = cartItemsContainer.querySelector(`.cart-item[data-id="${String(itemId)}"]`);
+    if (row) {
+      const qtyInput = row.querySelector('.quantity-input');
+      const totalCell = row.querySelector('.cart-item-total');
+      if (qtyInput) qtyInput.value = String(item.quantity);
+      if (totalCell) totalCell.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+    }
     updateTotals();
   }
 }
 
 // Set quantity directly
 function setQuantity(itemId, newQuantity) {
-  const item = cartItems.find(item => item.id === itemId);
+  const item = cartItems.find(item => String(item.id) === String(itemId));
   if (item) {
     const quantity = Math.max(1, Math.min(99, parseInt(newQuantity) || 1));
     item.quantity = quantity;
     saveCartToStorage();
-    renderCart();
+    const row = cartItemsContainer.querySelector(`.cart-item[data-id="${String(itemId)}"]`);
+    if (row) {
+      const qtyInput = row.querySelector('.quantity-input');
+      const totalCell = row.querySelector('.cart-item-total');
+      if (qtyInput) qtyInput.value = String(item.quantity);
+      if (totalCell) totalCell.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+    }
     updateTotals();
   }
 }
 
 // Remove item from cart
-function removeItem(itemId) {
-  cartItems = cartItems.filter(item => item.id !== itemId);
+function removeItem(itemId, size = null) {
+  if (size) {
+    // Remove specific size variant
+    cartItems = cartItems.filter(item => !(String(item.id) === String(itemId) && item.size === size));
+  } else {
+    // Remove all variants of the item (fallback for old cart items)
+    cartItems = cartItems.filter(item => String(item.id) !== String(itemId));
+  }
+  
   saveCartToStorage();
-  renderCart();
+  // Remove row from DOM immediately
+  const row = cartItemsContainer.querySelector(`.cart-item[data-id="${String(itemId)}"][data-size="${size || ''}"]`);
+  if (row && row.parentNode) row.parentNode.removeChild(row);
+  // If cart became empty, re-render to show empty state
+  if (cartItems.length === 0) {
+    renderCart();
+  }
   updateTotals();
   
   // Show removal notification
@@ -123,6 +238,11 @@ function removeItem(itemId) {
 
 // Calculate and update totals
 function updateTotals() {
+  // Guard if totals DOM isn't present
+  if (!subtotalElement || !shippingElement || !totalElement || !checkoutBtn) {
+    return;
+  }
+
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shipping = subtotal > 0 ? 9.99 : 0;
   const total = subtotal + shipping;

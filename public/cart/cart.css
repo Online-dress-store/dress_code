@@ -157,6 +157,13 @@ body::before {
   margin-bottom: 8px;
 }
 
+.cart-item-size {
+  font-size: 12px;
+  color: #d4a574;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
 .cart-item-price {
   font-size: 18px;
   font-weight: 600;
@@ -201,6 +208,18 @@ body::before {
   font-weight: 500;
   color: #2c2c2c;
   outline: none;
+}
+
+/* Remove native arrows from number inputs (keep our custom +/-) */
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .cart-item-total {
@@ -296,6 +315,18 @@ body::before {
 
 .checkout-btn:hover::before {
   left: 100%;
+}
+
+.checkout-btn:disabled {
+  background: #e8e4dd;
+  color: #8b7d6b;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.checkout-btn:disabled::before {
+  display: none;
 }
 
 .continue-shopping-btn {

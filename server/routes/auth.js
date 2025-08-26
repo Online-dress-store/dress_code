@@ -1,51 +1,203 @@
-const express = require('express');
-const { readUsers, writeUsers } = require('../modules/persist_module');
-const { v4: uuidv4 } = require('uuid');
+const router = require('express').Router();
+const userModule = require('../modules/user_module');
+const { generateToken, requireGuest } = require('../middleware/auth');
 
-const router = express.Router();
-
-// POST /api/auth/login
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required.' });
+// Register route
+router.post('/register', requireGuest, async (req, res) => {
+  try {
+    const { username, password, confirmPassword } = req.body;
+    
+    // Validation
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+    
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: 'Passwords do not match' });
+    }
+    
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    }
+    
+    // Create user
+    const user = await userModule.createUser(username, password);
+    
+    // Generate token (no remember me for registration)
+    const token = generateToken(user.id, false);
+    
+    // Set cookie
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 30 * 60 * 1000 // 30 minutes
+    });
+    
+    res.json({ 
+      success: true, 
+      message: 'Account created successfully',
+      user: { id: user.id, username: user.username, role: user.role }
+    });
+    
+  } catch (error) {
+    if (error.message === 'Username already exists') {
+      return res.status(400).json({ error: 'Username already exists' });
+    }
+    
+    console.error('Registration error:', error);
+    res.status(500).json({ error: 'Registration failed' });
   }
-  const users = await readUsers();
-  const user = users.find(u => u.username === username && u.password === password);
-  if (!user) {
-    return res.status(401).json({ error: 'Invalid username or password.' });
-  }
-  // Optionally, set a cookie or session here
-  res.json({ message: 'Login successful', user: { id: user.id, username: user.username, role: user.role } });
 });
 
-// POST /api/auth/register
-router.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required.' });
+// Login route
+router.post('/login', requireGuest, async (req, res) => {
+  try {
+    const { username, password, rememberMe } = req.body;
+    
+    // Validation
+    if (!username || !password) {
+      return res.status(400).json({ error: 'Username and password are required' });
+    }
+    
+    // Authenticate user
+    const user = await userModule.authenticateUser(username, password);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid username or password' });
+    }
+    
+    // Generate token
+    const token = generateToken(user.id, rememberMe);
+    
+    // Set cookie with appropriate expiration
+    const maxAge = rememberMe ? 12 * 24 * 60 * 60 * 1000 : 30 * 60 * 1000; // 12 days or 30 minutes
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge
+    });
+    
+    res.json({ 
+      success: true, 
+      message: 'Login successful',
+      user: { id: user.id, username: user.username, role: user.role }
+    });
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Login failed' });
   }
-  if (password.length < 6) {
-    return res.status(400).json({ error: 'Password must be at least 6 characters long.' });
+});
+
+// Logout route
+router.post('/logout', (req, res) => {
+  res.clearCookie('authToken');
+  res.json({ success: true, message: 'Logged out successfully' });
+});
+
+// Get current user info
+router.get('/me', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    
+    if (!decoded) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+    
+    const user = await userModule.getUserById(decoded.userId);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+    
+    res.json({ 
+      user: { 
+        id: user.id, 
+        username: user.username, 
+        role: user.role,
+        cart: user.cart,
+        wishlist: user.wishlist
+      } 
+    });
+    
+  } catch (error) {
+    console.error('Get user error:', error);
+    res.status(500).json({ error: 'Failed to get user info' });
   }
-  const users = await readUsers();
-  if (users.some(u => u.username === username)) {
-    return res.status(409).json({ error: 'Username already exists.' });
+});
+
+// Save order to user's profile
+router.post('/orders', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    
+    if (!decoded) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+    
+    const { orderData } = req.body;
+    
+    if (!orderData) {
+      return res.status(400).json({ error: 'Order data is required' });
+    }
+    
+    // Save order to user's profile
+    const orders = await userModule.addOrder(decoded.userId, orderData);
+    
+    res.json({ 
+      success: true, 
+      message: 'Order saved successfully',
+      orders: orders
+    });
+    
+  } catch (error) {
+    console.error('Save order error:', error);
+    res.status(500).json({ error: 'Failed to save order' });
   }
-  const newUser = {
-    id: uuidv4(),
-    username,
-    password,
-    role: 'customer',
-    cart: [],
-    purchases: [],
-    prefs: { theme: 'light' },
-    activity: [{ at: new Date().toISOString(), type: 'register' }],
-    createdAt: new Date().toISOString()
-  };
-  users.push(newUser);
-  await writeUsers(users);
-  res.status(201).json({ message: 'Registration successful', user: { id: newUser.id, username: newUser.username, role: newUser.role } });
+});
+
+// Get user's order history
+router.get('/orders', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    
+    if (!token) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+    
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    
+    if (!decoded) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+    
+    // Get user's order history
+    const orders = await userModule.getUserOrders(decoded.userId);
+    
+    res.json({ 
+      success: true, 
+      orders: orders
+    });
+    
+  } catch (error) {
+    console.error('Get orders error:', error);
+    res.status(500).json({ error: 'Failed to get order history' });
+  }
 });
 
 module.exports = router;

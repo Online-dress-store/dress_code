@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You - Dress Code</title>
+  <link rel="stylesheet" href="thank-you.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <a href="/" class="back-link">← Back to Home</a>
+    </div>
+    
+    <div class="thank-you-container">
+      <div class="success-icon">
+        <i class="ri-check-line"></i>
+      </div>
+      
+      <div class="thank-you-header">
+        <h1>Thank You!</h1>
+        <p class="subtitle">Your order has been successfully placed</p>
+      </div>
+      
+      <div class="order-details" id="orderDetails">
+        <!-- Order details will be populated here -->
+      </div>
+      
+      <div class="next-steps">
+        <h2>What's Next?</h2>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-icon">
+              <i class="ri-mail-line"></i>
+            </div>
+            <h3>Confirmation Email</h3>
+            <p>You'll receive an order confirmation email shortly with all the details.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">
+              <i class="ri-truck-line"></i>
+            </div>
+            <h3>Shipping Updates</h3>
+            <p>We'll notify you when your order ships with tracking information.</p>
+          </div>
+          <div class="step">
+            <div class="step-icon">
+              <i class="ri-calendar-line"></i>
+            </div>
+            <h3>Delivery</h3>
+            <p>Your order will arrive within 3-5 business days.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="action-buttons">
+        <button class="primary-btn" onclick="window.location.href='/'">
+          <i class="ri-home-line"></i>
+          Continue Shopping
+        </button>
+        <button class="secondary-btn" onclick="window.location.href='/account'">
+          <i class="ri-user-line"></i>
+          View My Orders
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/auth-check.js"></script>
+  <script src="thank-you.js"></script>
+</body>
+</html>

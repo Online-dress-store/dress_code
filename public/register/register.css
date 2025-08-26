@@ -29,15 +29,15 @@ body::before {
 .container {
   width: 100%;
   max-width: 420px;
-  padding: 20px;
+  padding: 80px 20px 20px 20px;
   position: relative;
   z-index: 1;
 }
 
 .back-button {
   position: absolute;
-  top: -80px;
-  left: 0;
+  top: 20px;
+  left: 20px;
 }
 
 .back-link {
@@ -147,6 +147,33 @@ input:focus {
 input::placeholder {
   color: #a8a095;
   font-weight: 400;
+}
+
+/* Message styling */
+.message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.message-success {
+  background: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.message-error {
+  background: rgba(244, 67, 54, 0.1);
+  color: #c62828;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.message-info {
+  background: rgba(33, 150, 243, 0.1);
+  color: #1565c0;
+  border: 1px solid rgba(33, 150, 243, 0.3);
 }
 
 .signup-btn {

@@ -3,7 +3,18 @@ const emptyWishlistElement = document.getElementById('emptyWishlist');
 const wishlistGridElement = document.getElementById('wishlistGrid');
 
 // Initialize wishlist
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  // Check authentication first
+  const authCheck = new AuthCheck();
+  const isAuthenticated = await authCheck.init();
+  
+  if (!isAuthenticated) {
+    return; // Stop execution if not authenticated
+  }
+  
+  // Get current user for wishlist data
+  const currentUser = authCheck.getCurrentUser();
+  
   // Load wishlist data from localStorage (if any exists)
   loadWishlistFromStorage();
   
