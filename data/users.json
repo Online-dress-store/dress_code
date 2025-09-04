@@ -88,7 +88,9 @@
     },
     "phone": "+1-555-ADMIN-01",
     "createdAt": "2025-01-01T00:00:00.000Z",
-    "updatedAt": "2025-01-01T12:00:00.000Z"
+    "updatedAt": "2025-01-01T12:00:00.000Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "u_customer_001",
@@ -161,7 +163,9 @@
     },
     "phone": "+1-555-CUST-01",
     "createdAt": "2024-06-01T00:00:00.000Z",
-    "updatedAt": "2025-01-01T11:30:00.000Z"
+    "updatedAt": "2025-01-01T11:30:00.000Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "u_customer_002",
@@ -223,7 +227,9 @@
     },
     "phone": "+1-555-USER-02",
     "createdAt": "2024-08-01T00:00:00.000Z",
-    "updatedAt": "2025-01-01T10:00:00.000Z"
+    "updatedAt": "2025-01-01T10:00:00.000Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "8bf26cb1-9d9d-4b8a-a16d-3c9245214b1e",
@@ -242,7 +248,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-12T17:35:27.216Z"
+    "createdAt": "2025-08-12T17:35:27.216Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "400438ee-7427-4db4-9546-7cd2a0880749",
@@ -261,7 +269,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-12T23:46:51.037Z"
+    "createdAt": "2025-08-12T23:46:51.037Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "6ce113a8-9253-4ca5-ae2d-52f5989c9e11",
@@ -280,7 +290,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-12T23:47:10.456Z"
+    "createdAt": "2025-08-12T23:47:10.456Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "ab948405-ce17-47a2-8b76-2e1c0fd637e1",
@@ -299,7 +311,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-12T23:47:21.001Z"
+    "createdAt": "2025-08-12T23:47:21.001Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "59ced4ef-1267-4451-812d-2dc7f6891158",
@@ -318,7 +332,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T00:04:38.773Z"
+    "createdAt": "2025-08-13T00:04:38.773Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "723057af-c23f-4606-b0cd-e62cb28ef92b",
@@ -337,7 +353,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T00:18:52.917Z"
+    "createdAt": "2025-08-13T00:18:52.917Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "c0ec3d36-f2dd-46eb-aa53-c9082a55aa99",
@@ -356,7 +374,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T00:20:03.617Z"
+    "createdAt": "2025-08-13T00:20:03.617Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "418e07c1-b19e-4483-b609-61f16146d1c4",
@@ -375,7 +395,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T00:31:27.188Z"
+    "createdAt": "2025-08-13T00:31:27.188Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "836faa04-c122-479f-80d2-6e38d3ca9ee3",
@@ -394,7 +416,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T00:50:51.852Z"
+    "createdAt": "2025-08-13T00:50:51.852Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "7129a016-7453-4a9f-8791-64e21319ff42",
@@ -425,7 +449,9 @@
         "productId": "p_drs_004"
       }
     ],
-    "createdAt": "2025-08-13T01:05:00.501Z"
+    "createdAt": "2025-08-13T01:05:00.501Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "570aecbd-7e8a-4f31-99d2-a6a6363a38fa",
@@ -456,7 +482,9 @@
         "productId": "p_drs_001"
       }
     ],
-    "createdAt": "2025-08-13T01:07:20.709Z"
+    "createdAt": "2025-08-13T01:07:20.709Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "f36ebfcd-e852-4ad1-b856-c64dc0fda96f",
@@ -475,7 +503,9 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-13T01:37:23.653Z"
+    "createdAt": "2025-08-13T01:37:23.653Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "5ab5ec28-28ff-4566-b8e1-f50c23d4b9b4",
@@ -538,7 +568,9 @@
         "productId": "p_drs_004"
       }
     ],
-    "createdAt": "2025-08-15T20:50:46.587Z"
+    "createdAt": "2025-08-15T20:50:46.587Z",
+    "wishlist": [],
+    "orders": []
   },
   {
     "id": "3a3d4b3b-1a7c-4e6b-9fd3-376bf8ad3113",
@@ -556,6 +588,8 @@
         "type": "register"
       }
     ],
-    "createdAt": "2025-08-15T22:50:44.115Z"
+    "createdAt": "2025-08-15T22:50:44.115Z",
+    "wishlist": [],
+    "orders": []
   }
 ]
