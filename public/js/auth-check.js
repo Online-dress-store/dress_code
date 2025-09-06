@@ -8,14 +8,38 @@ class AuthCheck {
   // Check authentication status
   async checkAuth() {
     try {
-      const response = await fetch('/api/auth/me');
-      const data = await response.json();
+      const response = await fetch('/api/auth/me', {
+        credentials: 'include'
+      });
       
       if (response.ok) {
+        // Check if response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          console.error('Non-JSON response from /api/auth/me:', {
+            status: response.status,
+            statusText: response.statusText,
+            contentType: contentType,
+            body: text
+          });
+          this.currentUser = null;
+          this.isAuthenticated = false;
+          return false;
+        }
+        
+        const data = await response.json();
         this.currentUser = data.user;
         this.isAuthenticated = true;
         return true;
+      } else if (response.status === 401) {
+        // User is not logged in (this is expected)
+        this.currentUser = null;
+        this.isAuthenticated = false;
+        return false;
       } else {
+        // Other error
+        console.error('Auth check error:', response.status, response.statusText);
         this.currentUser = null;
         this.isAuthenticated = false;
         return false;

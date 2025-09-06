@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const path = require('path');
 const { requireAuth, requireGuest } = require('./middleware/auth');
 const userModule = require('./modules/user_module');
@@ -7,8 +8,22 @@ const userModule = require('./modules/user_module');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// CORS configuration
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001'],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(cookieParser());
+
+// Middleware to ensure API routes return JSON
+app.use('/api', (req, res, next) => {
+  console.log('API request:', req.method, req.originalUrl, 'from origin:', req.headers.origin);
+  // Set JSON content type for all API routes
+  res.setHeader('Content-Type', 'application/json');
+  next();
+});
 
 // Initialize users on startup
 userModule.initializeUsers().then(() => {
@@ -17,17 +32,18 @@ userModule.initializeUsers().then(() => {
   console.error('Failed to initialize users:', err);
 });
 
-// serve static frontend from /public
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
-// serve data files
-app.use('/data', express.static(path.join(__dirname, '..', 'data')));
-
+// API routes must come BEFORE static file serving
 // products API (reads from data/products.json via persist module)
 app.use('/products', require('./routes/products'));
 
 // auth API
 app.use('/api/auth', require('./routes/auth'));
+
+// serve data files
+app.use('/data', express.static(path.join(__dirname, '..', 'data')));
+
+// serve static frontend from /public (after API routes)
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // healthcheck
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
@@ -113,6 +129,15 @@ app.get('/thank-you/', (req, res) => {
 });
 
 // 404 fallback for APIs
-app.use((req, res) => res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } }));
+app.use('/api/*', (req, res) => {
+  console.log('API route not found:', req.method, req.originalUrl);
+  res.status(404).json({ error: { code: 'NOT_FOUND', message: 'API route not found' } });
+});
+
+// 404 fallback for all other routes
+app.use((req, res) => {
+  console.log('Route not found:', req.method, req.originalUrl);
+  res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Route not found' } });
+});
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

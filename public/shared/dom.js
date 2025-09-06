@@ -75,7 +75,7 @@ export function showMessage(message, type = 'info') {
         messageDiv.parentNode.removeChild(messageDiv);
       }
     }, 300);
-  }, 3000);
+  }, 3001);
 }
 
 export function showNotLoggedInMessage(message) {

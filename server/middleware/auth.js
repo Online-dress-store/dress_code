@@ -40,16 +40,35 @@ function requireAuth(req, res, next) {
 }
 
 // Middleware to check if user is NOT authenticated (for login/register pages)
-function requireGuest(req, res, next) {
+async function requireGuest(req, res, next) {
   const token = req.cookies.authToken;
   
   if (token) {
     try {
-      jwt.verify(token, JWT_SECRET);
-      // User is already logged in, redirect to home
-      return res.redirect('/');
+      const decoded = jwt.verify(token, JWT_SECRET);
+      
+      // Check if user still exists in database
+      const userModule = require('../modules/user_module');
+      const user = await userModule.getUserById(decoded.userId);
+      
+      if (user) {
+        // User is already logged in and exists
+        if (req.path.startsWith('/api/')) {
+          return res.status(400).json({ 
+            error: 'Already logged in',
+            message: 'You are already logged in'
+          });
+        }
+        // For page routes, redirect to home
+        return res.redirect('/');
+      } else {
+        // User doesn't exist, clear the token
+        console.log('User not found in requireGuest, clearing token for user ID:', decoded.userId);
+        res.clearCookie('authToken');
+      }
     } catch (error) {
       // Invalid token, clear it and continue
+      console.log('Invalid token in requireGuest, clearing cookie');
       res.clearCookie('authToken');
     }
   }

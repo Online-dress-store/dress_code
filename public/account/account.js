@@ -106,7 +106,9 @@ function setupEventListeners() {
 // Load order history from server
 async function loadOrderHistory() {
   try {
-    const response = await fetch('/api/auth/orders');
+    const response = await fetch('/api/auth/orders', {
+      credentials: 'include'
+    });
     
     if (!response.ok) {
       throw new Error('Failed to fetch orders');
@@ -195,7 +197,8 @@ async function logout() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      credentials: 'include'
     });
     
     if (response.ok) {

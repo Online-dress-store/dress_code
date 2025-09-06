@@ -22,12 +22,22 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
+    // Show loading state
+    const submitBtn = registerForm.querySelector('.signup-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Creating Account...';
+    submitBtn.disabled = true;
+    
     try {
-      // Show loading state
-      const submitBtn = registerForm.querySelector('.signup-btn');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Creating Account...';
-      submitBtn.disabled = true;
+      // Clear any existing invalid tokens by logging out first
+      try {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+      } catch (e) {
+        // Ignore logout errors
+      }
       
       // Send registration request
       const response = await fetch('/api/auth/register', {
@@ -35,12 +45,27 @@ document.addEventListener('DOMContentLoaded', function() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           username,
           password,
           confirmPassword
         })
       });
+      
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response from register:', {
+          status: response.status,
+          statusText: response.statusText,
+          contentType: contentType,
+          body: text
+        });
+        showMessage('Server error. Please try again.', 'error');
+        return;
+      }
       
       const data = await response.json();
       

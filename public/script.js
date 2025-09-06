@@ -45,14 +45,34 @@ document.addEventListener('DOMContentLoaded', function() {
 // Check authentication status
 async function checkAuthStatus() {
   try {
-    const response = await fetch('/api/auth/me');
-    const data = await response.json();
+    const response = await fetch('/api/auth/me', {
+      credentials: 'include'
+    });
     
     if (response.ok) {
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response from /api/auth/me:', {
+          status: response.status,
+          statusText: response.statusText,
+          contentType: contentType,
+          body: text
+        });
+        updateUIForGuestUser();
+        return;
+      }
+      
       // User is logged in
+      const data = await response.json();
       updateUIForLoggedInUser(data.user);
+    } else if (response.status === 401) {
+      // User is not logged in (this is expected)
+      updateUIForGuestUser();
     } else {
-      // User is not logged in
+      // Other error
+      console.error('Auth check error:', response.status, response.statusText);
       updateUIForGuestUser();
     }
   } catch (error) {
@@ -171,7 +191,8 @@ async function logout() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      credentials: 'include'
     });
     
     if (response.ok) {

@@ -1,7 +1,9 @@
 // Auth helpers
 export async function getCurrentUser() {
   try {
-    const res = await fetch('/api/auth/me');
+    const res = await fetch('/api/auth/me', {
+      credentials: 'include'
+    });
     if (!res.ok) return null;
     const data = await res.json();
     return data.user || null;
@@ -19,7 +21,11 @@ export async function requireLogin(returnTo = location.pathname + location.searc
 
 export async function logout() {
   try {
-    await fetch('/api/auth/logout', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    await fetch('/api/auth/logout', { 
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
     location.href = '/';
   } catch (_) {}
 }
@@ -37,13 +43,21 @@ export function updateAuthState(authenticated, user = null) {
 // Check authentication status
 export async function checkAuthStatus() {
   try {
-    const response = await fetch('/api/auth/me');
-    const data = await response.json();
+    const response = await fetch('/api/auth/me', {
+      credentials: 'include'
+    });
     
     if (response.ok) {
+      const data = await response.json();
       currentUser = data.user;
       isAuthenticated = true;
+    } else if (response.status === 401) {
+      // User is not logged in (this is expected)
+      currentUser = null;
+      isAuthenticated = false;
     } else {
+      // Other error
+      console.error('Auth check error:', response.status, response.statusText);
       currentUser = null;
       isAuthenticated = false;
     }

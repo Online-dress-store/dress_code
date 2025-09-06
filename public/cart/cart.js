@@ -309,7 +309,7 @@ function showNotification(message) {
     setTimeout(() => {
       document.body.removeChild(notification);
     }, 300);
-  }, 3000);
+  }, 3001);
 }
 
 // Export for use in other scripts (for future add to cart functionality)

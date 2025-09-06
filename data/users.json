@@ -591,5 +591,50 @@
     "createdAt": "2025-08-15T22:50:44.115Z",
     "wishlist": [],
     "orders": []
+  },
+  {
+    "id": "da46d8a0-496b-4804-8ff6-ceb97df3aa3f",
+    "username": "test",
+    "passwordHash": "$2b$10$bl2DU/c6MlYHgsB4MAhnOOkmwk2DbeJJEOxjGEjh8dTZPmuzXSrTK",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": []
+  },
+  {
+    "id": "eeca3295-b384-4839-ae31-627fc3834b3d",
+    "username": "test2",
+    "passwordHash": "$2b$10$CsDi/olJeHOFmY237Y59uO2Fhk39mJ57fs76ffXA3nsDQE6mvt.Z6",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": []
+  },
+  {
+    "id": "7cc027f8-5400-49a1-ade9-3a92d54884f5",
+    "username": "newuser",
+    "passwordHash": "$2b$10$lklpCfZXHON8GDkWJ..e0.kl4kC5Lrd9ETIsmUTozaxpdZwX7WApK",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": []
+  },
+  {
+    "id": "2b607e1c-036a-4e49-b33f-72a9404d6aa9",
+    "username": "newtestuser",
+    "passwordHash": "$2b$10$I3h14cSieDvj1uy4dd1aB.8nNGiEh7euGuo2QBcEt/HFndRRGhoW2",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": []
+  },
+  {
+    "id": "1d4954e8-4253-48d3-8d81-6e92413ec9cd",
+    "username": "yuval2301",
+    "passwordHash": "$2b$10$v9DIWxUhhfMs1H3RWr2R3.aApl0iDjOVZSzQonKezyGAJHYcIZyt2",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": []
   }
 ]

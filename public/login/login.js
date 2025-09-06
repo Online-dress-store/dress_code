@@ -19,12 +19,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const password = formData.get('password');
     const rememberMe = formData.get('rememberMe') === 'on';
     
+    // Show loading state
+    const submitBtn = loginForm.querySelector('.login-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Signing In...';
+    submitBtn.disabled = true;
+    
     try {
-      // Show loading state
-      const submitBtn = loginForm.querySelector('.login-btn');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Signing In...';
-      submitBtn.disabled = true;
+      // Clear any existing invalid tokens by logging out first
+      try {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+      } catch (e) {
+        // Ignore logout errors
+      }
+      
+      console.log('Sending login request to:', '/api/auth/login');
+      console.log('Request data:', { username, rememberMe });
       
       // Send login request
       const response = await fetch('/api/auth/login', {
@@ -32,12 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           username,
           password,
           rememberMe
         })
       });
+      
+      console.log('Response received:', {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+      
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response from login:', {
+          status: response.status,
+          statusText: response.statusText,
+          contentType: contentType,
+          body: text
+        });
+        showMessage('Server error. Please try again.', 'error');
+        return;
+      }
       
       const data = await response.json();
       
