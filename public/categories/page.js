@@ -4,16 +4,13 @@ import { fetchProducts } from "../shared/api.js";
 import { isAuthenticated, currentUser, checkAuthStatus } from "../shared/auth.js";
 import { 
   isInCart, 
-  isInCartWithSize, 
-  addToCartWithSizeAndStock, 
-  removeFromCartWithSize,
-  updateCartCounter 
+  addToCart, 
+  removeFromCart
 } from "../shared/cart.js";
 import { 
-  isInWishlist, 
+  isWishlisted, 
   addToWishlist, 
-  removeFromWishlist, 
-  updateWishlistCounter 
+  removeFromWishlist
 } from "../shared/wishlist.js";
 import { createProductCard } from "../shared/renderCard.js";
 import { showNotLoggedInMessage, showMessage } from "../shared/dom.js";
@@ -92,8 +89,10 @@ function setupSorting() {
 // Load products from JSON file
 async function loadProducts() {
   try {
+    console.log('Loading products...');
     allProducts = await fetchProducts();
     console.log('Products loaded:', allProducts.length);
+    console.log('First product:', allProducts[0]);
   } catch (error) {
     console.error('Error loading products:', error);
     allProducts = [];
@@ -131,6 +130,9 @@ function sortProducts(products) {
 
 // Filter products by category and render
 function filterAndRenderProducts(categorySlug) {
+  console.log('filterAndRenderProducts called with categorySlug:', categorySlug);
+  console.log('allProducts length:', allProducts.length);
+  
   let filteredProducts = [];
   
   // Map category slugs to actual categories in the JSON
@@ -145,10 +147,12 @@ function filterAndRenderProducts(categorySlug) {
   };
   
   const targetCategory = categoryMap[categorySlug];
+  console.log('targetCategory:', targetCategory);
   
   if (targetCategory === null) {
     // Show all products for "all-items"
     filteredProducts = allProducts;
+    console.log('Showing all products, count:', filteredProducts.length);
   } else if (targetCategory === 'new') {
     // Show products created in the last 30 days
     const thirtyDaysAgo = new Date();
@@ -175,22 +179,7 @@ function filterAndRenderProducts(categorySlug) {
 
 
 
-// Add to cart (now requires size selection)
-function addToCart(product) {
-  if (!isAuthenticated) {
-    showNotLoggedInMessage('Please log in to add items to your cart');
-    return;
-  }
-  
-  // Check if product has variants/sizes
-  if (!product.variants || product.variants.length === 0) {
-    showMessage('This product has no available sizes', 'error');
-    return;
-  }
-  
-  // Show size selection modal
-  showSizeSelectionModal(product);
-}
+// Add to cart functionality is handled through the modal system
 
 // Show size selection modal
 function showSizeSelectionModal(product) {
@@ -273,7 +262,7 @@ function createQuickViewContent(product) {
   // Get available sizes from variants
   const availableSizes = product.variants ? product.variants.filter(variant => variant.stock > 0) : [];
   const selectedSize = availableSizes.length > 0 ? availableSizes[0].size : null;
-  const isInCartWithSize = selectedSize ? isInCartWithSize(product.id, selectedSize) : false;
+  const isInCartWithSelectedSize = selectedSize ? isInCartWithSize(product.id, selectedSize) : false;
   
   return `
     <div class="quick-view-container">
@@ -311,11 +300,11 @@ function createQuickViewContent(product) {
         ` : ''}
         
         <div class="quick-view-actions">
-          <button class="quick-view-primary-btn ${isInCartWithSize ? 'remove' : 'add'}" 
+          <button class="quick-view-primary-btn ${isInCartWithSelectedSize ? 'remove' : 'add'}" 
                   id="quick-view-action-btn"
                   data-product-id="${product.id}"
                   data-size="${selectedSize || ''}">
-            ${isInCartWithSize ? 'Remove from Cart' : 'Add to Cart'}
+            ${isInCartWithSelectedSize ? 'Remove from Cart' : 'Add to Cart'}
           </button>
         </div>
       </div>
@@ -323,14 +312,41 @@ function createQuickViewContent(product) {
   `;
 }
 
-// Check if product with specific size is in cart
+// Helper functions for cart operations with size
 function isInCartWithSize(productId, size) {
-  try {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    return cart.some(item => item.id === productId && item.size === size);
-  } catch (error) {
-    return false;
-  }
+  return isInCart(productId, size);
+}
+
+function addToCartWithSizeAndStock(product, size, stock) {
+  const cartItem = {
+    id: product.id,
+    title: product.title,
+    price: product.price,
+    image: product.images.main,
+    size: size,
+    quantity: 1
+  };
+  addToCart(cartItem, stock);
+  updateCartCounter();
+  return true;
+}
+
+function removeFromCartWithSize(productId, size) {
+  removeFromCart(productId, size);
+  updateCartCounter();
+  return true;
+}
+
+function updateCartCounter() {
+  // This function will be implemented to update the cart counter in the UI
+  // For now, we'll just log that it was called
+  console.log('Cart counter updated');
+}
+
+function updateWishlistCounter() {
+  // This function will be implemented to update the wishlist counter in the UI
+  // For now, we'll just log that it was called
+  console.log('Wishlist counter updated');
 }
 
 
@@ -433,7 +449,7 @@ function setupModalEventDelegation() {
         }
       } else {
         // Add to cart
-        if (addToCartWithSize(product, size)) {
+        if (addToCartWithSizeAndStock(product, size, 99)) {
           event.target.textContent = 'Remove from Cart';
           event.target.className = 'quick-view-primary-btn remove';
           updateProductCardState(productId, size, true);
@@ -494,11 +510,18 @@ function resetProductCardState(productId) {
 // Export function for future product rendering
 export function renderProducts(list) {
   console.log('renderProducts called with:', list);
+  console.log('list length:', list ? list.length : 'null/undefined');
   
   const grid = document.getElementById('grid');
+  if (!grid) {
+    console.error('Grid element not found!');
+    return;
+  }
+  
   const emptyState = grid.querySelector('.empty-state');
   
   if (list && list.length > 0) {
+    console.log('Rendering', list.length, 'products');
     // Remove empty state and render products
     if (emptyState) {
       emptyState.remove();
@@ -507,11 +530,13 @@ export function renderProducts(list) {
     
     // Clear existing content and render product cards
     grid.innerHTML = '';
-    list.forEach(product => {
+    list.forEach((product, index) => {
+      console.log(`Creating card for product ${index + 1}:`, product.title);
       const card = createProductCard(product);
       grid.appendChild(card);
     });
   } else {
+    console.log('No products to render, showing empty state');
     // Show empty state
     if (!emptyState) {
       grid.innerHTML = `
