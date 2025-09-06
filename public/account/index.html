@@ -4,15 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Account - Dress Code</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../shared/navigation.css" />
   <link rel="stylesheet" href="account.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="back-button">
-      <a href="/" class="back-link">← Back to Home</a>
-    </div>
+  <div class="page">
+    <div id="navigation"></div>
+    
+    <div class="container">
     
     <div class="account-container">
       <div class="account-header">
@@ -107,9 +109,10 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   
   <script src="../js/auth-check.js"></script>
-  <script src="account.js"></script>
+  <script type="module" src="account.js"></script>
 </body>
 </html>

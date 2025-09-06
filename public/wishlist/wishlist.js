@@ -1,9 +1,20 @@
+// Import navigation
+import { createNavigation, initNavigation, updateAuthStatus } from "../shared/navigation.js";
+
 // DOM elements
 const emptyWishlistElement = document.getElementById('emptyWishlist');
 const wishlistGridElement = document.getElementById('wishlistGrid');
 
 // Initialize wishlist
 document.addEventListener('DOMContentLoaded', async function() {
+  // Load navigation
+  const navigationElement = document.getElementById('navigation');
+  if (navigationElement) {
+    navigationElement.innerHTML = createNavigation();
+    initNavigation();
+    await updateAuthStatus();
+  }
+  
   // Check authentication first
   const authCheck = new AuthCheck();
   const isAuthenticated = await authCheck.init();

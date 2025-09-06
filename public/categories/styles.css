@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+/* Override main styles.css page constraints for categories page */
+.categories-page {
+  max-width: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #f5f2eb 0%, #e8e4dd 50%, #f5f2eb 100%);
@@ -18,6 +25,7 @@ body {
   margin: 0 auto;
   padding: 24px;
   position: relative;
+  width: 100%;
 }
 
 /* Back button styling (reused from other pages) */
@@ -116,10 +124,12 @@ h1 {
 }
 
 /* Grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+.categories-page .grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  gap: 24px !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .grid.empty {
@@ -153,13 +163,15 @@ h1 {
 }
 
 /* Product Card Styling */
-.card {
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  background: #fff;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: relative;
+.categories-page .card {
+  border-radius: 16px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  background: #fff !important;
+  transition: all 0.3s ease !important;
+  overflow: hidden !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .card:hover {
@@ -167,18 +179,18 @@ h1 {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 }
 
-.card-image {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
+.categories-page .card-image {
+  position: relative !important;
+  width: 100% !important;
+  height: 280px !important;
+  overflow: hidden !important;
 }
 
-.card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+.categories-page .card-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.3s ease !important;
 }
 
 .card:hover .card-image img {

@@ -1,5 +1,15 @@
+// Import navigation
+import { createNavigation, initNavigation, updateAuthStatus } from "../shared/navigation.js";
+
 // Login page functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  // Load navigation
+  const navigationElement = document.getElementById('navigation');
+  if (navigationElement) {
+    navigationElement.innerHTML = createNavigation();
+    initNavigation();
+    await updateAuthStatus();
+  }
   const loginForm = document.getElementById('loginForm');
   
   // Check for error message in URL

@@ -1,3 +1,6 @@
+// Import navigation
+import { createNavigation, initNavigation, updateAuthStatus } from "../shared/navigation.js";
+
 // Empty cart array by default - no preloaded products
 let cartItems = [];
 
@@ -12,6 +15,14 @@ let checkoutBtn;
 
 // Initialize cart
 document.addEventListener('DOMContentLoaded', async function() {
+  // Load navigation
+  const navigationElement = document.getElementById('navigation');
+  if (navigationElement) {
+    navigationElement.innerHTML = createNavigation();
+    initNavigation();
+    await updateAuthStatus();
+  }
+  
   // Resolve elements now that DOM is ready
   cartItemsContainer = document.getElementById('cartItems');
   emptyCartElement = document.getElementById('emptyCart');

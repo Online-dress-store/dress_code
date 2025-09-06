@@ -2,6 +2,7 @@
 import Modal from "../shared/modal.js";
 import { fetchProducts } from "../shared/api.js";
 import { isAuthenticated, currentUser, checkAuthStatus } from "../shared/auth.js";
+import { createNavigation, initNavigation, updateAuthStatus } from "../shared/navigation.js";
 import { 
   isInCart, 
   addToCart, 
@@ -20,6 +21,14 @@ let popup = null;
 let modal = null;
 
 document.addEventListener('DOMContentLoaded', async function() {
+  // Load navigation
+  const navigationElement = document.getElementById('navigation');
+  if (navigationElement) {
+    navigationElement.innerHTML = createNavigation();
+    initNavigation();
+    await updateAuthStatus();
+  }
+  
   // Initialize popup and modal
   popup = new Popup();
   modal = new Modal();
@@ -93,6 +102,10 @@ async function loadProducts() {
     allProducts = await fetchProducts();
     console.log('Products loaded:', allProducts.length);
     console.log('First product:', allProducts[0]);
+    
+    // Debug: Check all product categories
+    const categories = allProducts.map(p => ({ id: p.id, title: p.title, category: p.category }));
+    console.log('All product categories:', categories);
   } catch (error) {
     console.error('Error loading products:', error);
     allProducts = [];
@@ -138,15 +151,15 @@ function filterAndRenderProducts(categorySlug) {
   // Map category slugs to actual categories in the JSON
   const categoryMap = {
     'all-items': null, // Show all products
-    'new-in': 'new', // Could be filtered by date
-    'sale': 'sale', // Could be filtered by price or sale flag
-    'vacation': 'Vacation',
     'evening': 'Evening',
     'summer': 'Summer',
-    'everyday': 'Everyday'
+    'holiday': ['Cocktail', 'Wedding Guest'], // Map holiday to formal/special occasion dresses
+    'casual': 'Spring' // Map casual to spring (casual wear)
   };
   
   const targetCategory = categoryMap[categorySlug];
+  console.log('categorySlug:', categorySlug);
+  console.log('categoryMap:', categoryMap);
   console.log('targetCategory:', targetCategory);
   
   if (targetCategory === null) {
@@ -165,9 +178,26 @@ function filterAndRenderProducts(categorySlug) {
     filteredProducts = allProducts.slice(0, 2);
   } else {
     // Filter by exact category match
-    filteredProducts = allProducts.filter(product => 
-      product.category.toLowerCase() === targetCategory.toLowerCase()
-    );
+    filteredProducts = allProducts.filter(product => {
+      if (!product.category) {
+        console.warn('Product missing category:', product.id, product.title);
+        return false;
+      }
+      if (!targetCategory) {
+        console.warn('Target category is undefined for slug:', categorySlug);
+        return false;
+      }
+      
+      // Handle array of categories (for holiday)
+      if (Array.isArray(targetCategory)) {
+        return targetCategory.some(cat => 
+          product.category.toLowerCase() === cat.toLowerCase()
+        );
+      }
+      
+      // Handle single category
+      return product.category.toLowerCase() === targetCategory.toLowerCase();
+    });
   }
   
   // Sort the filtered products

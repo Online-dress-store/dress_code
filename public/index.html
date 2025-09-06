@@ -5,94 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dress Code</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="shared/navigation.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="page">
-    <header class="hc">
-      <div class="hc__left">
-        <form id="searchForm" class="searchline" role="search">
-          <input id="q" type="text" placeholder="Search dresses…" aria-label="Search dresses" />
-          <button class="icon" type="submit" aria-label="Search"><i class="ri-search-line"></i></button>
-        </form>
-      </div>
-  
-      <div class="hc__center">
-        <h1 class="page-title">DRESS <span>code</span></h1>
-        <p class="store-tagline">Giving dresses a second life – buy and sell in one place.</p>
-      </div>
-  
-      <div class="hc__right">
-        <a href="/wishlist" class="icon" aria-label="Liked"><i class="ri-heart-line"></i></a>
-        <a href="/sell" class="icon" aria-label="Sell a dress"><i class="ri-add-line"></i></a>
-        <a href="login/login.html" class="icon" id="profileLink" aria-label="Personal area"><i class="ri-user-line"></i></a>
-        <a href="cart/cart.html" class="icon" aria-label="Shopping cart"><i class="ri-shopping-bag-line"></i><span class="badge" id="bagCount">0</span></a>
-        <div class="menu-wrapper">
-          <button class="icon menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="Main menu">
-            <i class="ri-menu-line" aria-hidden="true"></i>
-          </button>
-          <nav class="dropdown-menu" role="menu" aria-hidden="true">
-            <div class="dropdown-section">
-              <a href="/categories/index.html?cat=new-in" class="dropdown-item" role="menuitem">NEW IN</a>
-              <a href="/categories/index.html?cat=sale" class="dropdown-item sale-item" role="menuitem">SALE</a>
-              <a href="/categories/index.html?cat=all-items" class="dropdown-item" role="menuitem">ALL ITEMS</a>
-            </div>
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-section">
-              <div class="dropdown-heading">Categories:</div>
-              <a href="/categories/index.html?cat=vacation" class="dropdown-item" role="menuitem">Vacation</a>
-              <a href="/categories/index.html?cat=evening" class="dropdown-item" role="menuitem">Evening</a>
-              <a href="/categories/index.html?cat=summer" class="dropdown-item" role="menuitem">Summer</a>
-              <a href="/categories/index.html?cat=everyday" class="dropdown-item" role="menuitem">Everyday</a>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </header>
+    <div id="navigation"></div>
   
     <main class="main-content">
       <div class="hero-section">
         <div class="hero-right">
-          <div class="video-container evening-video">
-            <video autoplay muted loop playsinline>
-              <source src="20250812_1934_Glamorous Evening Elegance_simple_compose_01k2fj3ydceqa9mpa4v4wcswr4.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="overlay-text">Evening collection</div>
+          <a href="/categories?cat=evening" class="video-link">
+            <div class="video-container evening-video">
+              <video autoplay muted loop playsinline>
+                <source src="20250812_1934_Glamorous Evening Elegance_simple_compose_01k2fj3ydceqa9mpa4v4wcswr4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-overlay">
+                <div class="overlay-text">Evening collection</div>
+              </div>
             </div>
-          </div>
+          </a>
           
-          <div class="video-container">
-            <video autoplay muted loop playsinline>
-              <source src="20250812_1919_Serene Beach Elegance_simple_compose_01k2fh7w50e6vt4rp15c4ds6nr (1).mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="overlay-text">Summer collection</div>
+          <a href="/categories?cat=summer" class="video-link">
+            <div class="video-container">
+              <video autoplay muted loop playsinline>
+                <source src="20250812_1919_Serene Beach Elegance_simple_compose_01k2fh7w50e6vt4rp15c4ds6nr (1).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-overlay">
+                <div class="overlay-text">Summer collection</div>
+              </div>
             </div>
-          </div>
+          </a>
 
-          <div class="video-container holiday-video">
-            <video autoplay muted loop playsinline>
-              <source src="20250813_1215_Elegant Holiday Glamour_simple_compose_01k2hbce7pe2ercxfydxkwnqyk.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="overlay-text">Holiday collection</div>
+          <a href="/categories?cat=holiday" class="video-link">
+            <div class="video-container holiday-video">
+              <video autoplay muted loop playsinline>
+                <source src="20250813_1215_Elegant Holiday Glamour_simple_compose_01k2hbce7pe2ercxfydxkwnqyk.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-overlay">
+                <div class="overlay-text">Holiday collection</div>
+              </div>
             </div>
-          </div>
+          </a>
 
-          <div class="video-container casual-video">
-            <video autoplay muted loop playsinline>
-              <source src="20250813_1731_Sunny Serene Stroll_simple_compose_01k2hxgbxwf019hyg05mjt9wwa.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-              <div class="overlay-text">Casual collection</div>
+          <a href="/categories?cat=casual" class="video-link">
+            <div class="video-container casual-video">
+              <video autoplay muted loop playsinline>
+                <source src="20250813_1731_Sunny Serene Stroll_simple_compose_01k2hxgbxwf019hyg05mjt9wwa.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-overlay">
+                <div class="overlay-text">Casual collection</div>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </main>
@@ -100,7 +70,7 @@
   
   <script src="js/auth-check.js"></script>
   <script src="js/popup.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
   
