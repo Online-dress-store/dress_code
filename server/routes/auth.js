@@ -229,4 +229,34 @@ router.get('/orders', async (req, res) => {
   }
 });
 
+// Get user's listed items
+router.get('/items', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+
+    if (!token) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+
+    if (!decoded) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    // Get user's listed items
+    const items = await userModule.getUserItems(decoded.userId);
+
+    res.json({
+      success: true,
+      items: items
+    });
+
+  } catch (error) {
+    console.error('Get items error:', error);
+    res.status(500).json({ error: 'Failed to get user items' });
+  }
+});
+
 module.exports = router;

@@ -34,7 +34,8 @@ function initializeAccountPage(user) {
   // Set up event listeners
   setupEventListeners();
   
-  // Load order history (placeholder for now)
+  // Load user items and order history
+  loadUserItems();
   loadOrderHistory();
 }
 
@@ -112,6 +113,78 @@ function setupEventListeners() {
     profileForm.style.display = 'none';
     editProfileBtn.style.display = 'flex';
   });
+}
+
+// Load user items from server
+async function loadUserItems() {
+  try {
+    const response = await fetch('/api/auth/items', {
+      credentials: 'include'
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch user items');
+    }
+    
+    const data = await response.json();
+    const items = data.items || [];
+    
+    const emptyItems = document.getElementById('emptyItems');
+    const itemsList = document.getElementById('itemsList');
+    
+    if (items.length === 0) {
+      // Show empty items state
+      emptyItems.style.display = 'block';
+      itemsList.style.display = 'none';
+    } else {
+      // Show items list
+      emptyItems.style.display = 'none';
+      itemsList.style.display = 'block';
+      
+      // Sort items by date (newest first)
+      const sortedItems = items.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      
+      // Render items
+      itemsList.innerHTML = sortedItems.map(item => `
+        <div class="item-card">
+          <div class="item-image">
+            <img src="${item.images?.main || '/placeholder-dress.jpg'}" alt="${item.title}" loading="lazy">
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">${item.title}</h3>
+            <p class="item-description">${item.description}</p>
+            <div class="item-meta">
+              <span class="item-category">${item.category}</span>
+              <span class="item-price">$${item.price.toFixed(2)}</span>
+            </div>
+            <div class="item-actions">
+              <span class="item-status ${item.status || 'active'}">${(item.status || 'active').charAt(0).toUpperCase() + (item.status || 'active').slice(1)}</span>
+              <div class="item-buttons">
+                <button class="edit-item-btn" onclick="editItem('${item.id}')">
+                  <i class="ri-edit-line"></i>
+                  Edit
+                </button>
+                <button class="delete-item-btn" onclick="deleteItem('${item.id}')">
+                  <i class="ri-delete-bin-line"></i>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error loading user items:', error);
+    showMessage('Failed to load your items', 'error');
+    
+    // Show empty state on error
+    const emptyItems = document.getElementById('emptyItems');
+    const itemsList = document.getElementById('itemsList');
+    emptyItems.style.display = 'block';
+    itemsList.style.display = 'none';
+  }
 }
 
 // Load order history from server
@@ -284,4 +357,18 @@ function showMessage(message, type = 'info') {
       }
     }, 300);
   }, 5000);
+}
+
+// Edit item function (placeholder)
+function editItem(itemId) {
+  showMessage('Edit functionality coming soon!', 'info');
+  console.log('Edit item:', itemId);
+}
+
+// Delete item function (placeholder)
+function deleteItem(itemId) {
+  if (confirm('Are you sure you want to delete this item?')) {
+    showMessage('Delete functionality coming soon!', 'info');
+    console.log('Delete item:', itemId);
+  }
 }

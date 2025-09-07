@@ -5,8 +5,8 @@ const { readUsers, writeUsers } = require('./persist_module');
 // Return a safe copy of a user without sensitive fields
 function toPublicUser(user) {
   if (!user) return null;
-  const { id, username, role, cart = [], wishlist = [], orders = [] } = user;
-  return { id, username, role, cart, wishlist, orders };
+  const { id, username, role, cart = [], wishlist = [], orders = [], items = [] } = user;
+  return { id, username, role, cart, wishlist, orders, items };
 }
 
 async function initializeUsers() {
@@ -21,6 +21,7 @@ async function initializeUsers() {
     if (!u.cart) { u.cart = []; changed = true; }
     if (!u.wishlist) { u.wishlist = []; changed = true; }
     if (!u.orders) { u.orders = []; changed = true; }
+    if (!u.items) { u.items = []; changed = true; }
   }
   if (changed) await writeUsers(users);
 }
@@ -38,7 +39,8 @@ async function createUser(username, password) {
     role: 'user',
     cart: [],
     wishlist: [],
-    orders: []
+    orders: [],
+    items: []
   };
   users.push(user);
   await writeUsers(users);
@@ -82,11 +84,18 @@ async function getUserOrders(userId) {
   return user && Array.isArray(user.orders) ? user.orders : [];
 }
 
+async function getUserItems(userId) {
+  const users = await readUsers();
+  const user = users.find(u => u.id === userId);
+  return user && Array.isArray(user.items) ? user.items : [];
+}
+
 module.exports = {
   initializeUsers,
   createUser,
   authenticateUser,
   getUserById,
   addOrder,
-  getUserOrders
+  getUserOrders,
+  getUserItems
 };

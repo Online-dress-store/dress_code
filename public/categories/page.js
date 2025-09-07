@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   // Make popup available globally for shared modules
   window.popup = popup;
   
-  // Read category from query string
+  // Read category and search from query string
   const params = new URLSearchParams(location.search);
   const slug = (params.get('cat') || 'all-items').toLowerCase();
+  const searchQuery = params.get('search') || '';
   
   // Map slug to pretty title
   function titleize(s) {
@@ -49,15 +50,25 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   
   // Set document title
-  document.title = `DRESS code – ${titleize(slug)}`;
+  if (searchQuery) {
+    document.title = `DRESS code – Search Results for "${searchQuery}"`;
+  } else {
+    document.title = `DRESS code – ${titleize(slug)}`;
+  }
   
   // Set category title
   const catTitle = document.getElementById('catTitle');
-  catTitle.textContent = titleize(slug);
+  if (searchQuery) {
+    catTitle.textContent = `Search Results for "${searchQuery}"`;
+  } else {
+    catTitle.textContent = titleize(slug);
+  }
   
   // Set category subtitle
   const catSubtitle = document.getElementById('catSubtitle');
-  if (slug === 'sale') {
+  if (searchQuery) {
+    catSubtitle.textContent = `Find the perfect dress matching your search`;
+  } else if (slug === 'sale') {
     catSubtitle.textContent = 'Discover our best offers';
   } else {
     catSubtitle.textContent = `Explore our latest ${titleize(slug)} looks`;
@@ -75,11 +86,14 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   // Load products and render
   loadProducts().then(() => {
-    filterAndRenderProducts(slug);
+    filterAndRenderProducts(slug, searchQuery);
   });
   
   // Set up modal event delegation
   setupModalEventDelegation();
+  
+  // Set up cart change event delegation
+  setupCartEventDelegation();
 });
 
 
@@ -90,7 +104,8 @@ function setupSorting() {
   if (sortSelect) {
     sortSelect.addEventListener('change', function() {
       const currentCategory = new URLSearchParams(location.search).get('cat') || 'all-items';
-      filterAndRenderProducts(currentCategory);
+      const currentSearch = new URLSearchParams(location.search).get('search') || '';
+      filterAndRenderProducts(currentCategory, currentSearch);
     });
   }
 }
@@ -142,8 +157,8 @@ function sortProducts(products) {
 }
 
 // Filter products by category and render
-function filterAndRenderProducts(categorySlug) {
-  console.log('filterAndRenderProducts called with categorySlug:', categorySlug);
+function filterAndRenderProducts(categorySlug, searchQuery = '') {
+  console.log('filterAndRenderProducts called with categorySlug:', categorySlug, 'searchQuery:', searchQuery);
   console.log('allProducts length:', allProducts.length);
   
   let filteredProducts = [];
@@ -161,6 +176,31 @@ function filterAndRenderProducts(categorySlug) {
   console.log('categorySlug:', categorySlug);
   console.log('categoryMap:', categoryMap);
   console.log('targetCategory:', targetCategory);
+  
+  // Helper function to search products
+  function searchProducts(products, query) {
+    if (!query || query.trim() === '') {
+      return products;
+    }
+    
+    const searchTerms = query.toLowerCase().trim().split(/\s+/);
+    console.log('Search terms:', searchTerms);
+    
+    return products.filter(product => {
+      // Search in title, description, category, tags, fabric type, and colors
+      const searchableText = [
+        product.title,
+        product.description,
+        product.category,
+        product.fabricType,
+        ...(product.tags || []),
+        ...(product.variants || []).map(v => v.color)
+      ].join(' ').toLowerCase();
+      
+      // Check if all search terms are found in the searchable text
+      return searchTerms.every(term => searchableText.includes(term));
+    });
+  }
   
   if (targetCategory === null) {
     // Show all products for "all-items"
@@ -200,11 +240,17 @@ function filterAndRenderProducts(categorySlug) {
     });
   }
   
+  // Apply search filter if there's a search query
+  if (searchQuery) {
+    filteredProducts = searchProducts(filteredProducts, searchQuery);
+    console.log(`After search filter: ${filteredProducts.length} products match "${searchQuery}"`);
+  }
+  
   // Sort the filtered products
   filteredProducts = sortProducts(filteredProducts);
   
   console.log(`Filtered and sorted ${filteredProducts.length} products for category: ${categorySlug}`);
-  renderProducts(filteredProducts);
+  renderProducts(filteredProducts, searchQuery);
 }
 
 
@@ -489,6 +535,39 @@ function setupModalEventDelegation() {
   });
 }
 
+// Set up cart change event delegation
+function setupCartEventDelegation() {
+  document.addEventListener('cartChange', function(event) {
+    const { product, button } = event.detail;
+    const productId = product.id;
+    
+    // Check if product is currently in cart
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const isCurrentlyInCart = cart.some(item => item.id === productId);
+    
+    if (isCurrentlyInCart) {
+      // Remove all sizes of this product from cart
+      const updatedCart = cart.filter(item => item.id !== productId);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      
+      // Update button state
+      button.textContent = 'Add to Cart';
+      button.classList.remove('in-cart');
+      
+      // Update cart counter
+      updateCartCounter();
+      
+      // Show success message
+      showMessage(`${product.title} removed from cart`, 'success');
+      
+      console.log(`Removed ${product.title} from cart`);
+    } else {
+      // If not in cart, show the size selection modal
+      showSizeSelectionModal(product);
+    }
+  });
+}
+
 // Update product card state after modal interaction
 function updateProductCardState(productId, size, isInCart) {
   const card = document.querySelector(`[data-product-id="${productId}"]`).closest('.card');
@@ -538,7 +617,7 @@ function resetProductCardState(productId) {
 
 
 // Export function for future product rendering
-export function renderProducts(list) {
+export function renderProducts(list, searchQuery = '') {
   console.log('renderProducts called with:', list);
   console.log('list length:', list ? list.length : 'null/undefined');
   
@@ -569,11 +648,15 @@ export function renderProducts(list) {
     console.log('No products to render, showing empty state');
     // Show empty state
     if (!emptyState) {
+      const emptyMessage = searchQuery 
+        ? `No dresses found matching "${searchQuery}". Try different keywords like "black", "summer", "evening", or "cotton".`
+        : 'No products available in this category yet.';
+      
       grid.innerHTML = `
         <div class="empty-state">
-          <div class="icon">🛍️</div>
+          <div class="icon">${searchQuery ? '🔍' : '🛍️'}</div>
           <h2>No items found</h2>
-          <p>No products available in this category yet.</p>
+          <p>${emptyMessage}</p>
         </div>
       `;
     }

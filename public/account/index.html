@@ -57,6 +57,35 @@
           </div>
         </div>
         
+        <!-- My Items Section -->
+        <div class="account-section">
+          <div class="section-header">
+            <h2><i class="ri-shirt-line"></i> My Items</h2>
+            <button class="add-item-btn" onclick="window.location.href='/sell'">
+              <i class="ri-add-line"></i>
+              Add New Item
+            </button>
+          </div>
+          
+          <div class="items-container" id="itemsContainer">
+            <div class="empty-items" id="emptyItems">
+              <div class="empty-icon">
+                <i class="ri-shirt-line"></i>
+              </div>
+              <h3>No Items Listed</h3>
+              <p>You haven't listed any items for sale yet.</p>
+              <a href="/sell" class="add-item-btn">
+                <i class="ri-add-line"></i>
+                List Your First Item
+              </a>
+            </div>
+            
+            <div class="items-list" id="itemsList" style="display: none;">
+              <!-- User's items will be populated here -->
+            </div>
+          </div>
+        </div>
+        
         <!-- Order History Section -->
         <div class="account-section">
           <div class="section-header">
