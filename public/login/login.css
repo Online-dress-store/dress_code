@@ -15,6 +15,23 @@ body {
   position: relative;
 }
 
+/* Dark mode overrides */
+[data-theme="dark"] body { background:#121212; color:#eaeaea; }
+[data-theme="dark"] .login-box { background:#1e1e1e; border-color:#2a2a2a; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+[data-theme="dark"] h1 { color:#f2f2f2; }
+[data-theme="dark"] .subtitle { color:#b8aea2; }
+[data-theme="dark"] .input-label { color:#b8aea2; }
+[data-theme="dark"] input { background:#2a2a2a; color:#eaeaea; border-color:#3a3a3a; }
+[data-theme="dark"] input::placeholder { color:#a9a29a; }
+[data-theme="dark"] .checkbox-label { color:#eaeaea; }
+[data-theme="dark"] .message-success { background: rgba(76,175,80,0.15); color:#b9e6c0; border-color: rgba(76,175,80,0.35); }
+[data-theme="dark"] .message-error { background: rgba(244,67,54,0.15); color:#ffbdbd; border-color: rgba(244,67,54,0.35); }
+[data-theme="dark"] .message-info { background: rgba(33,150,243,0.15); color:#b7dbff; border-color: rgba(33,150,243,0.35); }
+[data-theme="dark"] .divider-text { color:#b8aea2; }
+[data-theme="dark"] .divider-line { background: linear-gradient(90deg, transparent, #3a3a3a, transparent); }
+[data-theme="dark"] .create-account-btn { color:#eaeaea; border-color:#3a3a3a; }
+[data-theme="dark"] .create-account-btn:hover { background:#2a2a2a; border-color:#474747; color:#ffd7a3; }
+
 body::before {
   content: '';
   position: absolute;
@@ -28,10 +45,15 @@ body::before {
 
 .container {
   width: 100%;
-  max-width: 420px;
-  padding: 80px 20px 20px 20px;
+  max-width: 1200px;
+  padding: 40px 20px;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
 }
 
 .back-button {
@@ -71,6 +93,8 @@ body::before {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
+  max-width: 420px;
+  width: 100%;
 }
 
 .login-box::before {

@@ -13,6 +13,19 @@ body {
   line-height: 1.6;
 }
 
+/* Dark mode overrides */
+[data-theme="dark"] body { background:#121212; color:#eaeaea; }
+[data-theme="dark"] .wishlist-container { background:#1e1e1e; border-color:#2a2a2a; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+[data-theme="dark"] h1 { color:#f2f2f2; }
+[data-theme="dark"] .subtitle { color:#b8aea2; }
+[data-theme="dark"] .empty-wishlist h2 { color:#f2f2f2; }
+[data-theme="dark"] .empty-wishlist p { color:#b8aea2; }
+[data-theme="dark"] .wishlist-item { background:#1e1e1e; border-color:#2a2a2a; }
+[data-theme="dark"] .remove-from-wishlist-btn { background:#2a2a2a; }
+[data-theme="dark"] .remove-from-wishlist-btn:hover { background:#333; }
+[data-theme="dark"] .wishlist-item-title { color:#f2f2f2; }
+[data-theme="dark"] .wishlist-item-price { color:#ffd7a3; }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;

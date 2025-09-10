@@ -33,5 +33,70 @@
     "datetime": "2025-09-10T12:06:24.772Z",
     "username": "yuval2301",
     "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T12:28:51.882Z",
+    "username": "yuval2301",
+    "activity": "add-to-cart"
+  },
+  {
+    "datetime": "2025-09-10T13:51:18.278Z",
+    "username": "user_hh2n1",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:51:18.348Z",
+    "username": "user_hh2n1",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:52:06.471Z",
+    "username": "user_la5py",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:52:06.543Z",
+    "username": "user_la5py",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:52:06.552Z",
+    "username": "user_la5py",
+    "activity": "add-to-cart"
+  },
+  {
+    "datetime": "2025-09-10T13:53:53.599Z",
+    "username": "user_t7fyz",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:53:53.672Z",
+    "username": "user_t7fyz",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:53:53.743Z",
+    "username": "admin",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T13:53:53.758Z",
+    "username": "user_t7fyz",
+    "activity": "add-to-cart"
+  },
+  {
+    "datetime": "2025-09-10T14:23:03.751Z",
+    "username": "yuval2301",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T14:31:08.007Z",
+    "username": "yuval2301",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T14:50:02.137Z",
+    "username": "yuval2301",
+    "activity": "login"
   }
 ]

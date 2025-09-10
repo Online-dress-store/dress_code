@@ -177,28 +177,21 @@ function filterAndRenderProducts(categorySlug, searchQuery = '') {
   console.log('categoryMap:', categoryMap);
   console.log('targetCategory:', targetCategory);
   
-  // Helper function to search products
+  // Helper function to search products (prefix-only on title/description)
   function searchProducts(products, query) {
     if (!query || query.trim() === '') {
       return products;
     }
     
     const searchTerms = query.toLowerCase().trim().split(/\s+/);
-    console.log('Search terms:', searchTerms);
+    console.log('Search terms (prefix):', searchTerms);
     
     return products.filter(product => {
-      // Search in title, description, category, tags, fabric type, and colors
-      const searchableText = [
-        product.title,
-        product.description,
-        product.category,
-        product.fabricType,
-        ...(product.tags || []),
-        ...(product.variants || []).map(v => v.color)
-      ].join(' ').toLowerCase();
+      const title = String(product.title || '').toLowerCase();
+      const description = String(product.description || '').toLowerCase();
       
-      // Check if all search terms are found in the searchable text
-      return searchTerms.every(term => searchableText.includes(term));
+      // Every term must be a prefix of either title or description
+      return searchTerms.every(term => title.startsWith(term) || description.startsWith(term));
     });
   }
   

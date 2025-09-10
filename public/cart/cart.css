@@ -12,6 +12,26 @@ body {
   position: relative;
 }
 
+/* Dark mode overrides */
+[data-theme="dark"] body { background:#121212; color:#eaeaea; }
+[data-theme="dark"] .cart-container { background:#1e1e1e; border-color:#2a2a2a; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+[data-theme="dark"] .cart-header h1 { color:#f2f2f2; }
+[data-theme="dark"] .subtitle { color:#b8aea2; }
+[data-theme="dark"] .cart-items, [data-theme="dark"] .cart-summary { background:#1a1a1a; border-color:#2a2a2a; }
+[data-theme="dark"] .cart-item { border-color:#2a2a2a; }
+[data-theme="dark"] .cart-item-details h3 { color:#f2f2f2; }
+[data-theme="dark"] .cart-item-details p { color:#b8aea2; }
+[data-theme="dark"] .quantity-selector { background:#2a2a2a; border-color:#3a3a3a; }
+[data-theme="dark"] .quantity-btn { color:#eaeaea; }
+[data-theme="dark"] .quantity-btn:hover { background:#333; color:#ffd7a3; }
+[data-theme="dark"] .quantity-input { color:#eaeaea; }
+[data-theme="dark"] .summary-row { color:#b8aea2; }
+[data-theme="dark"] .summary-row.total { border-color:#2a2a2a; color:#f2f2f2; }
+[data-theme="dark"] .continue-shopping-btn { color:#eaeaea; border-color:#3a3a3a; }
+[data-theme="dark"] .continue-shopping-btn:hover { background:#2a2a2a; border-color:#474747; color:#ffd7a3; }
+[data-theme="dark"] .empty-cart h2 { color:#f2f2f2; }
+[data-theme="dark"] .empty-cart p { color:#b8aea2; }
+
 body::before {
   content: '';
   position: absolute;

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Readme</title>
+  <link rel="stylesheet" href="/shared/navigation.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page">
+    <div id="navigation"></div>
+    <div class="container" style="padding:24px">
+      <h1>Store Readme</h1>
+      <p>This page summarizes the required details for submission.</p>
+      <h2>Store name</h2>
+      <p>DRESS code</p>
+      <h2>What are you selling?</h2>
+      <p>Pre‑loved and new dresses (Evening, Summer, Holiday, Casual).</p>
+      <h2>Additional pages and how to use</h2>
+      <ul>
+        <li>Wishlist: like items and add to cart.</li>
+        <li>Sell: list your own items.</li>
+        <li>Account: personal details, purchases.</li>
+        <li>Admin: activity log + manage products.</li>
+      </ul>
+      <h2>What was hard?</h2>
+      <p>Auth, JSON‑only APIs, live cart/wishlist sync, admin logging & persistence.</p>
+      <h2>Partner</h2>
+      <p>Name: <em>Fill here</em> | ID: <em>Fill here</em>. Work split described in code comments and commits.</p>
+      <h2>Routes</h2>
+      <pre id="routes"></pre>
+      <h2>Testing</h2>
+      <p>See <code>test.js</code> – runs node‑fetch tests against dynamic routes.</p>
+    </div>
+  </div>
+  <script type="module">
+    import { createNavigation, initNavigation, updateAuthStatus } from '/shared/navigation.js';
+    const nav = document.getElementById('navigation');
+    if (nav) { nav.innerHTML = createNavigation(); initNavigation(); await updateAuthStatus(); }
+    // Render server routes summary fetched from client-known endpoints
+    const routes = [
+      'GET /products', 'GET/POST/PUT /api/auth/*', 'GET/POST /api/admin/activity', 'GET/POST/DELETE/PUT /api/admin/products',
+      'GET /readme.html', 'GET /llm.html'
+    ];
+    document.getElementById('routes').textContent = routes.join('\n');
+  </script>
+</body>
+</html>
+
+

@@ -19,6 +19,7 @@ export function createNavigation() {
         <a href="/sell" class="icon" aria-label="Sell a dress"><i class="ri-add-line"></i></a>
         <a href="/login" class="icon" id="profileLink" aria-label="Personal area"><i class="ri-user-line"></i></a>
         <a href="/cart" class="icon" aria-label="Shopping cart"><i class="ri-shopping-bag-line"></i><span class="badge" id="bagCount">0</span></a>
+        <button class="icon" id="themeToggle" aria-label="Toggle dark mode"><i class="ri-contrast-2-line"></i></button>
         <div class="menu-wrapper">
           <button class="icon menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="Main menu">
             <i class="ri-menu-line" aria-hidden="true"></i>
@@ -73,6 +74,22 @@ export function initNavigation() {
         menuBtn.setAttribute('aria-expanded', 'false');
         dropdownMenu.parentElement.classList.remove('open');
       }
+    });
+  }
+  
+  // Theme toggle
+  const toggleBtn = document.getElementById('themeToggle');
+  if (toggleBtn) {
+    // Apply saved theme
+    try {
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    } catch (_) {}
+    toggleBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (_) {}
     });
   }
   

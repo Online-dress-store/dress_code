@@ -2,6 +2,10 @@
 .admin-header h1 { font-family: 'Playfair Display', serif; margin-bottom: 8px; font-size: 32px; }
 .subtitle { color:#8b7d6b; margin-bottom: 24px; }
 
+/* Dark mode overrides */
+[data-theme="dark"] .admin-header h1 { color:#f2f2f2; }
+[data-theme="dark"] .subtitle { color:#b8aea2; }
+
 /* Admin Section Styles */
 .admin-section {
   background: white;
@@ -10,6 +14,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
+[data-theme="dark"] .admin-section { background:#1a1a1a; box-shadow: 0 4px 10px rgba(0,0,0,0.35); }
 
 .admin-section h2 {
   color: #2c3e50;
@@ -18,6 +23,7 @@
   font-weight: 600;
   font-family: 'Playfair Display', serif;
 }
+[data-theme="dark"] .admin-section h2 { color:#f2f2f2; }
 
 .admin-section h3 {
   color: #2c3e50;
@@ -43,6 +49,7 @@
   font-size: 1rem;
   font-family: 'Inter', sans-serif;
 }
+[data-theme="dark"] .activity-controls input { background:#2a2a2a; color:#eaeaea; border-color:#3a3a3a; }
 
 .activity-controls button {
   background: #8b7d6b;
@@ -75,6 +82,7 @@
   text-align: left;
   border-bottom: 1px solid rgba(139,125,107,.2);
 }
+[data-theme="dark"] .activity-table th, [data-theme="dark"] .activity-table td { border-color:#2a2a2a; }
 
 .activity-table th {
   background: #f8f9fa;
@@ -82,15 +90,18 @@
   color: #2c3e50;
   font-family: 'Inter', sans-serif;
 }
+[data-theme="dark"] .activity-table th { background:#222; color:#eaeaea; }
 
 .activity-table td {
   color: #555;
   font-family: 'Inter', sans-serif;
 }
+[data-theme="dark"] .activity-table td { color:#eaeaea; }
 
 .activity-table tr:hover {
   background: #f8f9fa;
 }
+[data-theme="dark"] .activity-table tr:hover { background:#222; }
 
 /* Product Management Styles */
 .create-form { 
@@ -103,6 +114,7 @@
   border-radius: 8px;
   padding: 20px;
 }
+[data-theme="dark"] .create-form { background:#1f1f1f; }
 
 .create-form textarea { 
   grid-column: 1 / -1; 
@@ -115,6 +127,7 @@
   padding: 10px 12px; 
   font-family: 'Inter', sans-serif;
 }
+[data-theme="dark"] .create-form input, [data-theme="dark"] .create-form textarea { background:#2a2a2a; color:#eaeaea; border-color:#3a3a3a; }
 
 .create-form button { 
   grid-column: 1 / -1; 
@@ -142,6 +155,8 @@
   background:#fff; 
   box-shadow: 0 8px 25px rgba(0,0,0,0.05); 
 }
+[data-theme="dark"] .product { background:#1e1e1e; border-color:#2a2a2a; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+[data-theme="dark"] .product .title, [data-theme="dark"] .product .price { color:#eaeaea; }
 
 .product img { 
   width:64px; 

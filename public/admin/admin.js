@@ -28,7 +28,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadActivityLog(prefix);
   });
 
-  // No creation in edit-only mode
+  // Handle create product
+  const form = document.getElementById('createForm');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const price = parseFloat(document.getElementById('price').value || '0');
+      const category = document.getElementById('category').value.trim();
+      const image = document.getElementById('image').value.trim();
+      const description = document.getElementById('description').value.trim();
+
+      const resp = await fetch('/api/admin/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ title, price, category, picture: image, description })
+      });
+
+      if (!resp.ok) {
+        let msg = 'Unknown error';
+        try { const err = await resp.json(); msg = err.message || JSON.stringify(err); } catch(_) {}
+        alert('Failed to add product: ' + msg);
+        return;
+      }
+
+      await loadProducts();
+      form.reset();
+    });
+  }
 });
 
 async function loadProducts() {

@@ -85,12 +85,11 @@ async function logAddToCartActivity(item) {
     const user = await fetchCurrentUser();
     if (!user) return; // Only log for authenticated users
     
-    await fetch('/api/admin/activity', {
+    await fetch('/api/activity', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({
-        username: user.username,
         activity: 'add-to-cart'
       })
     });

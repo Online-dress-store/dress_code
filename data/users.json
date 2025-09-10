@@ -6,7 +6,7 @@
     "password": "G7!pRz2@wQ9#xL8$",
     "firstName": "Admin",
     "lastName": "User",
-    "role": "user",
+    "role": "admin",
     "cart": [
       {
         "productId": "p_drs_001",
@@ -91,7 +91,8 @@
     "updatedAt": "2025-01-01T12:00:00.000Z",
     "wishlist": [],
     "orders": [],
-    "items": []
+    "items": [],
+    "passwordHash": "$2b$10$UVzNC7Hybxwu6o2dBuvPieamk4CqAWI.bIFaBYJzWxnLzJd/3wzRu"
   },
   {
     "id": "u_customer_001",
@@ -656,19 +657,19 @@
     "role": "admin",
     "cart": [
       {
-        "id": "p_drs_002",
-        "title": "Elegant Evening Gown",
-        "price": 299.99,
-        "image": "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/AG5158s.jpg?im=Resize,width=750",
-        "size": "M",
-        "quantity": 1
-      },
-      {
         "id": "p_drs_001",
         "title": "Black Summer Dress",
         "price": 99.99,
         "image": "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/F36246s.jpg?im=Resize,width=750",
         "size": "S",
+        "quantity": 1
+      },
+      {
+        "id": "p_drs_003",
+        "title": "Floral Spring Dress",
+        "price": 129.99,
+        "image": "https://m.media-amazon.com/images/I/81Cj85XiyOL._AC_SX679_.jpg",
+        "size": "M",
         "quantity": 1
       }
     ],
@@ -753,6 +754,36 @@
         "userId": "ba75c2c9-82ff-42e3-9035-ed2016e4ffc9"
       }
     ],
+    "items": []
+  },
+  {
+    "id": "3952ba0d-6c28-47b8-8711-82a6e6be9a7d",
+    "username": "user_hh2n1",
+    "passwordHash": "$2b$10$KOwq5IamkIIeEQa0tYzJE.vNTiE7sPGAiZuqYkJ1hUK0hwkDE7/bu",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "224452dd-8c67-45f9-9040-7047cf7fb2e2",
+    "username": "user_la5py",
+    "passwordHash": "$2b$10$VAbR5Y/l7fELOTtcdpkHUOGlUuhIVh0Sp7bBGdJblrnbqaYUj4HP6",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "5f335aff-8b88-447b-bdaf-34b26ded6807",
+    "username": "user_t7fyz",
+    "passwordHash": "$2b$10$pTR/72oHMYRKAs5N/5vKUegHgtKDA.x1ZPgeulE49ELKeIm6Hrury",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
     "items": []
   }
 ]

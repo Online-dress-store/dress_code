@@ -213,6 +213,22 @@
   display: block;
 }
 
+/* Dark mode basics */
+[data-theme="dark"] body { background:#121212; color:#eaeaea; }
+[data-theme="dark"] .page-title { color:#eaeaea !important; }
+[data-theme="dark"] .store-tagline { color:#b8aea2; }
+[data-theme="dark"] .dropdown-menu, [data-theme="dark"] .user-dropdown { background:#1e1e1e !important; border-color:#2a2a2a !important; }
+[data-theme="dark"] .dropdown-item { color:#eaeaea; }
+[data-theme="dark"] .dropdown-item:hover { background:#2a2a2a; color:#ffd7a3; }
+[data-theme="dark"] .badge { background:#c62828; }
+[data-theme="dark"] .container, [data-theme="dark"] .admin-section, [data-theme="dark"] .product, [data-theme="dark"] .items-container, [data-theme="dark"] .orders-container { background:#1a1a1a; color:#eaeaea; }
+[data-theme="dark"] .product { border-color: rgba(255,255,255,.12); }
+[data-theme="dark"] .user-dropdown { background:#1f1f1f; border-color:#2a2a2a; }
+[data-theme="dark"] .dropdown-item { color:#eee; }
+[data-theme="dark"] .dropdown-item:hover { background:#2a2a2a; }
+[data-theme="dark"] .dropdown-menu { background:#1b1b1b; border-color:#2a2a2a; }
+[data-theme="dark"] .badge { background:#c62828; }
+
 .video-overlay {
   position: absolute;
   inset: 0;

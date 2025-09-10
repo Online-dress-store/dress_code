@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // Handle form submission
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
   event.preventDefault();
   
   // Collect form data
@@ -44,17 +44,25 @@ function handleFormSubmit(event) {
   // Generate the final product object
   const newProduct = generateProductObject(productData);
   
-  // Log the product object to console
-  console.log('New Product Data:', newProduct);
-  
-  // Show success message
-  showSuccessMessage();
-  
-  // Reset form
-  event.target.reset();
-  
-  // Reset variants to default
-  resetVariants();
+  try {
+    const res = await fetch('/api/auth/items', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(newProduct)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to save');
+    }
+    // Show success message
+    showSuccessMessage();
+    // Reset form
+    event.target.reset();
+    resetVariants();
+  } catch (e) {
+    showErrorMessage(e.message || 'Failed to save');
+  }
 }
 
 // Collect all form data

@@ -2,9 +2,10 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
-const { requireAuth, requireGuest } = require('./middleware/auth');
+const { requireAuth, requireGuest, requireAdmin } = require('./middleware/auth');
 const userModule = require('./modules/user_module');
 const activityModule = require('./modules/activity_module');
+const { createRateLimit } = require('./middleware/rateLimit');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -40,11 +41,28 @@ Promise.all([
 // products API (reads from data/products.json via persist module)
 app.use('/products', require('./routes/products'));
 
-// auth API
+// auth API (rate limiting applied inside auth routes for sensitive endpoints)
 app.use('/api/auth', require('./routes/auth'));
 
-// admin API
+// admin API (has its own stricter limiter inside the router)
 app.use('/api/admin', require('./routes/admin'));
+
+// public activity logging (non-admin) – logs only add-to-cart for the authenticated user
+app.post('/api/activity', createRateLimit(15 * 60 * 1000, 300), requireAuth, async (req, res) => {
+  try {
+    const { activity } = req.body || {};
+    if (activity !== 'add-to-cart') {
+      return res.status(400).json({ error: 'Only add-to-cart activity is allowed here' });
+    }
+    const user = await userModule.getUserById(req.user.userId);
+    const activityModule = require('./modules/activity_module');
+    await activityModule.logActivity(user.username, 'add-to-cart');
+    res.json({ success: true });
+  } catch (e) {
+    console.error('Public activity log error:', e);
+    res.status(500).json({ error: 'Failed to log activity' });
+  }
+});
 
 // serve data files
 app.use('/data', express.static(path.join(__dirname, '..', 'data')));
@@ -54,6 +72,15 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // healthcheck
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
+// Public documentation pages
+app.get('/readme.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'readme.html'));
+});
+
+app.get('/llm.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'llm.html'));
+});
 
 // Route for home page
 app.get('/', (req, res) => {
@@ -77,35 +104,35 @@ app.get('/register/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'register', 'register.html'));
 });
 
-app.get('/cart', (req, res) => {
+app.get('/cart', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'cart', 'cart.html'));
 });
 
-app.get('/cart/', (req, res) => {
+app.get('/cart/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'cart', 'cart.html'));
 });
 
-app.get('/wishlist', (req, res) => {
+app.get('/wishlist', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'wishlist', 'index.html'));
 });
 
-app.get('/wishlist/', (req, res) => {
+app.get('/wishlist/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'wishlist', 'index.html'));
 });
 
-app.get('/sell', (req, res) => {
+app.get('/sell', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'sell', 'index.html'));
 });
 
-app.get('/sell/', (req, res) => {
+app.get('/sell/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'sell', 'index.html'));
 });
 
-app.get('/account', (req, res) => {
+app.get('/account', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'account', 'index.html'));
 });
 
-app.get('/account/', (req, res) => {
+app.get('/account/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'account', 'index.html'));
 });
 
@@ -119,28 +146,28 @@ app.get('/categories/', (req, res) => {
 });
 
 // Checkout and thank you pages
-app.get('/checkout', (req, res) => {
+app.get('/checkout', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'checkout', 'index.html'));
 });
 
-app.get('/checkout/', (req, res) => {
+app.get('/checkout/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'checkout', 'index.html'));
 });
 
-app.get('/thank-you', (req, res) => {
+app.get('/thank-you', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'thank-you', 'index.html'));
 });
 
-app.get('/thank-you/', (req, res) => {
+app.get('/thank-you/', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'thank-you', 'index.html'));
 });
 
-// Admin page (client checks role)
-app.get('/admin', (req, res) => {
+// Admin page (server enforces admin auth)
+app.get('/admin', requireAuth, requireAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
 });
 
-app.get('/admin/', (req, res) => {
+app.get('/admin/', requireAuth, requireAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
 });
 

@@ -266,6 +266,24 @@ router.get('/items', async (req, res) => {
   }
 });
 
+// Add new item to current user's items
+router.post('/items', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    if (!token) return res.status(401).json({ error: 'Not authenticated' });
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    if (!decoded) return res.status(401).json({ error: 'Invalid token' });
+
+    const item = req.body && typeof req.body === 'object' ? req.body : {};
+    const saved = await userModule.addUserItem(decoded.userId, item);
+    res.status(201).json({ success: true, item: saved });
+  } catch (e) {
+    console.error('Add item error:', e);
+    res.status(500).json({ error: 'Failed to add item' });
+  }
+});
+
 // Get current user's cart
 router.get('/cart', async (req, res) => {
   try {

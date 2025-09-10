@@ -17,14 +17,39 @@ async function initializeUsers() {
   }
   // Ensure default structure for all users
   let changed = false;
+  // Ensure default admin user exists (admin/admin)
+  let adminUser = users.find(u => String(u.username).toLowerCase() === 'admin');
+  if (!adminUser) {
+    const passwordHash = await bcrypt.hash('admin', 10);
+    adminUser = {
+      id: uuidv4(),
+      username: 'admin',
+      passwordHash,
+      role: 'admin',
+      cart: [],
+      wishlist: [],
+      orders: [],
+      items: []
+    };
+    users.push(adminUser);
+    changed = true;
+  } else {
+    // ensure admin has correct role and password on every startup
+    const newHash = await bcrypt.hash('admin', 10);
+    if (adminUser.passwordHash !== newHash) {
+      adminUser.passwordHash = newHash;
+      changed = true;
+    }
+    if (adminUser.role !== 'admin') { adminUser.role = 'admin'; changed = true; }
+  }
   for (const u of users) {
     if (!u.cart) { u.cart = []; changed = true; }
     if (!u.wishlist) { u.wishlist = []; changed = true; }
     if (!u.orders) { u.orders = []; changed = true; }
     if (!u.items) { u.items = []; changed = true; }
 
-    // Enforce admin role only for the specific username 'yuval2301'
-    if (String(u.username).toLowerCase() === 'yuval2301') {
+    // Enforce admin role for known admins
+    if (String(u.username).toLowerCase() === 'yuval2301' || String(u.username).toLowerCase() === 'admin') {
       if (u.role !== 'admin') { u.role = 'admin'; changed = true; }
     } else {
       if (u.role !== 'user') { u.role = 'user'; changed = true; }
@@ -97,6 +122,17 @@ async function getUserItems(userId) {
   return user && Array.isArray(user.items) ? user.items : [];
 }
 
+async function addUserItem(userId, item) {
+  const users = await readUsers();
+  const idx = users.findIndex(u => u.id === userId);
+  if (idx === -1) throw new Error('User not found');
+  if (!Array.isArray(users[idx].items)) users[idx].items = [];
+  const newItem = Object.assign({}, item, { id: uuidv4(), createdAt: new Date().toISOString() });
+  users[idx].items.push(newItem);
+  await writeUsers(users);
+  return newItem;
+}
+
 // Cart helpers
 async function getUserCart(userId) {
   const users = await readUsers();
@@ -137,6 +173,7 @@ module.exports = {
   addOrder,
   getUserOrders,
   getUserItems,
+  addUserItem,
   getUserCart,
   setUserCart,
   getUserWishlist,

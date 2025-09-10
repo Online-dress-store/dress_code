@@ -76,12 +76,39 @@ router.get('/products', async (req, res) => {
   }
 });
 
-// Disable creating new products via admin API
-router.post('/products', (req, res) => {
-  return res.status(405).json({
-    error: 'Method not allowed',
-    message: 'Adding new products is disabled'
-  });
+// Create new product (per spec)
+router.post('/products', async (req, res) => {
+  try {
+    const { title, description, picture, category, price } = req.body || {};
+    if (!title || !picture) {
+      return res.status(400).json({
+        error: 'Validation error',
+        message: 'Title and picture are required'
+      });
+    }
+    const products = await persistModule.listProducts();
+    const maxNumericId = products
+      .map(p => Number(String(p.id).replace(/\D/g, '')))
+      .filter(n => !Number.isNaN(n));
+    const nextNum = maxNumericId.length ? Math.max(...maxNumericId) + 1 : 1;
+    const newId = `p_${nextNum.toString().padStart(3,'0')}`;
+    const product = {
+      id: newId,
+      title: String(title),
+      description: String(description || ''),
+      picture: String(picture),
+      category: String(category || 'General'),
+      price: Number(price || 0),
+      sizes: ['S','M','L'],
+      variants: [ { size: 'S', stock: 10, color: 'default' }, { size: 'M', stock: 10, color: 'default' }, { size: 'L', stock: 10, color: 'default' } ]
+    };
+    products.push(product);
+    await persistModule.writeProducts(products);
+    res.status(201).json({ success: true, data: product, message: 'Product added successfully' });
+  } catch (error) {
+    console.error('Error creating product:', error);
+    res.status(500).json({ error: 'Internal server error', message: 'Failed to create product' });
+  }
 });
 
 // Update existing product (edit-only mode)

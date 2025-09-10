@@ -13,6 +13,24 @@ body {
   position: relative;
 }
 
+/* Dark mode overrides */
+[data-theme="dark"] body { background:#121212; color:#eaeaea; }
+[data-theme="dark"] .checkout-container { background:#1e1e1e; border-color:#2a2a2a; box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+[data-theme="dark"] .checkout-header h1 { color:#f2f2f2; }
+[data-theme="dark"] .subtitle { color:#b8aea2; }
+[data-theme="dark"] .order-summary, [data-theme="dark"] .checkout-form { background:#1a1a1a; border-color:#2a2a2a; }
+[data-theme="dark"] .section-header { border-color:#2a2a2a; }
+[data-theme="dark"] .section-header h2 { color:#f2f2f2; }
+[data-theme="dark"] .order-item { border-color:#2a2a2a; }
+[data-theme="dark"] .order-item-name { color:#f2f2f2; }
+[data-theme="dark"] .order-item-price { color:#b8aea2; }
+[data-theme="dark"] .total-row { color:#b8aea2; }
+[data-theme="dark"] .total-row.final { color:#f2f2f2; border-color:#2a2a2a; }
+[data-theme="dark"] .form-group label { color:#eaeaea; }
+[data-theme="dark"] .form-group input, [data-theme="dark"] .form-group select { background:#2a2a2a; color:#eaeaea; border-color:#3a3a3a; }
+[data-theme="dark"] .terms-checkbox { background:#1a1a1a; border-color:#2a2a2a; }
+[data-theme="dark"] .terms-checkbox label { color:#eaeaea; }
+
 body::before {
   content: '';
   position: absolute;
