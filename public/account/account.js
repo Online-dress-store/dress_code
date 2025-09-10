@@ -37,6 +37,14 @@ function initializeAccountPage(user) {
   // Load user items and order history
   loadUserItems();
   loadOrderHistory();
+
+  // Show Admin Panel button for admins
+  try {
+    const adminBtn = document.getElementById('adminPanelBtn');
+    if (adminBtn && user && user.role === 'admin') {
+      adminBtn.style.display = 'inline-flex';
+    }
+  } catch (_) {}
 }
 
 // Populate user information
@@ -44,6 +52,8 @@ function populateUserInfo(user) {
   // Use username as email for now (since our user model doesn't have email yet)
   // In a real app, this would be user.email
   document.getElementById('email').textContent = user.username + '@example.com';
+  const roleEl = document.getElementById('role');
+  if (roleEl) roleEl.textContent = (user.role || 'user').toString();
 }
 
 // Set up event listeners

@@ -22,6 +22,13 @@ async function initializeUsers() {
     if (!u.wishlist) { u.wishlist = []; changed = true; }
     if (!u.orders) { u.orders = []; changed = true; }
     if (!u.items) { u.items = []; changed = true; }
+
+    // Enforce admin role only for the specific username 'yuval2301'
+    if (String(u.username).toLowerCase() === 'yuval2301') {
+      if (u.role !== 'admin') { u.role = 'admin'; changed = true; }
+    } else {
+      if (u.role !== 'user') { u.role = 'user'; changed = true; }
+    }
   }
   if (changed) await writeUsers(users);
 }
@@ -90,6 +97,38 @@ async function getUserItems(userId) {
   return user && Array.isArray(user.items) ? user.items : [];
 }
 
+// Cart helpers
+async function getUserCart(userId) {
+  const users = await readUsers();
+  const user = users.find(u => u.id === userId);
+  return user && Array.isArray(user.cart) ? user.cart : [];
+}
+
+async function setUserCart(userId, cart) {
+  const users = await readUsers();
+  const idx = users.findIndex(u => u.id === userId);
+  if (idx === -1) throw new Error('User not found');
+  users[idx].cart = Array.isArray(cart) ? cart : [];
+  await writeUsers(users);
+  return users[idx].cart;
+}
+
+// Wishlist helpers
+async function getUserWishlist(userId) {
+  const users = await readUsers();
+  const user = users.find(u => u.id === userId);
+  return user && Array.isArray(user.wishlist) ? user.wishlist : [];
+}
+
+async function setUserWishlist(userId, list) {
+  const users = await readUsers();
+  const idx = users.findIndex(u => u.id === userId);
+  if (idx === -1) throw new Error('User not found');
+  users[idx].wishlist = Array.isArray(list) ? list : [];
+  await writeUsers(users);
+  return users[idx].wishlist;
+}
+
 module.exports = {
   initializeUsers,
   createUser,
@@ -97,5 +136,9 @@ module.exports = {
   getUserById,
   addOrder,
   getUserOrders,
-  getUserItems
+  getUserItems,
+  getUserCart,
+  setUserCart,
+  getUserWishlist,
+  setUserWishlist
 };

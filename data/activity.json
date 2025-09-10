@@ -1,0 +1,37 @@
+[
+  {
+    "datetime": "2025-09-10T11:33:53.445Z",
+    "username": "unknown",
+    "activity": "logout"
+  },
+  {
+    "datetime": "2025-09-10T11:33:53.542Z",
+    "username": "yuval22",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T11:34:10.291Z",
+    "username": "yuval22",
+    "activity": "logout"
+  },
+  {
+    "datetime": "2025-09-10T11:34:15.518Z",
+    "username": "unknown",
+    "activity": "logout"
+  },
+  {
+    "datetime": "2025-09-10T11:34:15.602Z",
+    "username": "yuval2301",
+    "activity": "login"
+  },
+  {
+    "datetime": "2025-09-10T12:02:30.342Z",
+    "username": "yuval2301",
+    "activity": "add-to-cart"
+  },
+  {
+    "datetime": "2025-09-10T12:06:24.772Z",
+    "username": "yuval2301",
+    "activity": "login"
+  }
+]

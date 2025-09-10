@@ -537,18 +537,35 @@ function setupModalEventDelegation() {
 
 // Set up cart change event delegation
 function setupCartEventDelegation() {
-  document.addEventListener('cartChange', function(event) {
+  document.addEventListener('cartChange', async function(event) {
     const { product, button } = event.detail;
     const productId = product.id;
+    
+    // Require auth for add-to-cart actions. If not logged in, redirect to login
+    try {
+      const res = await fetch('/api/auth/me', { credentials: 'include' });
+      if (!res.ok) {
+        const returnTo = encodeURIComponent(window.location.pathname + window.location.search);
+        window.location.href = `/login?returnTo=${returnTo}`;
+        return;
+      }
+    } catch (_) {
+      const returnTo = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `/login?returnTo=${returnTo}`;
+      return;
+    }
     
     // Check if product is currently in cart
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const isCurrentlyInCart = cart.some(item => item.id === productId);
     
     if (isCurrentlyInCart) {
-      // Remove all sizes of this product from cart
-      const updatedCart = cart.filter(item => item.id !== productId);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      // Remove all sizes of this product from cart via shared API (also syncs server & events)
+      try {
+        removeFromCart(productId);
+      } catch (e) {
+        console.error('removeFromCart failed:', e);
+      }
       
       // Update button state
       button.textContent = 'Add to Cart';

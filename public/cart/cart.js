@@ -52,6 +52,13 @@ document.addEventListener('DOMContentLoaded', async function() {
     updateTotals();
   }
 
+  // Live update when cart changes elsewhere (e.g., add from product card)
+  window.addEventListener('cart-updated', () => {
+    loadCartFromStorage();
+    renderCart();
+    updateTotals();
+  });
+
   // Event delegation for remove buttons (handles icon clicks too)
   cartItemsContainer.addEventListener('click', function(event) {
     const removeBtn = event.target.closest('.remove-btn');
@@ -125,6 +132,8 @@ function loadCartFromStorage() {
 function saveCartToStorage() {
   try {
     localStorage.setItem('cart', JSON.stringify(cartItems));
+    // Notify the rest of the app (header counters, other tabs/pages)
+    try { window.dispatchEvent(new CustomEvent('cart-updated', { detail: { cart: cartItems } })); } catch (_) {}
   } catch (error) {
     console.error('Error saving cart to storage:', error);
   }

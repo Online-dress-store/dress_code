@@ -1,5 +1,7 @@
-// Import navigation
+// Import navigation and shared helpers
 import { createNavigation, initNavigation, updateAuthStatus } from "../shared/navigation.js";
+import { addToCart } from "../shared/cart.js";
+import { getWishlist as getWishlistShared, removeFromWishlist as removeWishlistShared } from "../shared/wishlist.js";
 
 // DOM elements
 const emptyWishlistElement = document.getElementById('emptyWishlist');
@@ -36,14 +38,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 // Load wishlist data from localStorage
 function loadWishlistFromStorage() {
   try {
-    const savedWishlist = localStorage.getItem('wishlist');
-    if (savedWishlist) {
-      const wishlist = JSON.parse(savedWishlist);
-      if (wishlist && wishlist.length > 0) {
-        console.log('Found saved wishlist items:', wishlist);
-        return wishlist;
-      }
-    }
+    const list = getWishlistShared();
+    if (Array.isArray(list) && list.length > 0) return list;
   } catch (error) {
     console.error('Error loading wishlist from storage:', error);
   }
@@ -122,9 +118,7 @@ function createWishlistItem(item) {
 // Remove item from wishlist
 function removeFromWishlist(productId) {
   try {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-    const updatedWishlist = wishlist.filter(item => item.id !== productId);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+    removeWishlistShared(productId);
     
     // Re-render the wishlist
     renderWishlist();
@@ -136,27 +130,32 @@ function removeFromWishlist(productId) {
 }
 
 // Add item to cart from wishlist
-function addToCartFromWishlist(item) {
+async function addToCartFromWishlist(item) {
   try {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    // Require auth; redirect to login if needed
+    try {
+      const res = await fetch('/api/auth/me', { credentials: 'include' });
+      if (!res.ok) {
+        const returnTo = encodeURIComponent(window.location.pathname + window.location.search);
+        window.location.href = `/login?returnTo=${returnTo}`;
+        return;
+      }
+    } catch (_) {
+      const returnTo = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.href = `/login?returnTo=${returnTo}`;
+      return;
+    }
+
     const cartItem = {
       id: item.id,
-      title: item.title,
+      size: 'M',
+      quantity: 1,
       price: item.price,
       image: item.image,
-      size: 'M', // Default size
-      quantity: 1
+      title: item.title
     };
-    
-    // Check if item already exists in cart
-    const existingItem = cart.find(cartItem => cartItem.id === item.id && cartItem.size === 'M');
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      cart.push(cartItem);
-    }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
+
+    addToCart(cartItem);
     
     // Show success message
     showMessage('Item added to cart!', 'success');

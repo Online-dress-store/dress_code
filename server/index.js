@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const { requireAuth, requireGuest } = require('./middleware/auth');
 const userModule = require('./modules/user_module');
+const activityModule = require('./modules/activity_module');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -25,11 +26,14 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-// Initialize users on startup
-userModule.initializeUsers().then(() => {
-  console.log('Users initialized');
+// Initialize users and activity log on startup
+Promise.all([
+  userModule.initializeUsers(),
+  activityModule.initializeActivity()
+]).then(() => {
+  console.log('Users and activity log initialized');
 }).catch(err => {
-  console.error('Failed to initialize users:', err);
+  console.error('Failed to initialize:', err);
 });
 
 // API routes must come BEFORE static file serving
@@ -38,6 +42,9 @@ app.use('/products', require('./routes/products'));
 
 // auth API
 app.use('/api/auth', require('./routes/auth'));
+
+// admin API
+app.use('/api/admin', require('./routes/admin'));
 
 // serve data files
 app.use('/data', express.static(path.join(__dirname, '..', 'data')));
@@ -126,6 +133,15 @@ app.get('/thank-you', (req, res) => {
 
 app.get('/thank-you/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'thank-you', 'index.html'));
+});
+
+// Admin page (client checks role)
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
+});
+
+app.get('/admin/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
 });
 
 // 404 fallback for APIs

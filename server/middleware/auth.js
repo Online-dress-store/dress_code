@@ -91,9 +91,38 @@ function verifyToken(token) {
   }
 }
 
+// Middleware to check if user is admin
+function requireAdmin(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ 
+      error: 'Authentication required',
+      message: 'You are not logged in'
+    });
+  }
+  
+  // Get user from database to check role
+  const userModule = require('../modules/user_module');
+  userModule.getUserById(req.user.userId).then(user => {
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ 
+        error: 'Access denied',
+        message: 'Admin privileges required'
+      });
+    }
+    next();
+  }).catch(err => {
+    console.error('Error checking admin role:', err);
+    return res.status(500).json({ 
+      error: 'Internal server error',
+      message: 'Failed to verify admin privileges'
+    });
+  });
+}
+
 module.exports = {
   requireAuth,
   requireGuest,
+  requireAdmin,
   generateToken,
   verifyToken,
   JWT_SECRET

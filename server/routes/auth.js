@@ -3,6 +3,7 @@
  
   const router = require('express').Router();
 const userModule = require('../modules/user_module');
+const activityModule = require('../modules/activity_module');
 const { generateToken, requireGuest } = require('../middleware/auth');
 
 // Register route
@@ -45,6 +46,9 @@ router.post('/register', async (req, res, next) => {
       sameSite: 'lax',
       maxAge: 30 * 60 * 1000 // 30 minutes
     });
+
+    // Log login activity
+    await activityModule.logActivity(user.username, 'login');
 
     res.json({
       success: true,
@@ -99,6 +103,9 @@ router.post('/login', async (req, res, next) => {
       sameSite: 'lax',
       maxAge
     });
+
+    // Log login activity
+    await activityModule.logActivity(user.username, 'login');
 
     res.json({
       success: true,
@@ -256,6 +263,72 @@ router.get('/items', async (req, res) => {
   } catch (error) {
     console.error('Get items error:', error);
     res.status(500).json({ error: 'Failed to get user items' });
+  }
+});
+
+// Get current user's cart
+router.get('/cart', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    if (!token) return res.status(401).json({ error: 'Not authenticated' });
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    if (!decoded) return res.status(401).json({ error: 'Invalid token' });
+    const cart = await userModule.getUserCart(decoded.userId);
+    res.json({ success: true, cart });
+  } catch (e) {
+    console.error('Get cart error:', e);
+    res.status(500).json({ error: 'Failed to get cart' });
+  }
+});
+
+// Replace current user's cart
+router.put('/cart', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    if (!token) return res.status(401).json({ error: 'Not authenticated' });
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    if (!decoded) return res.status(401).json({ error: 'Invalid token' });
+    const { cart } = req.body || {};
+    const saved = await userModule.setUserCart(decoded.userId, Array.isArray(cart) ? cart : []);
+    res.json({ success: true, cart: saved });
+  } catch (e) {
+    console.error('Set cart error:', e);
+    res.status(500).json({ error: 'Failed to save cart' });
+  }
+});
+
+// Get current user's wishlist
+router.get('/wishlist', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    if (!token) return res.status(401).json({ error: 'Not authenticated' });
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    if (!decoded) return res.status(401).json({ error: 'Invalid token' });
+    const wishlist = await userModule.getUserWishlist(decoded.userId);
+    res.json({ success: true, wishlist });
+  } catch (e) {
+    console.error('Get wishlist error:', e);
+    res.status(500).json({ error: 'Failed to get wishlist' });
+  }
+});
+
+// Replace current user's wishlist
+router.put('/wishlist', async (req, res) => {
+  try {
+    const token = req.cookies.authToken;
+    if (!token) return res.status(401).json({ error: 'Not authenticated' });
+    const { verifyToken } = require('../middleware/auth');
+    const decoded = verifyToken(token);
+    if (!decoded) return res.status(401).json({ error: 'Invalid token' });
+    const { wishlist } = req.body || {};
+    const saved = await userModule.setUserWishlist(decoded.userId, Array.isArray(wishlist) ? wishlist : []);
+    res.json({ success: true, wishlist: saved });
+  } catch (e) {
+    console.error('Set wishlist error:', e);
+    res.status(500).json({ error: 'Failed to save wishlist' });
   }
 });
 

@@ -18,6 +18,10 @@ async function listProducts() { // Function to list all products from the produc
   }
 }
 
+async function writeProducts(products) {
+  await fs.writeFile(PRODUCTS_PATH, JSON.stringify(products, null, 2));
+}
+
 // Read all users from users.json
 async function readUsers() {
   try {
@@ -34,4 +38,4 @@ async function writeUsers(users) {
   await fs.writeFile(USERS_PATH, JSON.stringify(users, null, 2));
 }
 
-module.exports = { listProducts, readUsers, writeUsers };
+module.exports = { listProducts, writeProducts, readUsers, writeUsers };

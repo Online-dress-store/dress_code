@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Product Management</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../shared/navigation.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+</head>
+<body>
+  <div class="page">
+    <div id="navigation"></div>
+    <div class="container">
+      <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <p class="subtitle">Manage products and view activity logs</p>
+      </div>
+
+      <div id="notAdmin" class="not-admin" style="display:none;">
+        <p>You are not authorized to view this page.</p>
+      </div>
+
+      <div id="adminContent" style="display:none;">
+        <!-- Activity Log Section -->
+        <div class="admin-section">
+          <h2>Activity Log</h2>
+          <div class="activity-controls">
+            <input type="text" id="usernameFilter" placeholder="Filter by username prefix..." />
+            <button id="refreshActivity">Refresh</button>
+          </div>
+          <div class="activity-table-container">
+            <table class="activity-table">
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Username</th>
+                  <th>Activity</th>
+                </tr>
+              </thead>
+              <tbody id="activityTableBody">
+                <!-- Activity logs will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Product Management Section (Edit/Delete only) -->
+        <div class="admin-section">
+          <h2>Manage Products</h2>
+          <p class="subtitle" style="margin-top:-8px;">Edit details or delete existing products. Adding new products is disabled.</p>
+          <div id="products" class="products"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
+
+

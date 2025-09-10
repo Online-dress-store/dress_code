@@ -1,26 +1,30 @@
 [
   {
     "id": "p_drs_001",
-    "title": "Black Summer Dress",
+    "title": "Black Mini Summer Dress",
     "description": "Lightweight knee-length summer dress with breathable fabric. Perfect for warm weather and casual occasions.",
     "category": "Summer",
-    "tags": ["casual", "summer", "lightweight"],
-    "price": 89.99,
+    "tags": [
+      "casual",
+      "summer",
+      "lightweight"
+    ],
+    "price": 99.99,
     "fabricType": "cotton",
     "variants": [
       {
         "size": "S",
-        "stock": 15,
+        "stock": 10,
         "color": "black"
       },
       {
         "size": "M",
-        "stock": 20,
+        "stock": 10,
         "color": "black"
       },
       {
         "size": "L",
-        "stock": 12,
+        "stock": 10,
         "color": "black"
       }
     ],
@@ -32,14 +36,23 @@
     },
     "inStock": true,
     "createdAt": "2025-01-01T00:00:00.000Z",
-    "updatedAt": "2025-01-01T00:00:00.000Z"
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ]
   },
   {
     "id": "p_drs_002",
     "title": "Elegant Evening Gown",
     "description": "Stunning floor-length evening gown perfect for formal events and special occasions.",
     "category": "Evening",
-    "tags": ["formal", "elegant", "evening"],
+    "tags": [
+      "formal",
+      "elegant",
+      "evening"
+    ],
     "price": 299.99,
     "fabricType": "silk",
     "variants": [
@@ -74,7 +87,11 @@
     "title": "Floral Spring Dress",
     "description": "Beautiful floral print dress perfect for spring and summer events.",
     "category": "Spring",
-    "tags": ["floral", "spring", "casual"],
+    "tags": [
+      "floral",
+      "spring",
+      "casual"
+    ],
     "price": 129.99,
     "fabricType": "cotton",
     "variants": [
@@ -109,7 +126,11 @@
     "title": "Cocktail Party Dress",
     "description": "Perfect cocktail dress for parties and semi-formal events.",
     "category": "Cocktail",
-    "tags": ["party", "cocktail", "semi-formal"],
+    "tags": [
+      "party",
+      "cocktail",
+      "semi-formal"
+    ],
     "price": 159.99,
     "fabricType": "polyester",
     "variants": [
@@ -144,7 +165,11 @@
     "title": "Wedding Guest Dress",
     "description": "Elegant dress perfect for wedding guests and special celebrations.",
     "category": "Wedding Guest",
-    "tags": ["wedding", "elegant", "special"],
+    "tags": [
+      "wedding",
+      "elegant",
+      "special"
+    ],
     "price": 189.99,
     "fabricType": "chiffon",
     "variants": [

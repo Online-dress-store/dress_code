@@ -38,6 +38,10 @@
               <span class="info-label">Email:</span>
               <span class="info-value" id="email">Loading...</span>
             </div>
+            <div class="info-row">
+              <span class="info-label">Role:</span>
+              <span class="info-value" id="role">Loading...</span>
+            </div>
           </div>
           
           <div class="profile-form" id="profileForm" style="display: none;">
@@ -129,6 +133,10 @@
             <button class="action-btn" onclick="window.location.href='/sell'">
               <i class="ri-add-line"></i>
               Sell a Dress
+            </button>
+            <button class="action-btn" id="adminPanelBtn" style="display: none;" onclick="window.location.href='/admin'">
+              <i class="ri-shield-user-line"></i>
+              Admin Panel
             </button>
             <button class="action-btn logout-btn" onclick="logout()">
               <i class="ri-logout-box-line"></i>

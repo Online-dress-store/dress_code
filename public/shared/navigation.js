@@ -79,6 +79,19 @@ export function initNavigation() {
   // Update cart counter
   updateCartCounter();
   updateWishlistCounter();
+
+  // Live-update counters when cart/wishlist change in the app
+  try {
+    window.addEventListener('cart-updated', updateCartCounter);
+    window.addEventListener('wishlist-updated', updateWishlistCounter);
+    // Cross-tab updates via localStorage events
+    window.addEventListener('storage', (e) => {
+      if (e && (e.key === 'cart' || e.key === 'wishlist')) {
+        updateCartCounter();
+        updateWishlistCounter();
+      }
+    });
+  } catch (_) {}
 }
 
 // Update cart counter
@@ -142,6 +155,7 @@ export async function updateAuthStatus() {
     if (response.ok) {
       // User is logged in
       const data = await response.json();
+      const isAdmin = data && data.user && data.user.role === 'admin';
       profileLink.href = '/account';
       profileLink.innerHTML = `
         <div class="user-menu">
@@ -151,6 +165,11 @@ export async function updateAuthStatus() {
               <i class="ri-user-line"></i>
               My Account
             </a>
+            ${isAdmin ? `
+            <a href="/admin" class="account-link">
+              <i class="ri-shield-user-line"></i>
+              Admin Panel
+            </a>` : ''}
             <button class="logout-btn" onclick="logout()">
               <i class="ri-logout-box-line"></i>
               Logout
@@ -158,6 +177,19 @@ export async function updateAuthStatus() {
           </div>
         </div>
       `;
+
+      // Hydrate per-user data (cart, wishlist) from server after login
+      try {
+        const cartMod = await import('./cart.js');
+        if (cartMod.hydrateCartFromServer) await cartMod.hydrateCartFromServer();
+        const wishMod = await import('./wishlist.js');
+        if (wishMod.hydrateWishlistFromServer) await wishMod.hydrateWishlistFromServer();
+        // Update counters after hydration
+        updateCartCounter();
+        updateWishlistCounter();
+      } catch (e) {
+        console.error('Hydration error:', e);
+      }
     } else {
       // User is not logged in
       profileLink.href = '/login';
@@ -180,6 +212,13 @@ window.logout = async function() {
     });
     
     if (response.ok) {
+      // Clear client caches so next user starts clean
+      try {
+        localStorage.removeItem('cart');
+        localStorage.removeItem('wishlist');
+      } catch (_) {}
+      updateCartCounter();
+      updateWishlistCounter();
       // Redirect to home page
       window.location.href = '/';
     } else {
