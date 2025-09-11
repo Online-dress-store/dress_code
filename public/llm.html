@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LLM Generated Code</title>
-  <link rel="stylesheet" href="/shared/navigation.css" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="shared/navigation.css" />
+  <link rel="stylesheet" href="shared/tooltip.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
 </head>
 <body>
   <div class="page">
@@ -19,15 +22,20 @@
         <li>server/routes/admin.js and modules/activity_module.js</li>
         <li>public/admin/* (UI)</li>
         <li>server/middleware/rateLimit.js</li>
+        <li>server/routes/accessories.js - Accessories API with recommendation algorithm</li>
+        <li>public/shared/quickview.js - Quick View modal component with focus trap</li>
+        <li>public/shared/quickview.css - Modal styles with dark mode support</li>
+        <li>data/accessories.json - Curated accessories data with external buy links</li>
         <li>Others as noted in commit history</li>
       </ul>
     </div>
   </div>
   <script type="module">
-    import { createNavigation, initNavigation, updateAuthStatus } from '/shared/navigation.js';
+    import { createNavigation, initNavigation, updateAuthStatus } from './shared/navigation.js';
     const nav = document.getElementById('navigation');
     if (nav) { nav.innerHTML = createNavigation(); initNavigation(); await updateAuthStatus(); }
   </script>
+  <script type="module" src="shared/tooltip.js"></script>
 </body>
 </html>
 

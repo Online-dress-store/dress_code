@@ -4,6 +4,7 @@ const path = require('path');
 
 const PRODUCTS_PATH = path.join(__dirname, '..' ,'..', 'data', 'products.json');
 const USERS_PATH = path.join(__dirname, '..', '..', 'data', 'users.json');
+const ACCESSORIES_PATH = path.join(__dirname, '..', '..', 'data', 'accessories.json');
 // this path assumes the directory structure is as follows:
 // Online-dress-store/server/modules/persist_module.js
 // Online-dress-store/data/products.json  
@@ -38,4 +39,25 @@ async function writeUsers(users) {
   await fs.writeFile(USERS_PATH, JSON.stringify(users, null, 2));
 }
 
-module.exports = { listProducts, writeProducts, readUsers, writeUsers };
+// Read accessories from accessories.json
+async function readAccessories() {
+  try {
+    const data = await fs.readFile(ACCESSORIES_PATH, 'utf8');
+    return JSON.parse(data);
+  } catch (e) {
+    if (e.code === 'ENOENT') return [];
+    throw e;
+  }
+}
+
+// Alias for compatibility
+const readProducts = listProducts;
+
+module.exports = { 
+  listProducts, 
+  readProducts,
+  writeProducts, 
+  readUsers, 
+  writeUsers,
+  readAccessories
+};

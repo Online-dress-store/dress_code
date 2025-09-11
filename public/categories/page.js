@@ -15,6 +15,7 @@ import {
 } from "../shared/wishlist.js";
 import { createProductCard } from "../shared/renderCard.js";
 import { showNotLoggedInMessage, showMessage } from "../shared/dom.js";
+import { quickViewModal } from "../shared/quickview.js";
 
 let allProducts = [];
 let popup = null;
@@ -94,6 +95,9 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   // Set up cart change event delegation
   setupCartEventDelegation();
+  
+  // Set up Quick View event delegation
+  setupQuickViewEventDelegation();
 });
 
 
@@ -166,10 +170,10 @@ function filterAndRenderProducts(categorySlug, searchQuery = '') {
   // Map category slugs to actual categories in the JSON
   const categoryMap = {
     'all-items': null, // Show all products
-    'evening': 'Evening',
-    'summer': 'Summer',
-    'holiday': ['Cocktail', 'Wedding Guest'], // Map holiday to formal/special occasion dresses
-    'casual': 'Spring' // Map casual to spring (casual wear)
+    'evening': ['Evening', 'Evening Wear'],
+    'summer': ['Summer', 'Beach', 'Sun'],
+    'holiday': ['Holiday', 'Cocktail', 'Wedding Guest', 'Party'],
+    'casual': ['Casual', 'Spring']
   };
   
   const targetCategory = categoryMap[categorySlug];
@@ -210,7 +214,7 @@ function filterAndRenderProducts(categorySlug, searchQuery = '') {
     // Show products with sale pricing (for now, show first 2 products as "sale")
     filteredProducts = allProducts.slice(0, 2);
   } else {
-    // Filter by exact category match
+    // Filter by category match (supports alias arrays)
     filteredProducts = allProducts.filter(product => {
       if (!product.category) {
         console.warn('Product missing category:', product.id, product.title);
@@ -221,15 +225,14 @@ function filterAndRenderProducts(categorySlug, searchQuery = '') {
         return false;
       }
       
-      // Handle array of categories (for holiday)
+      // Handle array of aliases
       if (Array.isArray(targetCategory)) {
-        return targetCategory.some(cat => 
-          product.category.toLowerCase() === cat.toLowerCase()
-        );
+        const productCat = String(product.category).toLowerCase();
+        return targetCategory.some(cat => productCat === String(cat).toLowerCase());
       }
       
-      // Handle single category
-      return product.category.toLowerCase() === targetCategory.toLowerCase();
+      // Handle single category string
+      return String(product.category).toLowerCase() === String(targetCategory).toLowerCase();
     });
   }
   
@@ -676,4 +679,17 @@ export function renderProducts(list, searchQuery = '') {
   // Update counters after rendering
   updateWishlistCounter();
   updateCartCounter();
+}
+
+// Set up Quick View event delegation
+function setupQuickViewEventDelegation() {
+  document.addEventListener('quickView', async (event) => {
+    const { product } = event.detail;
+    try {
+      await quickViewModal.open(product);
+    } catch (error) {
+      console.error('Failed to open Quick View:', error);
+      showMessage('Failed to open Quick View. Please try again.', 'error');
+    }
+  });
 }

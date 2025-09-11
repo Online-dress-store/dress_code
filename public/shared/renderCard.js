@@ -9,9 +9,9 @@ export function renderProductCard(product, { onQuickView, onCartChange } = {}) {
     <div class="card-image">
       <img src="${product.images.main}" alt="${product.title}" loading="lazy">
       <div class="card-overlay">
-        <button class="quick-view-btn" data-product-id="${product.id}">Quick View</button>
+        <button class="quick-view-btn" data-product-id="${product.id}" data-tooltip="View product details and accessories">Quick View</button>
       </div>
-      <button class="wishlist-btn ${isWishlisted(product.id) ? 'active' : ''}" data-product-id="${product.id}">
+      <button class="wishlist-btn ${isWishlisted(product.id) ? 'active' : ''}" data-product-id="${product.id}" data-tooltip="${isWishlisted(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}">
         <i class="ri-heart-${isWishlisted(product.id) ? 'fill' : 'line'}"></i>
       </button>
     </div>
@@ -23,7 +23,7 @@ export function renderProductCard(product, { onQuickView, onCartChange } = {}) {
         <span class="card-price">$${product.price.toFixed(2)}</span>
       </div>
       <div class="card-actions">
-        <button class="add-to-cart-btn ${isInCart(product.id) ? 'in-cart' : ''}" data-product-id="${product.id}">
+        <button class="add-to-cart-btn ${isInCart(product.id) ? 'in-cart' : ''}" data-product-id="${product.id}" data-tooltip="${isInCart(product.id) ? 'Remove from cart' : 'Add to cart'}">
           ${isInCart(product.id) ? 'In Cart' : 'Add to Cart'}
         </button>
       </div>

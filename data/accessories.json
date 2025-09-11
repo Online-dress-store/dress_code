@@ -1,0 +1,90 @@
+[
+  {
+    "id": "acc_001",
+    "name": "Pearl Drop Earrings",
+    "price": 45.99,
+    "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=pearl+drop+earrings",
+    "category": "jewelry",
+    "colors": ["white", "cream", "ivory"],
+    "occasions": ["evening", "formal", "wedding"],
+    "styles": ["elegant", "classic", "vintage"]
+  },
+  {
+    "id": "acc_002", 
+    "name": "Gold Statement Necklace",
+    "price": 89.50,
+    "image": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=gold+statement+necklace",
+    "category": "jewelry",
+    "colors": ["gold", "yellow", "metallic"],
+    "occasions": ["evening", "party", "formal"],
+    "styles": ["bold", "modern", "glamorous"]
+  },
+  {
+    "id": "acc_003",
+    "name": "Silk Scarf",
+    "price": 32.00,
+    "image": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300&h=300&fit=crop", 
+    "buyUrl": "https://www.amazon.com/s?k=silk+scarf+women",
+    "category": "accessories",
+    "colors": ["blue", "green", "purple", "pink"],
+    "occasions": ["casual", "business", "travel"],
+    "styles": ["elegant", "versatile", "classic"]
+  },
+  {
+    "id": "acc_004",
+    "name": "Leather Clutch Bag",
+    "price": 78.99,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=leather+clutch+bag",
+    "category": "bags",
+    "colors": ["black", "brown", "tan"],
+    "occasions": ["evening", "formal", "party"],
+    "styles": ["classic", "sophisticated", "minimalist"]
+  },
+  {
+    "id": "acc_005",
+    "name": "Straw Sun Hat",
+    "price": 24.99,
+    "image": "https://images.unsplash.com/photo-1521369909029-2afed882baee?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=straw+sun+hat+women",
+    "category": "hats",
+    "colors": ["natural", "beige", "tan"],
+    "occasions": ["summer", "beach", "casual"],
+    "styles": ["bohemian", "casual", "vacation"]
+  },
+  {
+    "id": "acc_006",
+    "name": "Silver Bracelet Set",
+    "price": 35.00,
+    "image": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=silver+bracelet+set+women",
+    "category": "jewelry",
+    "colors": ["silver", "metallic", "gray"],
+    "occasions": ["casual", "business", "daily"],
+    "styles": ["delicate", "modern", "stackable"]
+  },
+  {
+    "id": "acc_007",
+    "name": "Red Lipstick Set",
+    "price": 19.99,
+    "image": "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=red+lipstick+set",
+    "category": "beauty",
+    "colors": ["red", "crimson", "burgundy"],
+    "occasions": ["evening", "party", "formal"],
+    "styles": ["bold", "classic", "glamorous"]
+  },
+  {
+    "id": "acc_008",
+    "name": "Denim Jacket",
+    "price": 65.00,
+    "image": "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=300&h=300&fit=crop",
+    "buyUrl": "https://www.amazon.com/s?k=denim+jacket+women",
+    "category": "outerwear",
+    "colors": ["blue", "indigo", "navy"],
+    "occasions": ["casual", "weekend", "spring"],
+    "styles": ["casual", "vintage", "versatile"]
+  }
+]

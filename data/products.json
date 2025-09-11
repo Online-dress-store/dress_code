@@ -198,5 +198,148 @@
     "inStock": true,
     "createdAt": "2025-01-01T00:00:00.000Z",
     "updatedAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "p_a33bb6dc-51a2-4954-8f99-a221dd0b525c",
+    "title": "Ivy Black Gown",
+    "description": "Classic elegant black evening dress",
+    "price": 200,
+    "category": "Evening",
+    "images": {
+      "main": "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD2200_V1.jpg"
+    },
+    "variants": [
+      {
+        "size": "M",
+        "color": "black",
+        "stock": 1
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:30:08.511Z",
+    "updatedAt": "2025-09-11T09:30:08.511Z"
+  },
+  {
+    "id": "p_41e6157f-0553-4188-99e4-ca456da6eb06",
+    "title": "Elegant Navy Blue Dress",
+    "description": "Elegant Sexy Strapless Slit-Draped Evening Party Dress",
+    "price": 80,
+    "category": "Evening",
+    "images": {
+      "main": "https://img.ltwebstatic.com/v4/j/spmp/2025/08/29/d9/17564400173589ea5c4bf7e9ff6194628a36b41f4b_wk_1756462940_thumbnail_900x.webp"
+    },
+    "variants": [
+      {
+        "size": "S",
+        "color": "navy",
+        "stock": 1
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:30:42.590Z",
+    "updatedAt": "2025-09-11T09:30:42.590Z"
+  },
+  {
+    "id": "p_4eb2a9ad-2c79-4528-ac02-999e7f8808fa",
+    "title": "Elegant Women'S Sleeveless Dress",
+    "description": "Light Yellow, Ruched Detail, Flowy A-Line Skirt, Perfect for Spring & Summer, Casual Vacation Style, Casual Summer Dress | Sleeveless Fashion | Ruched Texture",
+    "price": 90,
+    "category": "Summer",
+    "images": {
+      "main": "https://img.kwcdn.com/product/fancy/f484e31d-0610-4436-9faf-c3fc9c5a469d.jpg?imageView2/2/w/800/q/70/format/webp"
+    },
+    "variants": [
+      {
+        "size": "S",
+        "color": "yellow",
+        "stock": 2
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:34:24.898Z",
+    "updatedAt": "2025-09-11T09:34:24.898Z"
+  },
+  {
+    "id": "p_01b414e6-a2ab-4ebf-beca-072c87314647",
+    "title": "Ace Dress",
+    "description": "Daily Pacific Mini Dress",
+    "price": 78,
+    "category": "Casual",
+    "images": {
+      "main": "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD942_V1.jpg"
+    },
+    "variants": [
+      {
+        "size": "M",
+        "stock": 10,
+        "color": "Pacific"
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:37:58.686Z",
+    "updatedAt": "2025-09-11T09:37:58.686Z",
+    "sizes": [
+      "M"
+    ]
+  },
+  {
+    "id": "p_174f7b5f-25f6-488c-a88c-73a13c354b92",
+    "title": "Amelie Dress",
+    "description": "A strapless maxi dress with a flattering fit, featuring a red-and-white checkered pattern for a fresh, summery look.",
+    "price": 76,
+    "category": "Summer",
+    "images": {
+      "main": "https://is4.revolveassets.com/images/p4/n/z/SDRE-WD237_V1.jpg"
+    },
+    "variants": [
+      {
+        "size": "S",
+        "color": "Gingham Coral",
+        "stock": 1
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:47:53.915Z",
+    "updatedAt": "2025-09-11T09:47:53.915Z"
+  },
+  {
+    "id": "p_de7abb8b-cc8e-4748-a5ef-94b1c2d44a25",
+    "title": "La Lune Ruched Tie Maxi Dress",
+    "description": "A sleek cream maxi dress with delicate spaghetti straps and a ruched bodice, offering an elegant and timeless silhouette.",
+    "price": 80,
+    "category": "Holiday",
+    "images": {
+      "main": "https://is4.revolveassets.com/images/p4/n/z/SHON-WD647_V1.jpg"
+    },
+    "variants": [
+      {
+        "size": "XS",
+        "color": "Cream",
+        "stock": 1
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T09:59:39.301Z",
+    "updatedAt": "2025-09-11T09:59:39.301Z"
+  },
+  {
+    "id": "p_d75edd70-cf17-4038-aa72-a4e27aa40430",
+    "title": "Zita Embroidered A-Line Mini Dress - Cobalt",
+    "description": "A sleeveless cobalt blue A-line mini dress with delicate embroidery, giving it a fresh, playful, and effortlessly chic look.",
+    "price": 90,
+    "category": "Casual",
+    "images": {
+      "main": "https://petalandpup.com/cdn/shop/files/ZitaEmbroideredA-LineMiniDress-Cobalt2.jpg?v=1738914204&width=900"
+    },
+    "variants": [
+      {
+        "size": "L",
+        "color": "Cobalt",
+        "stock": 2
+      }
+    ],
+    "ownerId": "u_admin_001",
+    "createdAt": "2025-09-11T10:02:41.024Z",
+    "updatedAt": "2025-09-11T10:02:41.024Z"
   }
 ]

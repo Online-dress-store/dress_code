@@ -47,6 +47,9 @@ app.use('/api/auth', require('./routes/auth'));
 // admin API (has its own stricter limiter inside the router)
 app.use('/api/admin', require('./routes/admin'));
 
+// accessories API
+app.use('/api/accessories', require('./routes/accessories'));
+
 // public activity logging (non-admin) – logs only add-to-cart for the authenticated user
 app.post('/api/activity', createRateLimit(15 * 60 * 1000, 300), requireAuth, async (req, res) => {
   try {

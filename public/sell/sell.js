@@ -55,6 +55,23 @@ async function handleFormSubmit(event) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error || 'Failed to save');
     }
+
+    // Also publish to global store catalog (non-admin friendly)
+    try {
+      await fetch('/products/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          title: newProduct.title,
+          price: newProduct.price,
+          category: newProduct.category,
+          image: newProduct.images?.main,
+          description: newProduct.description,
+          variants: newProduct.variants
+        })
+      });
+    } catch (_) { /* ignore publish errors */ }
     // Show success message
     showSuccessMessage();
     // Reset form

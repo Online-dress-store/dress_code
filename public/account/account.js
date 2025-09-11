@@ -153,10 +153,12 @@ async function loadUserItems() {
       
       // Sort items by date (newest first)
       const sortedItems = items.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      // Keep items globally to support per-item publish
+      window.__userItems = sortedItems;
       
       // Render items
       itemsList.innerHTML = sortedItems.map(item => `
-        <div class="item-card">
+        <div class="item-card" data-item-id="${item.id}">
           <div class="item-image">
             <img src="${item.images?.main || '/placeholder-dress.jpg'}" alt="${item.title}" loading="lazy">
           </div>
@@ -370,15 +372,125 @@ function showMessage(message, type = 'info') {
 }
 
 // Edit item function (placeholder)
-function editItem(itemId) {
-  showMessage('Edit functionality coming soon!', 'info');
-  console.log('Edit item:', itemId);
+// Toggle inline edit/save for an item
+async function editItem(itemId) {
+  try {
+    const card = findItemCard(itemId);
+    if (!card) return;
+    const btn = card.querySelector('.edit-item-btn');
+    const isEditing = btn.dataset.editing === 'true';
+    const titleEl = card.querySelector('.item-title');
+    const descEl = card.querySelector('.item-description');
+    const catEl = card.querySelector('.item-category');
+    const priceEl = card.querySelector('.item-price');
+
+    if (!isEditing) {
+      btn.dataset.editing = 'true';
+      btn.innerHTML = '<i class="ri-save-line"></i> Save';
+      titleEl.contentEditable = 'true';
+      descEl.contentEditable = 'true';
+      catEl.contentEditable = 'true';
+      priceEl.contentEditable = 'true';
+      titleEl.focus();
+      return;
+    }
+
+    // Save
+    const title = titleEl.textContent.trim();
+    const description = descEl.textContent.trim();
+    const category = catEl.textContent.trim();
+    const price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ''));
+    if (!title || !description || !category || !isFinite(price)) {
+      showMessage('Please enter valid title, description, category and price', 'error');
+      return;
+    }
+    const resp = await fetch(`/api/auth/items/${encodeURIComponent(itemId)}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ title, description, category, price })
+    });
+    if (!resp.ok) {
+      let msg = 'Unknown error';
+      try { const err = await resp.json(); msg = err.message || JSON.stringify(err); } catch(_) {}
+      showMessage('Failed to save: ' + msg, 'error');
+      return;
+    }
+    btn.dataset.editing = 'false';
+    btn.innerHTML = '<i class="ri-edit-line"></i> Edit';
+    titleEl.contentEditable = 'false';
+    descEl.contentEditable = 'false';
+    catEl.contentEditable = 'false';
+    priceEl.contentEditable = 'false';
+    showMessage('Item updated', 'success');
+  } catch (e) {
+    console.error('Edit item error', e);
+    showMessage('Failed to update item', 'error');
+  }
 }
 
-// Delete item function (placeholder)
-function deleteItem(itemId) {
-  if (confirm('Are you sure you want to delete this item?')) {
-    showMessage('Delete functionality coming soon!', 'info');
-    console.log('Delete item:', itemId);
+// Delete item
+async function deleteItem(itemId) {
+  if (!confirm('Are you sure you want to delete this item?')) return;
+  try {
+    const resp = await fetch(`/api/auth/items/${encodeURIComponent(itemId)}`, {
+      method: 'DELETE',
+      credentials: 'include'
+    });
+    if (!resp.ok) {
+      let msg = 'Unknown error';
+      try { const err = await resp.json(); msg = err.message || JSON.stringify(err); } catch(_) {}
+      showMessage('Failed to delete: ' + msg, 'error');
+      return;
+    }
+    // Remove from UI and cache
+    const card = findItemCard(itemId);
+    if (card && card.parentNode) card.parentNode.removeChild(card);
+    window.__userItems = (window.__userItems || []).filter(i => i.id !== itemId);
+    showMessage('Item deleted', 'success');
+  } catch (e) {
+    console.error('Delete item error', e);
+    showMessage('Failed to delete item', 'error');
+  }
+}
+
+function findItemCard(itemId) {
+  const list = document.getElementById('itemsList');
+  return list.querySelector(`.item-card[data-item-id="${CSS.escape(itemId)}"]`);
+}
+
+// Expose functions for inline handlers (module scope is not global)
+window.editItem = editItem;
+window.deleteItem = deleteItem;
+
+// Publish item to global store catalog
+async function publishItem(itemId) {
+  try {
+    const items = window.__userItems || [];
+    const item = items.find(i => i.id === itemId);
+    if (!item) { showMessage('Item not found', 'error'); return; }
+    const resp = await fetch('/products/publish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        title: item.title,
+        description: item.description,
+        category: item.category,
+        price: item.price,
+        image: item.images?.main,
+        variants: item.variants || []
+      })
+    });
+    if (!resp.ok) {
+      let msg = 'Unknown error';
+      try { const err = await resp.json(); msg = err.message || JSON.stringify(err); } catch(_) {}
+      showMessage('Publish failed: ' + msg, 'error');
+      return;
+    }
+    showMessage('Published to store successfully', 'success');
+  } catch (e) {
+    console.error('Publish error', e);
+    showMessage('Publish failed', 'error');
   }
 }

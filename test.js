@@ -119,6 +119,27 @@ async function run() {
     pass('POST /api/activity add-to-cart');
   } catch (e) { fail('Public activity', e); }
 
+  log('Accessories');
+  try {
+    // Test accessories endpoint with a valid product ID
+    const res = await f('/api/accessories?productId=p_drs_001');
+    if (!res.ok) throw new Error('accessories status ' + res.status);
+    const body = await res.json();
+    if (!body.success || !Array.isArray(body.recommendations)) throw new Error('invalid response format');
+    if (body.recommendations.length !== 3) throw new Error('should return exactly 3 recommendations');
+    pass('GET /api/accessories?productId=p_drs_001');
+    
+    // Test with missing productId
+    const res2 = await f('/api/accessories');
+    if (res2.status !== 400) throw new Error('should return 400 for missing productId');
+    pass('GET /api/accessories (missing productId) -> 400');
+    
+    // Test with invalid productId
+    const res3 = await f('/api/accessories?productId=invalid');
+    if (res3.status !== 404) throw new Error('should return 404 for invalid productId');
+    pass('GET /api/accessories?productId=invalid -> 404');
+  } catch (e) { fail('Accessories suite', e); }
+
   console.log('\nAll tests completed.');
 }
 

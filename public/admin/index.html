@@ -6,6 +6,7 @@
   <title>Admin - Product Management</title>
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="../shared/navigation.css" />
+  <link rel="stylesheet" href="../shared/tooltip.css" />
   <link rel="stylesheet" href="admin.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
@@ -32,18 +33,23 @@
             <button id="refreshActivity">Refresh</button>
           </div>
           <div class="activity-table-container">
-            <table class="activity-table">
+            <table class="activity-table" aria-label="User activity table">
               <thead>
                 <tr>
-                  <th>Date & Time</th>
-                  <th>Username</th>
-                  <th>Activity</th>
+                  <th>datetime</th>
+                  <th>username</th>
+                  <th>type of activity</th>
                 </tr>
               </thead>
               <tbody id="activityTableBody">
                 <!-- Activity logs will be populated here -->
               </tbody>
             </table>
+            <div class="pagination" id="activityPagination" aria-label="Activity pagination" style="display:none; gap:8px; align-items:center; margin-top:12px;">
+              <button id="prevPage" class="btn" disabled>Prev</button>
+              <span id="pageInfo" style="min-width:120px; text-align:center;"></span>
+              <button id="nextPage" class="btn" disabled>Next</button>
+            </div>
           </div>
         </div>
 
@@ -65,6 +71,7 @@
   </div>
 
   <script type="module" src="admin.js"></script>
+  <script type="module" src="../shared/tooltip.js"></script>
 </body>
 </html>
 

@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Readme</title>
-  <link rel="stylesheet" href="/shared/navigation.css" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="shared/navigation.css" />
+  <link rel="stylesheet" href="shared/tooltip.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
 </head>
 <body>
   <div class="page">
@@ -23,11 +26,15 @@
         <li>Sell: list your own items.</li>
         <li>Account: personal details, purchases.</li>
         <li>Admin: activity log + manage products.</li>
+        <li>Quick View: modal with product details and recommended accessories with external buy links.</li>
       </ul>
       <h2>What was hard?</h2>
-      <p>Auth, JSON‑only APIs, live cart/wishlist sync, admin logging & persistence.</p>
-      <h2>Partner</h2>
-      <p>Name: <em>Fill here</em> | ID: <em>Fill here</em>. Work split described in code comments and commits.</p>
+      <p>Authentication flow with JWT cookies and session management, ensuring all API routes return JSON-only responses (no HTML), implementing real-time cart/wishlist synchronization across pages using custom events and localStorage, building comprehensive admin activity logging with prefix filtering, and creating robust data persistence system with file-based storage for users, products, and activity logs.</p>
+      <h2>Partner & Division of Work</h2>
+      <ul>
+        <li><strong>My work (Yuval Yakuti, 318461159):</strong> All front-end — UI pages/screens, quick-view modal, client-side validation, fetch calls, state handling, styling/UX, accessibility tweaks, error messages, and integrations with server APIs.</li>
+        <li><strong>Partner's work (Ophir Shiran, 314959404):</strong> All back-end — Node/Express routes and auth with cookies/JWT, persist_module.js (persistence to disk), admin endpoints (activity log + manage products), rate limiting (DoS defense), and test.js automated route tests.</li>
+      </ul>
       <h2>Routes</h2>
       <pre id="routes"></pre>
       <h2>Testing</h2>
@@ -35,16 +42,17 @@
     </div>
   </div>
   <script type="module">
-    import { createNavigation, initNavigation, updateAuthStatus } from '/shared/navigation.js';
+    import { createNavigation, initNavigation, updateAuthStatus } from './shared/navigation.js';
     const nav = document.getElementById('navigation');
     if (nav) { nav.innerHTML = createNavigation(); initNavigation(); await updateAuthStatus(); }
     // Render server routes summary fetched from client-known endpoints
     const routes = [
       'GET /products', 'GET/POST/PUT /api/auth/*', 'GET/POST /api/admin/activity', 'GET/POST/DELETE/PUT /api/admin/products',
-      'GET /readme.html', 'GET /llm.html'
+      'GET /api/accessories?productId=...', 'GET /readme.html', 'GET /llm.html'
     ];
     document.getElementById('routes').textContent = routes.join('\n');
   </script>
+  <script type="module" src="shared/tooltip.js"></script>
 </body>
 </html>
 

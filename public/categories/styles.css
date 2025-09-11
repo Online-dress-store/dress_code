@@ -205,6 +205,8 @@ h1 {
   position: relative !important;
   width: 100% !important;
   max-width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .card:hover {
@@ -268,6 +270,9 @@ h1 {
 
 .card-content {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .card-title {
@@ -315,6 +320,7 @@ h1 {
 .card-actions {
   display: flex;
   gap: 8px;
+  margin-top: auto; /* push actions to bottom so buttons align across cards */
 }
 
 .add-to-cart-btn {
@@ -756,4 +762,28 @@ h1 {
   .empty-state {
     padding: 8vh 0;
   }
+}
+
+/* Quick View button styles */
+.quick-view-btn {
+  background: rgba(139, 125, 107, 0.9);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.card:hover .quick-view-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quick-view-btn:hover {
+  background: rgba(107, 93, 75, 0.95);
 }

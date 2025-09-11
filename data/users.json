@@ -3,24 +3,11 @@
     "id": "u_admin_001",
     "username": "admin",
     "email": "admin@dressstore.com",
-    "password": "G7!pRz2@wQ9#xL8$",
+    "password": "admin",
     "firstName": "Admin",
     "lastName": "User",
     "role": "admin",
-    "cart": [
-      {
-        "productId": "p_drs_001",
-        "quantity": 8,
-        "size": "M",
-        "addedAt": "2025-08-13T00:04:13.696Z"
-      },
-      {
-        "productId": "p_drs_002",
-        "quantity": 1,
-        "size": "M",
-        "addedAt": "2025-08-13T01:34:14.866Z"
-      }
-    ],
+    "cart": [],
     "purchases": [],
     "prefs": {
       "theme": "light",
@@ -91,8 +78,198 @@
     "updatedAt": "2025-01-01T12:00:00.000Z",
     "wishlist": [],
     "orders": [],
-    "items": [],
-    "passwordHash": "$2b$10$UVzNC7Hybxwu6o2dBuvPieamk4CqAWI.bIFaBYJzWxnLzJd/3wzRu"
+    "items": [
+      {
+        "id": "40691abf-7e32-4580-8776-cd05831efd39",
+        "title": "Elegant Navy Blue Dress",
+        "description": "Elegant Sexy Strapless Slit-Draped Evening Party Dress",
+        "category": "Evening",
+        "tags": [
+          "elegant"
+        ],
+        "price": 80,
+        "fabricType": "cotton",
+        "variants": [
+          {
+            "size": "S",
+            "color": "navy",
+            "stock": 1
+          }
+        ],
+        "images": {
+          "main": "https://img.ltwebstatic.com/v4/j/spmp/2025/08/29/d9/17564400173589ea5c4bf7e9ff6194628a36b41f4b_wk_1756462940_thumbnail_900x.webp",
+          "gallery": [
+            "https://img.ltwebstatic.com/v4/j/spmp/2025/08/29/f2/17564398997497ae3b929c0ced4b6d4c72650ddb18_wk_1756462941_thumbnail_900x.webp"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T08:57:05.298Z",
+        "updatedAt": "2025-09-11T08:57:05.283Z"
+      },
+      {
+        "id": "53565706-0063-4f31-ba82-72960233bf0d",
+        "title": "Ivy Black Gown",
+        "description": "Classic elegant black evening dress ",
+        "category": "Evening",
+        "tags": [
+          "elegant"
+        ],
+        "price": 200,
+        "fabricType": "silk",
+        "variants": [
+          {
+            "size": "M",
+            "color": "black",
+            "stock": 1
+          }
+        ],
+        "images": {
+          "main": "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD2200_V1.jpg",
+          "gallery": [
+            "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD2200_V2.jpg"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T09:04:29.306Z",
+        "updatedAt": "2025-09-11T09:04:29.295Z"
+      },
+      {
+        "id": "55f0e1d7-9154-488b-beb7-90e824175e6b",
+        "title": "Elegant Women'S Sleeveless Dress",
+        "description": "Light Yellow, Ruched Detail, Flowy A-Line Skirt, Perfect for Spring & Summer, Casual Vacation Style, Casual Summer Dress | Sleeveless Fashion | Ruched Texture",
+        "category": "Summer",
+        "tags": [
+          "elegant"
+        ],
+        "price": 90,
+        "fabricType": "cotton",
+        "variants": [
+          {
+            "size": "S",
+            "color": "yellow",
+            "stock": 2
+          }
+        ],
+        "images": {
+          "main": "https://img.kwcdn.com/product/fancy/f484e31d-0610-4436-9faf-c3fc9c5a469d.jpg?imageView2/2/w/800/q/70/format/webp",
+          "gallery": [
+            "https://img.kwcdn.com/product/fancy/fe1c43d3-2409-4f4f-913e-2c3934891c63.jpg?imageView2/2/w/800/q/70/format/webp"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T09:34:24.892Z",
+        "updatedAt": "2025-09-11T09:34:24.883Z"
+      },
+      {
+        "id": "36bd649c-9a3b-4bfa-8446-4bc517ad163f",
+        "title": "Ace Dress",
+        "description": "Daily Pacific Mini Dress ",
+        "category": "Casual",
+        "tags": [
+          "vintage"
+        ],
+        "price": 78,
+        "fabricType": "cotton",
+        "variants": [
+          {
+            "size": "M",
+            "color": "Pacific",
+            "stock": 3
+          }
+        ],
+        "images": {
+          "main": "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD942_V1.jpg",
+          "gallery": [
+            "https://is4.revolveassets.com/images/p4/n/z/AMAN-WD942_V1.jpg"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T09:37:47.000Z",
+        "updatedAt": "2025-09-11T09:37:46.994Z"
+      },
+      {
+        "id": "a904fd07-32cf-424e-b0ce-f6ea62a91fa3",
+        "title": "Amelie Dress",
+        "description": "A strapless maxi dress with a flattering fit, featuring a red-and-white checkered pattern for a fresh, summery look.",
+        "category": "Summer",
+        "tags": [
+          "vintage"
+        ],
+        "price": 76,
+        "fabricType": "cotton",
+        "variants": [
+          {
+            "size": "S",
+            "color": "Gingham Coral",
+            "stock": 1
+          }
+        ],
+        "images": {
+          "main": "https://is4.revolveassets.com/images/p4/n/z/SDRE-WD237_V1.jpg",
+          "gallery": [
+            "https://is4.revolveassets.com/images/p4/n/z/SDRE-WD237_V1.jpg"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T09:47:53.911Z",
+        "updatedAt": "2025-09-11T09:47:53.899Z"
+      },
+      {
+        "id": "c94117ec-ef2a-443e-af65-945e431b397e",
+        "title": "La Lune Ruched Tie Maxi Dress",
+        "description": "A sleek cream maxi dress with delicate spaghetti straps and a ruched bodice, offering an elegant and timeless silhouette.",
+        "category": "Holiday",
+        "tags": [
+          "elegant"
+        ],
+        "price": 80,
+        "fabricType": "coton",
+        "variants": [
+          {
+            "size": "XS",
+            "color": "Cream",
+            "stock": 1
+          }
+        ],
+        "images": {
+          "main": "https://is4.revolveassets.com/images/p4/n/z/SHON-WD647_V1.jpg",
+          "gallery": [
+            "https://is4.revolveassets.com/images/p4/n/z/SHON-WD647_V1.jpg"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T09:59:39.294Z",
+        "updatedAt": "2025-09-11T09:59:39.288Z"
+      },
+      {
+        "id": "4cf59374-c90e-4914-9c87-96609551fa62",
+        "title": "Zita Embroidered A-Line Mini Dress - Cobalt",
+        "description": "A sleeveless cobalt blue A-line mini dress with delicate embroidery, giving it a fresh, playful, and effortlessly chic look.",
+        "category": "Casual",
+        "tags": [
+          "floral"
+        ],
+        "price": 90,
+        "fabricType": "silk",
+        "variants": [
+          {
+            "size": "L",
+            "color": "Cobalt",
+            "stock": 2
+          }
+        ],
+        "images": {
+          "main": "https://petalandpup.com/cdn/shop/files/ZitaEmbroideredA-LineMiniDress-Cobalt2.jpg?v=1738914204&width=900",
+          "gallery": [
+            "https://petalandpup.com/cdn/shop/files/ZitaEmbroideredA-LineMiniDress-Cobalt2.jpg?v=1738914204&width=900"
+          ]
+        },
+        "inStock": true,
+        "createdAt": "2025-09-11T10:02:41.015Z",
+        "updatedAt": "2025-09-11T10:02:41.007Z"
+      }
+    ],
+    "passwordHash": "$2b$10$8bs1XXwjTUyLkv3GPBhRA.VaDjw6SIz6ok1KXYjg3h.6gz10WmANm"
   },
   {
     "id": "u_customer_001",
@@ -655,24 +832,7 @@
     "username": "yuval2301",
     "passwordHash": "$2b$10$v9DIWxUhhfMs1H3RWr2R3.aApl0iDjOVZSzQonKezyGAJHYcIZyt2",
     "role": "admin",
-    "cart": [
-      {
-        "id": "p_drs_001",
-        "title": "Black Summer Dress",
-        "price": 99.99,
-        "image": "https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/F36246s.jpg?im=Resize,width=750",
-        "size": "S",
-        "quantity": 1
-      },
-      {
-        "id": "p_drs_003",
-        "title": "Floral Spring Dress",
-        "price": 129.99,
-        "image": "https://m.media-amazon.com/images/I/81Cj85XiyOL._AC_SX679_.jpg",
-        "size": "M",
-        "quantity": 1
-      }
-    ],
+    "cart": [],
     "wishlist": [
       {
         "id": "p_drs_001",
@@ -780,6 +940,56 @@
     "id": "5f335aff-8b88-447b-bdaf-34b26ded6807",
     "username": "user_t7fyz",
     "passwordHash": "$2b$10$pTR/72oHMYRKAs5N/5vKUegHgtKDA.x1ZPgeulE49ELKeIm6Hrury",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "c70bf14e-34f5-470f-8542-3259640ab260",
+    "username": "user_t24tm",
+    "passwordHash": "$2b$10$Spay6XFJGRkSD.0P2HweDuVP5zOQgjC9y3ryx6JQ.5LnataNJweaS",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "07b86094-ea04-48c5-a590-9f154466cfec",
+    "username": "user_2zw7n",
+    "passwordHash": "$2b$10$8BIud.hf0ksBcQRevl6F3u1GqNu8O/TSI4z7DXhWSrruZ1LQXcYG.",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "6a6f296a-7bcd-4473-a0fe-0933492942a8",
+    "username": "user_ktxml",
+    "passwordHash": "$2b$10$1Ohwp3bCviTHR02UJv4aOeHKvuif7720OZIMp1Cj/1xjYkPhFlnUq",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "a8d738e5-35de-48ee-9112-5fd3103664a5",
+    "username": "user_79btc",
+    "passwordHash": "$2b$10$iY2PIKL4c4GEvyb0601me..TU1/QZ1HhwI72Ye6ZccLqwbHkrvHAm",
+    "role": "user",
+    "cart": [],
+    "wishlist": [],
+    "orders": [],
+    "items": []
+  },
+  {
+    "id": "0ad97ce4-1070-4684-b7fe-d9620bb2475e",
+    "username": "user_vk432",
+    "passwordHash": "$2b$10$PmXMq3.HOW04Oeo6T13Xp.PaGht5YF1vuF9yeRdZgAInjKquKaYNO",
     "role": "user",
     "cart": [],
     "wishlist": [],

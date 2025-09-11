@@ -5,7 +5,7 @@ export function createNavigation() {
       <div class="hc__left">
         <form id="searchForm" class="searchline" role="search">
           <input id="q" type="text" placeholder="Search dresses…" aria-label="Search dresses" />
-          <button class="icon" type="submit" aria-label="Search"><i class="ri-search-line"></i></button>
+          <button class="icon" type="submit" aria-label="Search" data-tooltip="Search for dresses"><i class="ri-search-line"></i></button>
         </form>
       </div>
   
@@ -15,11 +15,11 @@ export function createNavigation() {
       </div>
   
       <div class="hc__right">
-        <a href="/wishlist" class="icon" aria-label="Liked"><i class="ri-heart-line"></i></a>
-        <a href="/sell" class="icon" aria-label="Sell a dress"><i class="ri-add-line"></i></a>
+        <a href="/wishlist" class="icon" aria-label="Liked" data-tooltip="View wishlist"><i class="ri-heart-line"></i></a>
+        <a href="/sell" class="icon" aria-label="Sell a dress" data-tooltip="Sell your dress"><i class="ri-add-line"></i></a>
         <a href="/login" class="icon" id="profileLink" aria-label="Personal area"><i class="ri-user-line"></i></a>
-        <a href="/cart" class="icon" aria-label="Shopping cart"><i class="ri-shopping-bag-line"></i><span class="badge" id="bagCount">0</span></a>
-        <button class="icon" id="themeToggle" aria-label="Toggle dark mode"><i class="ri-contrast-2-line"></i></button>
+        <a href="/cart" class="icon" aria-label="Shopping cart" data-tooltip="View shopping cart"><i class="ri-shopping-bag-line"></i><span class="badge" id="bagCount">0</span></a>
+        <button class="icon" id="themeToggle" aria-label="Toggle dark mode" data-tooltip="Toggle dark mode"><i class="ri-contrast-2-line"></i></button>
         <div class="menu-wrapper">
           <button class="icon menu-btn" aria-haspopup="true" aria-expanded="false" aria-label="Main menu">
             <i class="ri-menu-line" aria-hidden="true"></i>

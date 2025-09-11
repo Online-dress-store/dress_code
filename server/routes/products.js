@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const persist = require('../modules/persist_module');
-const { verifyToken } = require('../middleware/auth');
+const { verifyToken, requireAuth } = require('../middleware/auth');
+const userModule = require('../modules/user_module');
 const { v4: uuidv4 } = require('uuid');
 
 router.get('/', async (req, res, next) => {
@@ -30,7 +31,7 @@ function requireAdmin(req, res, next) {
   } catch (e) { next(e); }
 }
 
-// Add product (admin only)
+// Add product (admin only remains supported)
 router.post('/', requireAdmin, async (req, res, next) => {
   try {
     const { title, description, price, category, image } = req.body || {};
@@ -51,6 +52,38 @@ router.post('/', requireAdmin, async (req, res, next) => {
     products.push(product);
     await persist.writeProducts(products);
     res.json({ success: true, product });
+  } catch (e) { next(e); }
+});
+
+// Public endpoint: any authenticated user can publish a product to the catalog
+router.post('/publish', requireAuth, async (req, res, next) => {
+  try {
+    const body = req.body || {};
+    const title = String(body.title || '').trim();
+    const description = String(body.description || '').trim();
+    const category = String(body.category || '').trim();
+    const price = Number(body.price);
+    const image = String(body.image || body.picture || (body.images && body.images.main) || '').trim();
+    if (!title || !description || !category || !image || !isFinite(price) || price <= 0) {
+      return res.status(400).json({ error: 'Invalid product payload' });
+    }
+    const products = await persist.listProducts();
+    const id = `p_${uuidv4()}`;
+    const product = {
+      id,
+      title,
+      description,
+      price,
+      category,
+      images: { main: image },
+      variants: Array.isArray(body.variants) ? body.variants : [],
+      ownerId: req.user.userId,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    products.push(product);
+    await persist.writeProducts(products);
+    res.status(201).json({ success: true, product });
   } catch (e) { next(e); }
 });
 

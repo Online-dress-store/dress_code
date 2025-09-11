@@ -28,6 +28,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadActivityLog(prefix);
   });
 
+  // Pagination controls
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => changeActivityPage(-1));
+    nextBtn.addEventListener('click', () => changeActivityPage(1));
+  }
+
   // Handle create product
   const form = document.getElementById('createForm');
   if (form) {
@@ -86,8 +94,8 @@ async function loadProducts() {
         <div class="title" data-field="title">${p.title}</div> 
         <div class="price" data-field="price">${Number(p.price).toFixed(2)}</div>
         <div class="sizes" data-field="sizes">${sizesText}</div>
-        <button class="edit" data-id="${p.id}">Edit</button>
-        <button class="delete" data-id="${p.id}">Delete</button>
+        <button class="edit" data-id="${p.id}" data-tooltip="Edit product details">Edit</button>
+        <button class="delete" data-id="${p.id}" data-tooltip="Delete product">Delete</button>
       `;
       
       el.querySelector('.delete').addEventListener('click', async () => {
@@ -160,6 +168,11 @@ async function loadProducts() {
   }
 }
 
+// Pagination state for activity table
+let activityAll = [];
+let activityPage = 1;
+const ACTIVITY_PAGE_SIZE = 10;
+
 async function loadActivityLog(usernamePrefix = '') {
   try {
     const url = usernamePrefix 
@@ -174,35 +187,70 @@ async function loadActivityLog(usernamePrefix = '') {
     }
     
     const data = await resp.json();
-    const activities = data.data || [];
-    const tbody = document.getElementById('activityTableBody');
-    tbody.innerHTML = '';
-    
-    if (activities.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">No activity logs found</td></tr>';
-      return;
+    let activities = data.data || [];
+
+    // Ensure only login/logout/add-to-cart are displayed per spec
+    const allowed = new Set(['login', 'logout', 'add-to-cart']);
+    activities = activities.filter(a => allowed.has((a.activity || a.type || '').toLowerCase()));
+
+    // Enforce case-insensitive starts-with username prefix on the client too
+    if (usernamePrefix && usernamePrefix.length > 0) {
+      const p = usernamePrefix.toLowerCase();
+      activities = activities.filter(a => (a.username || '').toLowerCase().startsWith(p));
     }
-    
-    // Sort by datetime (newest first)
+    // Sort by datetime (newest first) and save for pagination
     activities.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-    
-    activities.forEach(activity => {
-      const row = document.createElement('tr');
-      const date = new Date(activity.datetime);
-      const formattedDate = date.toLocaleString();
-      
-      row.innerHTML = `
-        <td>${formattedDate}</td>
-        <td>${activity.username}</td>
-        <td>${activity.activity}</td>
-      `;
-      
-      tbody.appendChild(row);
-    });
+    activityAll = activities;
+    activityPage = 1;
+    renderActivityPage();
   } catch (error) {
     console.error('Error loading activity log:', error);
     alert('Failed to load activity log');
   }
+}
+
+function renderActivityPage() {
+  const tbody = document.getElementById('activityTableBody');
+  const pager = document.getElementById('activityPagination');
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+  const pageInfo = document.getElementById('pageInfo');
+
+  tbody.innerHTML = '';
+
+  const total = activityAll.length;
+  if (total === 0) {
+    if (pager) pager.style.display = 'none';
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: #999;">No activity logs found</td></tr>';
+    return;
+  }
+
+  const totalPages = Math.max(1, Math.ceil(total / ACTIVITY_PAGE_SIZE));
+  activityPage = Math.min(Math.max(1, activityPage), totalPages);
+  const start = (activityPage - 1) * ACTIVITY_PAGE_SIZE;
+  const slice = activityAll.slice(start, start + ACTIVITY_PAGE_SIZE);
+
+  slice.forEach(activity => {
+    const row = document.createElement('tr');
+    const date = new Date(activity.datetime);
+    const formattedDate = date.toLocaleString();
+    row.innerHTML = `
+      <td>${formattedDate}</td>
+      <td>${activity.username}</td>
+      <td>${(activity.activity || activity.type)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  if (pager) pager.style.display = 'flex';
+  if (prevBtn) prevBtn.disabled = activityPage <= 1;
+  if (nextBtn) nextBtn.disabled = activityPage >= totalPages;
+  if (pageInfo) pageInfo.textContent = `Page ${activityPage} of ${totalPages} (${total} rows)`;
+}
+
+function changeActivityPage(delta) {
+  activityPage += delta;
+  renderActivityPage();
 }
 
 
