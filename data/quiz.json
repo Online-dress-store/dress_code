@@ -1,0 +1,556 @@
+[
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest",
+        "Prom",
+        "Evening",
+        "Casual",
+        "Work"
+      ],
+      "length": [
+        "Mini",
+        "Midi",
+        "Maxi"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "a70392c6114e4bb0108f1690",
+    "ts": 1757597956721
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest",
+        "Evening",
+        "Casual",
+        "Work"
+      ],
+      "length": [
+        "Mini",
+        "Midi",
+        "Maxi"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300",
+        "300+"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ]
+    },
+    "token": "11861c4680c6363acad1ded4",
+    "ts": 1757597982834
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [
+        "Mini"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "80a6b9b0e27cf0ac3af239f9",
+    "ts": 1757598092436
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [
+        "Mini"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300",
+        "300+"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "9212e51d2cdbcf2a2de9ae65",
+    "ts": 1757598183042
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [
+        "Mini"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "3dc4c61dbcfec03bb364b141",
+    "ts": 1757598244625
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [
+        "Mini"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "d824003a505b1af3b9fb00c5",
+    "ts": 1757598336372
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ]
+    },
+    "token": "eac1a3c22dd0df502a571777",
+    "ts": 1757598867958
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "length": [],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ]
+    },
+    "token": "8aa699fb4eba4699bee46ca3",
+    "ts": 1757598873627
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ]
+    },
+    "token": "9327347adf302b950716f553",
+    "ts": 1757598982205
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Jewel"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "35f4b2605908553c139b7840",
+    "ts": 1757599657327
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ]
+    },
+    "token": "c59208422f003f935755ccfa",
+    "ts": 1757600737156
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "b39424da1e3cf0e15c5d2316",
+    "ts": 1757601137184
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "782fb11838284b318c417e64",
+    "ts": 1757601151662
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "74998d80bf205bc173b49ca9",
+    "ts": 1757601303025
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest",
+        "Prom",
+        "Evening"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150",
+        "150–300"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "b8e89460a8acf0fc3cb82273",
+    "ts": 1757601312909
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "53511f99c0d153f6f7a57e3e",
+    "ts": 1757601717050
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "36f2a7b26bd904fc199faa97",
+    "ts": 1757602044150
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "6b9e3f88732eaddcca5b338b",
+    "ts": 1757602164782
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "0d81e1a5b079c5fcb8b4937a",
+    "ts": 1757602296200
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "986eb6c593deea431f5ffc5a",
+    "ts": 1757602639699
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS",
+        "S"
+      ]
+    },
+    "token": "781a21b95af7ac14b7e6efe4",
+    "ts": 1757603538050
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "a04ca0fb560ab785b7545558",
+    "ts": 1757603841114
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "2aa884a831ba3f6ed0656233",
+    "ts": 1757606860471
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "1b898236a52bb7cc9b98347b",
+    "ts": 1757606896203
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "a30ba0233e7830aa3246d5ee",
+    "ts": 1757607374464
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": [
+        "XS"
+      ]
+    },
+    "token": "c1852239ca2ff45dedcde85b",
+    "ts": 1757607492438
+  }
+]

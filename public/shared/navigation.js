@@ -27,6 +27,7 @@ export function createNavigation() {
           <nav class="dropdown-menu" role="menu" aria-hidden="true">
             <div class="dropdown-section">
               <a href="/categories?cat=all-items" class="dropdown-item" role="menuitem">ALL ITEMS</a>
+              <a href="/quiz" class="dropdown-item" role="menuitem">Style Quiz</a>
             </div>
             <div class="dropdown-divider"></div>
             <div class="dropdown-section">

@@ -1,0 +1,94 @@
+#quiz-page {
+  --bg: #faf6f1;
+  --text: #2b2b2b;
+  --muted: #6b6b6b;
+  --gold: #c39a6b;
+  --gold-dark: #8b6b3c;
+  --border: #e9e3db;
+  --chip: #f3ede6;
+  --chip-on: #e8dac7;
+}
+
+#quiz-page { background: var(--bg); overflow-x: hidden; }
+#quiz-page *, #quiz-page *::before, #quiz-page *::after { box-sizing: border-box; }
+#quiz-page .container { max-width: 1200px; margin: 0 auto; padding: 0 16px 24px; }
+
+#quiz-page .hero { padding: 32px 0 16px; }
+#quiz-page .hero h1 { font-family: 'Playfair Display', serif; font-weight: 700; margin: 0 0 8px; color: var(--text); }
+#quiz-page .hero p { color: var(--muted); margin: 0; }
+
+#quiz-page .layout { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+#quiz-page form#quizForm { width: 100%; }
+#quiz-page .card { background: #fff; border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+#quiz-page .card.pad { padding: 20px; }
+
+#quiz-page fieldset { border: none; padding: 0; margin: 16px 0; }
+#quiz-page legend { font-weight: 600; color: var(--text); margin-bottom: 8px; }
+
+#quiz-page .chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, max-content)); gap: 8px; align-items: center; }
+#quiz-page .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--chip); color: var(--text); cursor: pointer; transition: background .2s, border-color .2s, transform .05s; }
+#quiz-page .chip[aria-pressed="true"] { background: var(--chip-on); border-color: var(--gold); }
+#quiz-page .chip:hover { border-color: var(--gold); }
+#quiz-page .chip input { display: none; }
+#quiz-page .chip-close { margin-left: 4px; border: 0; background: transparent; cursor: pointer; color: var(--muted); }
+
+#quiz-page .actions { display: flex; align-items: center; gap: 12px; }
+#quiz-page .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; border: 1px solid var(--gold); background: var(--gold); color: #fff; cursor: pointer; font-weight: 600; }
+#quiz-page .btn[disabled] { opacity: .6; cursor: not-allowed; }
+#quiz-page .btn.secondary { background: transparent; color: var(--gold-dark); }
+
+#quiz-page .summary { display:flex; gap:8px; flex-wrap:wrap; margin: 8px 0 0; }
+#quiz-page .summary .chip { background:#fff; }
+
+#quiz-page .banner { background: #fff8ec; color: #7a5a2b; border: 1px solid #f0e0c7; border-radius: 10px; padding: 10px 12px; margin: 8px 0; }
+
+#quiz-page .results-head { display:flex; align-items:center; justify-content: space-between; margin-bottom: 12px; }
+#quiz-page .count { color: var(--muted); }
+
+#quiz-page .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+#quiz-page #results { min-height: 200px; }
+#quiz-page .results-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 320px)); gap:24px; justify-content: center; }
+
+/* Product card (store-like) */
+#quiz-page .product-card { display:flex; flex-direction:column; border-radius:16px; background:#fff; border:1px solid var(--border); box-shadow:0 8px 22px rgba(0,0,0,.06); transition: transform .15s ease, box-shadow .15s ease; overflow:hidden; max-width: 360px; }
+#quiz-page .product-card:hover { transform: translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.09); }
+#quiz-page .product-card .image-wrap { width:100%; aspect-ratio:3/4; overflow:hidden; background:#f5f2ee; }
+#quiz-page .product-card .image-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+#quiz-page .product-card .content { padding:12px; display:flex; flex-direction:column; gap:6px; }
+#quiz-page .product-card h3 { font-family:'Playfair Display', serif; font-size:16px; margin:0; color:var(--text); }
+#quiz-page .product-card .price { font-weight:700; color:var(--text); }
+#quiz-page .product-card .actions { margin-top:auto; display:flex; gap:8px; }
+#quiz-page .product-card .actions .secondary { border:1px solid var(--gold); color:var(--gold-dark); padding:8px 10px; border-radius:8px; text-decoration:none; }
+
+/* Skeletons */
+#quiz-page .skeleton-card { border-radius:16px; background:linear-gradient(90deg,#f3ede6 25%,#efe8e0 37%,#f3ede6 63%); background-size:400% 100%; animation:shimmer 1.2s infinite; aspect-ratio:3/4; }
+@keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+
+/* Empty & error */
+#quiz-page .empty { text-align:center; color:var(--muted); padding:32px 0; }
+#quiz-page .toast { background:#fff3f3; border:1px solid #ffd6d6; color:#8a2b2b; padding:10px 12px; border-radius:10px; }
+#quiz-page .product-card { border:1px solid var(--border); border-radius: 14px; background:#fff; overflow:hidden; box-shadow: 0 6px 16px rgba(0,0,0,.05); display:flex; flex-direction:column; }
+#quiz-page .product-card img { width:100%; aspect-ratio:3/4; object-fit:cover; display:block; }
+#quiz-page .product-card .content { padding:12px; display:flex; flex-direction:column; gap:6px; }
+#quiz-page .product-card h3 { font-family:'Playfair Display', serif; font-size:16px; margin:0; color:var(--text); }
+#quiz-page .price { font-weight:700; color:var(--text); }
+#quiz-page .product-card .tags { display:flex; gap:6px; flex-wrap:wrap; }
+#quiz-page .tag { font-size:12px; background:var(--chip); border-radius:999px; padding:4px 8px; }
+#quiz-page .product-card .actions { display:flex; gap:8px; margin-top:auto; }
+
+#quiz-page .skeleton { border-radius: 14px; border:1px solid var(--border); background: linear-gradient(90deg,#f3ede6 25%,#efe8e0 37%,#f3ede6 63%); background-size: 400% 100%; animation: shimmer 1.2s infinite; aspect-ratio: 3/4; }
+@keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+
+#quiz-page .empty { text-align:center; color:var(--muted); padding:40px 0; }
+
+@media (max-width: 1024px) {
+  #quiz-page .layout { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  #quiz-page .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px) {
+  #quiz-page .grid { grid-template-columns: 1fr; }
+}
+

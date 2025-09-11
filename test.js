@@ -140,6 +140,38 @@ async function run() {
     pass('GET /api/accessories?productId=invalid -> 404');
   } catch (e) { fail('Accessories suite', e); }
 
+  log('Style Quiz');
+  try {
+    // Ensure logged in as a fresh user
+    const uq = 'quiz_' + Math.random().toString(36).slice(2,7);
+    let res = await f('/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: uq, password: 'secret12', confirmPassword: 'secret12' }) });
+    if (!res.ok) throw new Error('register status ' + res.status);
+    // Post quiz answers
+    const body = {
+      occasion: ['Evening','Casual'],
+      length: ['Midi'],
+      color: ['Black','Red'],
+      budget: ['150–300'],
+      size: ['S','M']
+    };
+    res = await f('/api/quiz', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error('quiz post ' + res.status);
+    const q = await res.json();
+    if (!q.token) throw new Error('no token');
+    pass('POST /api/quiz -> token');
+
+    // Get recommendations
+    res = await f('/api/quiz/recommendations?token=' + encodeURIComponent(q.token));
+    if (!res.ok) throw new Error('quiz get ' + res.status);
+    const rec = await res.json();
+    if (!rec.items || !Array.isArray(rec.items)) throw new Error('bad items');
+    pass('GET /api/quiz/recommendations -> items');
+
+    // Invalid token should 404
+    res = await f('/api/quiz/recommendations?token=badtoken');
+    if (res.status === 404) pass('GET /api/quiz/recommendations invalid -> 404'); else throw new Error('expected 404');
+  } catch (e) { fail('Quiz suite', e); }
+
   console.log('\nAll tests completed.');
 }
 

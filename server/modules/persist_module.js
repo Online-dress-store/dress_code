@@ -5,6 +5,7 @@ const path = require('path');
 const PRODUCTS_PATH = path.join(__dirname, '..' ,'..', 'data', 'products.json');
 const USERS_PATH = path.join(__dirname, '..', '..', 'data', 'users.json');
 const ACCESSORIES_PATH = path.join(__dirname, '..', '..', 'data', 'accessories.json');
+const QUIZ_PATH = path.join(__dirname, '..', '..', 'data', 'quiz.json');
 // this path assumes the directory structure is as follows:
 // Online-dress-store/server/modules/persist_module.js
 // Online-dress-store/data/products.json  
@@ -59,5 +60,14 @@ module.exports = {
   writeProducts, 
   readUsers, 
   writeUsers,
-  readAccessories
+  readAccessories,
+  readQuizSubmissions: async function readQuizSubmissions() {
+    try {
+      const txt = await fs.readFile(QUIZ_PATH, 'utf8');
+      return JSON.parse(txt);
+    } catch (e) { if (e.code === 'ENOENT') return []; throw e; }
+  },
+  writeQuizSubmissions: async function writeQuizSubmissions(rows) {
+    await fs.writeFile(QUIZ_PATH, JSON.stringify(rows, null, 2));
+  }
 };

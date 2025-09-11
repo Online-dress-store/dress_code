@@ -50,6 +50,13 @@ app.use('/api/admin', require('./routes/admin'));
 // accessories API
 app.use('/api/accessories', require('./routes/accessories'));
 
+// try-on API and serving tmp results
+app.use('/api/tryon', require('./routes/tryon'));
+app.use('/tmp', express.static(require('os').tmpdir() + '/tryon'));
+
+// quiz API
+app.use('/api/quiz', require('./routes/quiz'));
+
 // public activity logging (non-admin) – logs only add-to-cart for the authenticated user
 app.post('/api/activity', createRateLimit(15 * 60 * 1000, 300), requireAuth, async (req, res) => {
   try {
@@ -172,6 +179,22 @@ app.get('/admin', requireAuth, requireAdmin, (req, res) => {
 
 app.get('/admin/', requireAuth, requireAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'admin', 'index.html'));
+});
+
+// Try-On page (login required)
+app.get('/tryon', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'tryon', 'index.html'));
+});
+app.get('/tryon/', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'tryon', 'index.html'));
+});
+
+// Quiz page (login required)
+app.get('/quiz', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'quiz', 'index.html'));
+});
+app.get('/quiz/', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'quiz', 'index.html'));
 });
 
 // 404 fallback for APIs

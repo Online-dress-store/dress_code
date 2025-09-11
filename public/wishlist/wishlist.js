@@ -36,10 +36,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // Load wishlist data from localStorage
-function loadWishlistFromStorage() {
+async function loadWishlistFromStorage() {
   try {
     const list = getWishlistShared();
-    if (Array.isArray(list) && list.length > 0) return list;
+    // sanitize: keep only valid items with id
+    const sanitized = Array.isArray(list) ? list.filter(i => i && typeof i.id !== 'undefined') : [];
+    // If there were invalid items, persist the cleaned list
+    if (sanitized.length !== (Array.isArray(list) ? list.length : 0)) {
+      try {
+        const mod = await import('../shared/wishlist.js');
+        if (mod && typeof mod.setWishlist === 'function') mod.setWishlist(sanitized);
+      } catch (_) {}
+    }
+    if (sanitized.length > 0) return sanitized;
   } catch (error) {
     console.error('Error loading wishlist from storage:', error);
   }
@@ -47,8 +56,8 @@ function loadWishlistFromStorage() {
 }
 
 // Render wishlist
-function renderWishlist() {
-  const wishlistItems = loadWishlistFromStorage();
+async function renderWishlist() {
+  const wishlistItems = await loadWishlistFromStorage();
   
   if (wishlistItems.length === 0) {
     // Show empty state
@@ -80,16 +89,21 @@ function renderGrid(wishlistItems) {
 function createWishlistItem(item) {
   const itemElement = document.createElement('div');
   itemElement.className = 'wishlist-item';
+  const title = item.title || item.name || 'Untitled Item';
+  const priceNum = Number(item.price);
+  const priceText = Number.isFinite(priceNum) ? priceNum.toFixed(2) : '0.00';
+  const placeholder = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><rect width="300" height="400" fill="#f3ede6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, Arial" font-size="16" fill="#8b7d6b">No image</text></svg>');
+  const imageSrc = item.image || (item.images && item.images.main) || placeholder;
   itemElement.innerHTML = `
     <div class="wishlist-item-image">
-      <img src="${item.image}" alt="${item.title}" loading="lazy">
+      <img src="${imageSrc}" alt="${title}" loading="lazy">
       <button class="remove-from-wishlist-btn" data-product-id="${item.id}">
         <i class="ri-heart-fill"></i>
       </button>
     </div>
     <div class="wishlist-item-details">
-      <h3 class="wishlist-item-title">${item.title}</h3>
-      <p class="wishlist-item-price">$${item.price.toFixed(2)}</p>
+      <h3 class="wishlist-item-title">${title}</h3>
+      <p class="wishlist-item-price">$${priceText}</p>
       <div class="wishlist-item-actions">
         <button class="add-to-cart-btn" data-product-id="${item.id}">
           <i class="ri-shopping-cart-line"></i>

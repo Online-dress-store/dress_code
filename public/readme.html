@@ -27,6 +27,7 @@
         <li>Account: personal details, purchases.</li>
         <li>Admin: activity log + manage products.</li>
         <li>Quick View: modal with product details and recommended accessories with external buy links.</li>
+        <li>Style Quiz: login-gated quiz at <code>/quiz</code>. Submit preferences → fetch personalized <code>/api/quiz/recommendations</code> and render cards.</li>
       </ul>
       <h2>What was hard?</h2>
       <p>Authentication flow with JWT cookies and session management, ensuring all API routes return JSON-only responses (no HTML), implementing real-time cart/wishlist synchronization across pages using custom events and localStorage, building comprehensive admin activity logging with prefix filtering, and creating robust data persistence system with file-based storage for users, products, and activity logs.</p>
@@ -47,8 +48,13 @@
     if (nav) { nav.innerHTML = createNavigation(); initNavigation(); await updateAuthStatus(); }
     // Render server routes summary fetched from client-known endpoints
     const routes = [
-      'GET /products', 'GET/POST/PUT /api/auth/*', 'GET/POST /api/admin/activity', 'GET/POST/DELETE/PUT /api/admin/products',
-      'GET /api/accessories?productId=...', 'GET /readme.html', 'GET /llm.html'
+      'GET /products',
+      'GET/POST/PUT /api/auth/*',
+      'GET/POST /api/admin/activity',
+      'GET/POST/DELETE/PUT /api/admin/products',
+      'GET /api/accessories?productId=...',
+      'POST /api/quiz', 'GET /api/quiz/recommendations?token=...',
+      'GET /readme.html', 'GET /llm.html'
     ];
     document.getElementById('routes').textContent = routes.join('\n');
   </script>

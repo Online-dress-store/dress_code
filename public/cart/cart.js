@@ -134,6 +134,15 @@ function saveCartToStorage() {
     localStorage.setItem('cart', JSON.stringify(cartItems));
     // Notify the rest of the app (header counters, other tabs/pages)
     try { window.dispatchEvent(new CustomEvent('cart-updated', { detail: { cart: cartItems } })); } catch (_) {}
+    // Also sync to server so refresh doesn't restore deleted items
+    (async () => {
+      try {
+        const mod = await import('../shared/cart.js');
+        if (mod && typeof mod.setCart === 'function') {
+          mod.setCart(cartItems);
+        }
+      } catch (_) {}
+    })();
   } catch (error) {
     console.error('Error saving cart to storage:', error);
   }
@@ -276,22 +285,24 @@ function updateTotals() {
   checkoutBtn.style.opacity = cartItems.length === 0 ? '0.5' : '1';
 }
 
-// Handle checkout
-checkoutBtn.addEventListener('click', function() {
-  if (cartItems.length === 0) {
-    showNotification('Your cart is empty');
-    return;
-  }
-  
-  // In a real app, this would redirect to a checkout page
-  showNotification('Proceeding to checkout...');
-  console.log('Checkout with items:', cartItems);
-  
-  // Simulate checkout process
-  setTimeout(() => {
-    alert('Checkout functionality would be implemented here. This is a demo.');
-  }, 1000);
-});
+// Handle checkout (guard if button not present on page)
+if (checkoutBtn) {
+  checkoutBtn.addEventListener('click', function() {
+    if (cartItems.length === 0) {
+      showNotification('Your cart is empty');
+      return;
+    }
+    
+    // In a real app, this would redirect to a checkout page
+    showNotification('Proceeding to checkout...');
+    console.log('Checkout with items:', cartItems);
+    
+    // Simulate checkout process
+    setTimeout(() => {
+      alert('Checkout functionality would be implemented here. This is a demo.');
+    }, 1000);
+  });
+}
 
 // Show notification
 function showNotification(message) {

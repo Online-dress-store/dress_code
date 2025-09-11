@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Style Quiz - Dress Code</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../shared/navigation.css" />
+  <link rel="stylesheet" href="../shared/quickview.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" />
+  <link rel="stylesheet" href="quiz.css" />
+</head>
+<body>
+  <div class="page" id="quiz-page">
+    <div id="navigation"></div>
+    <div class="container">
+      <div class="hero">
+        <h1>Style Quiz</h1>
+        <p>Select your preferences to get personalized recommendations.</p>
+      </div>
+
+      <div class="layout">
+        <form id="quizForm" class="card pad" aria-live="polite">
+          <fieldset>
+            <legend>Occasion</legend>
+            <div class="chips" role="group" aria-labelledby="occasion">
+              <label class="chip"><input type="checkbox" name="occasion" value="Wedding guest">Wedding guest</label>
+              <label class="chip"><input type="checkbox" name="occasion" value="Prom">Prom</label>
+              <label class="chip"><input type="checkbox" name="occasion" value="Evening">Evening</label>
+              <label class="chip"><input type="checkbox" name="occasion" value="Casual">Casual</label>
+              <label class="chip"><input type="checkbox" name="occasion" value="Work">Work</label>
+            </div>
+          </fieldset>
+
+          <!-- Length dropped: not consistently present in catalog; derived heuristically server-side -->
+
+          <fieldset>
+            <legend>Color</legend>
+            <div class="chips" role="group" aria-labelledby="color">
+              <label class="chip"><input type="checkbox" name="color" value="Any">Any</label>
+              <label class="chip"><input type="checkbox" name="color" value="White">White</label>
+              <label class="chip"><input type="checkbox" name="color" value="Black">Black</label>
+              <label class="chip"><input type="checkbox" name="color" value="Red">Red</label>
+              <label class="chip"><input type="checkbox" name="color" value="Blue">Blue</label>
+              <label class="chip"><input type="checkbox" name="color" value="Pink">Pink</label>
+              <label class="chip"><input type="checkbox" name="color" value="Green">Green</label>
+              <label class="chip"><input type="checkbox" name="color" value="Beige">Beige</label>
+              <label class="chip"><input type="checkbox" name="color" value="Pastel">Pastel</label>
+              <label class="chip"><input type="checkbox" name="color" value="Jewel">Jewel</label>
+              <label class="chip"><input type="checkbox" name="color" value="Neutral">Neutral</label>
+              <label class="chip"><input type="checkbox" name="color" value="Flower">Flower</label>
+            </div>
+            <div style="margin-top:8px;">
+              <label for="colorCustom">Or type a color:</label>
+              <input id="colorCustom" type="text" placeholder="e.g. purple" style="width:220px;">
+              <button type="button" id="addColor" class="secondary">Add</button>
+            </div>
+            <div id="colorTokens" style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Budget</legend>
+            <div class="chips" role="group" aria-labelledby="budget">
+              <label class="chip"><input type="checkbox" name="budget" value="<150">&lt;150</label>
+              <label class="chip"><input type="checkbox" name="budget" value="150–300">150–300</label>
+              <label class="chip"><input type="checkbox" name="budget" value="300+">300+</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Size</legend>
+            <div class="chips" role="group" aria-labelledby="size">
+              <label class="chip"><input type="checkbox" name="size" value="XS">XS</label>
+              <label class="chip"><input type="checkbox" name="size" value="S">S</label>
+              <label class="chip"><input type="checkbox" name="size" value="M">M</label>
+              <label class="chip"><input type="checkbox" name="size" value="L">L</label>
+              <label class="chip"><input type="checkbox" name="size" value="XL">XL</label>
+            </div>
+          </fieldset>
+
+          <div class="summary" id="summary"></div>
+          <div class="actions" style="margin-top:12px;">
+            <button type="submit" class="btn" id="submitBtn"><i class="ri-sparkling-2-line"></i> Find my dresses</button>
+            <button type="button" class="btn secondary" id="clearBtn">Clear</button>
+            <span id="status" class="status"></span>
+            <span id="relaxedNote" class="status" style="margin-left:8px;"></span>
+          </div>
+        </form>
+
+        <section id="results"></section>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../shared/navigation.js"></script>
+  <script src="../js/auth-check.js"></script>
+  <script type="module" src="page.js"></script>
+  <script type="module">
+    import { createNavigation, initNavigation, updateAuthStatus } from '../shared/navigation.js';
+    const nav = document.getElementById('navigation');
+    if (nav) { nav.innerHTML = createNavigation(); initNavigation(); await updateAuthStatus(); }
+  </script>
+</body>
+</html>
+

@@ -7,7 +7,16 @@
     "firstName": "Admin",
     "lastName": "User",
     "role": "admin",
-    "cart": [],
+    "cart": [
+      {
+        "id": "p_de7abb8b-cc8e-4748-a5ef-94b1c2d44a25",
+        "size": null,
+        "price": 80,
+        "title": "La Lune Ruched Tie Maxi Dress",
+        "image": "https://is4.revolveassets.com/images/p4/n/z/SHON-WD647_V1.jpg",
+        "quantity": 1
+      }
+    ],
     "purchases": [],
     "prefs": {
       "theme": "light",
@@ -76,7 +85,14 @@
     "phone": "+1-555-ADMIN-01",
     "createdAt": "2025-01-01T00:00:00.000Z",
     "updatedAt": "2025-01-01T12:00:00.000Z",
-    "wishlist": [],
+    "wishlist": [
+      {
+        "id": "p_de7abb8b-cc8e-4748-a5ef-94b1c2d44a25",
+        "title": "La Lune Ruched Tie Maxi Dress",
+        "price": 80,
+        "image": "https://is4.revolveassets.com/images/p4/n/z/SHON-WD647_V1.jpg"
+      }
+    ],
     "orders": [],
     "items": [
       {
@@ -269,7 +285,7 @@
         "updatedAt": "2025-09-11T10:02:41.007Z"
       }
     ],
-    "passwordHash": "$2b$10$8bs1XXwjTUyLkv3GPBhRA.VaDjw6SIz6ok1KXYjg3h.6gz10WmANm"
+    "passwordHash": "$2b$10$Rl5cEr1zPlN8KFZ6pXcfNeDc0VP98ujASMWwL4rWS0wDyfMkaPxLu"
   },
   {
     "id": "u_customer_001",
