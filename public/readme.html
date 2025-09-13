@@ -24,17 +24,15 @@
       <ul>
         <li>Wishlist: like items and add to cart.</li>
         <li>Sell: list your own items.</li>
-        <li>Account: personal details, purchases.</li>
-        <li>Admin: activity log + manage products.</li>
         <li>Quick View: modal with product details and recommended accessories with external buy links.</li>
         <li>Style Quiz: login-gated quiz at <code>/quiz</code>. Submit preferences → fetch personalized <code>/api/quiz/recommendations</code> and render cards.</li>
       </ul>
       <h2>What was hard?</h2>
-      <p>Authentication flow with JWT cookies and session management, ensuring all API routes return JSON-only responses (no HTML), implementing real-time cart/wishlist synchronization across pages using custom events and localStorage, building comprehensive admin activity logging with prefix filtering, and creating robust data persistence system with file-based storage for users, products, and activity logs.</p>
+      <p>Creating the Virtual Try-On page was the most challenging part of the frontend development. I attempted to build a feature where users could upload their photo and overlay a dress image with drag/scale controls, but struggled with complex image processing requirements like background removal, EXIF orientation handling, and canvas manipulation. The technical complexity of real-time image editing, file upload handling, and creating a smooth user experience for image positioning proved too difficult to implement successfully within the project timeline. This taught me the importance of properly scoping feature complexity and the value of focusing on core functionality first.</p>
       <h2>Partner & Division of Work</h2>
       <ul>
-        <li><strong>My work (Yuval Yakuti, 318461159):</strong> All front-end — UI pages/screens, quick-view modal, client-side validation, fetch calls, state handling, styling/UX, accessibility tweaks, error messages, and integrations with server APIs.</li>
-        <li><strong>Partner's work (Ophir Shiran, 314959404):</strong> All back-end — Node/Express routes and auth with cookies/JWT, persist_module.js (persistence to disk), admin endpoints (activity log + manage products), rate limiting (DoS defense), and test.js automated route tests.</li>
+        <li><strong>My work (Yuval Yakuti, 318461159):</strong> All front-end development — UI pages/screens including Style Quiz, Quick View modal with accessory recommendations, Wishlist page, Sell Your Dress page, client-side validation, fetch API calls, state management, styling/UX design, accessibility features, error handling, and frontend integrations with server APIs.</li>
+        <li><strong>Partner's work (Ophir Shiran, 314959404):</strong> All back-end development — Node/Express server routes and authentication with cookies/JWT, persist_module.js (data persistence to disk), admin endpoints (activity log + manage products), rate limiting (DoS defense), and test.js automated route tests.</li>
       </ul>
       <h2>Routes</h2>
       <pre id="routes"></pre>

@@ -298,5 +298,10 @@
     "datetime": "2025-09-11T16:18:16.862Z",
     "username": "admin",
     "activity": "add-to-cart"
+  },
+  {
+    "datetime": "2025-09-12T10:05:08.693Z",
+    "username": "admin",
+    "activity": "add-to-cart"
   }
 ]

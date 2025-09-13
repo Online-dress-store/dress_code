@@ -36,6 +36,7 @@ export function createNavigation() {
               <a href="/categories?cat=summer" class="dropdown-item" role="menuitem">Summer</a>
               <a href="/categories?cat=holiday" class="dropdown-item" role="menuitem">Holiday</a>
               <a href="/categories?cat=casual" class="dropdown-item" role="menuitem">Casual</a>
+              <a href="/readme.html" class="dropdown-item" role="menuitem">Project Info</a>
             </div>
           </nav>
         </div>

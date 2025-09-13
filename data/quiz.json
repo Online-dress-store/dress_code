@@ -552,5 +552,22 @@
     },
     "token": "c1852239ca2ff45dedcde85b",
     "ts": 1757607492438
+  },
+  {
+    "userId": "u_admin_001",
+    "answers": {
+      "occasion": [
+        "Wedding guest"
+      ],
+      "color": [
+        "Any"
+      ],
+      "budget": [
+        "<150"
+      ],
+      "size": []
+    },
+    "token": "0a6910a3ae875ca80a78a7fd",
+    "ts": 1757671499179
   }
 ]
